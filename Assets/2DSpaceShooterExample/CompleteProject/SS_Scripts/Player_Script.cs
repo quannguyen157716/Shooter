@@ -36,6 +36,8 @@ public class Player_Script : MonoBehaviour
 	Vector3 mousePosition;
 	Vector3 currentMPosition;
 	Vector3 objPosition;
+	Vector3 direction;
+	Vector3 touchPosition;
 	Rigidbody2D rigidbody2;
 	AudioSource audio2;
 	// Update is called once per frame
@@ -75,7 +77,7 @@ public class Player_Script : MonoBehaviour
 	void FixedUpdate()
 	{
 	
-
+		/* 
 		rigidbody2.velocity=objPosition*0.1f;
 		if(Input.GetMouseButton(0))
 		{
@@ -84,16 +86,40 @@ public class Player_Script : MonoBehaviour
 			{
 				objPosition = Camera.main.ScreenToWorldPoint (mousePosition);
 				rigidbody2.velocity = objPosition*speed;
-
-				rigidbody2.position = new Vector2 
-				(
-				Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
-				Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
-				);
-			}	
-			currentMPosition=mousePosition;	
+			}
+			else
+			{
+				objPosition = Camera.main.ScreenToWorldPoint (currentMPosition);
+				rigidbody2.velocity = objPosition*0.2f;
+			}
+				
 		}
 
+		rigidbody2.position = new Vector2 
+		(
+			Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
+			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
+		);
+		currentMPosition=mousePosition; */
+		
+		if(Input.touchCount>0)
+		{
+			Touch touch=Input.GetTouch(0);
+			touchPosition=Camera.main.ScreenToWorldPoint(touch.position);
+			touchPosition.z=0;
+			direction=touchPosition-transform.position;
+			rigidbody2.velocity=new Vector2(direction.x,direction.y) *speed;
+
+			if(touch.phase==TouchPhase.Ended)
+			{
+				rigidbody2.velocity=Vector2.zero;
+			}
+		}
+			rigidbody2.position = new Vector2 
+		(
+			Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
+			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
+		);
 	}
 	//Called when the Trigger entered
 	void OnTriggerEnter2D(Collider2D other)
