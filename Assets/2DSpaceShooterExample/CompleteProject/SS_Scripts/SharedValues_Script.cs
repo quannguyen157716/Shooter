@@ -15,6 +15,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class SharedValues_Script : MonoBehaviour 
 {
+	
 	//Public Var
 	public Text scoreText; 				//GUI Score
 	public Text GameOverText; 			//GUI GameOver
@@ -40,9 +41,10 @@ public class SharedValues_Script : MonoBehaviour
 		//Excute when the GameOver Trigger is True
 		if (gameover == true)
 		{
+			
 			GameOverText.text = "GAME OVER"; 			//Show GUI GameOver
 			FinalScoreText.text = "" + score; 			//Show GUI FinalScore
-			ReplayText.text = "PRESS R TO REPLAY"; 		//Show GUI Replay
+			//ReplayText.text = "PRESS R TO REPLAY"; 		//Show GUI Replay
 		}
 	}
 }

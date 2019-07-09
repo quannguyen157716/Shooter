@@ -34,12 +34,12 @@ public class Player_Script : MonoBehaviour
 	//Private Var
 	private float nextFire = 0.0F;	//First fire & Next fire Time
 
-	Rigidbody2D rigidbody2;
+	//Rigidbody2D rigidbody2;
 	AudioSource audio2;
 	// Update is called once per frame
 	void Start()
 	{
-		rigidbody2=GetComponent<Rigidbody2D>();
+		//rigidbody2=GetComponent<Rigidbody2D>();
 		audio2=GetComponent<AudioSource>();
 	}
 	void Update () 

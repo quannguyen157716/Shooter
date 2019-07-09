@@ -12,6 +12,13 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+[System.Serializable]
+public class Buttons
+{
+	public Button ReplayButton;
+}
 //Asteroid Properties
 [System.Serializable]
 public class Asteroid 
@@ -65,6 +72,7 @@ public class GameController_Script : MonoBehaviour
 	public EnemyGreen enemyGreen;		//make an Object from Class enemyGreen
 	public EnemyRed enemyRed;			//make an Object from Class enemyRed
 	public Vector2 spawnValues;			//Store spawning (x,y) values
+	public Buttons ListButton; 
 	
 	// Use this for initialization
 	void Start ()
@@ -73,19 +81,32 @@ public class GameController_Script : MonoBehaviour
 		StartCoroutine (enemyBlueSpawnWaves());		//Start IEnumerator function
 		StartCoroutine (enemyGreenSpawnWaves());	//Start IEnumerator function
 		StartCoroutine (enemyRedSpawnWaves());		//Start IEnumerator function
+		ListButton.ReplayButton.gameObject.SetActive(false);
+		ListButton.ReplayButton.onClick.AddListener(Replay);
+
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
+		if(SharedValues_Script.gameover)
+		{
+			ListButton.ReplayButton.gameObject.SetActive(true);
+		}
 		//Excute when keyboard button R pressed
-		if(Input.GetKey("r"))
+		/* if(ListButton.ReplayButton)
 		{
 			SceneManager.LoadScene("Scene_01");
 			//Load Level 0 (same Level) to make a restart
-		}
+		}*/
 	}
 
+	void Replay()
+	{
+		SceneManager.LoadScene("Scene_01");
+	}
+
+	
 	//Asteroid IEnumerator Coroutine
 	IEnumerator asteroidSpawnWaves()
 	{
