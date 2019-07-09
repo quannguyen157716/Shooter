@@ -33,13 +33,15 @@ public class Player_Script : MonoBehaviour
 
 	//Private Var
 	private float nextFire = 0.0F;	//First fire & Next fire Time
-
-	//Rigidbody2D rigidbody2;
+	Vector3 mousePosition;
+	Vector3 currentMPosition;
+	Vector3 objPosition;
+	Rigidbody2D rigidbody2;
 	AudioSource audio2;
 	// Update is called once per frame
 	void Start()
 	{
-		//rigidbody2=GetComponent<Rigidbody2D>();
+		rigidbody2=GetComponent<Rigidbody2D>();
 		audio2=GetComponent<AudioSource>();
 	}
 	void Update () 
@@ -54,9 +56,9 @@ public class Player_Script : MonoBehaviour
 	}
 
 	// FixedUpdate is called one per specific time
-	void FixedUpdate ()
+	/* void FixedUpdate ()
 	{
-		/* float moveHorizontal = Input.GetAxis ("Horizontal"); 				//Get if Any Horizontal Keys pressed
+		float moveHorizontal = Input.GetAxis ("Horizontal"); 				//Get if Any Horizontal Keys pressed
 		float moveVertical = Input.GetAxis ("Vertical");					//Get if Any Vertical Keys pressed
 		Vector2 movement = new Vector2 (moveHorizontal, moveVertical); 		//Put them in a Vector2 Variable (x,y)
 		rigidbody2.velocity = movement * speed; 							//Add Velocity to the player ship rigidbody
@@ -67,9 +69,32 @@ public class Player_Script : MonoBehaviour
 				Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
 				Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
 			);
-		*/
-	}
+		
+	}*/
 
+	void FixedUpdate()
+	{
+	
+
+		rigidbody2.velocity=objPosition*0.1f;
+		if(Input.GetMouseButton(0))
+		{
+			mousePosition = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 3);
+			if(mousePosition!=currentMPosition)
+			{
+				objPosition = Camera.main.ScreenToWorldPoint (mousePosition);
+				rigidbody2.velocity = objPosition*speed;
+
+				rigidbody2.position = new Vector2 
+				(
+				Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
+				Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
+				);
+			}	
+			currentMPosition=mousePosition;	
+		}
+
+	}
 	//Called when the Trigger entered
 	void OnTriggerEnter2D(Collider2D other)
 	{
@@ -80,12 +105,5 @@ public class Player_Script : MonoBehaviour
 			SharedValues_Script.gameover = true; 											//Trigger That its a GameOver
 			Destroy(gameObject); 															//Destroy Player Ship Object
 		}
-	}
-
-	void OnMouseDrag()
-	{
-		Vector3 mousePosition = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 3);
-        Vector3 objPosition = Camera.main.ScreenToWorldPoint (mousePosition);
-        transform.position = objPosition;  
 	}
 }
