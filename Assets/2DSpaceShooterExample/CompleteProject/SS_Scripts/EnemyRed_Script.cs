@@ -58,8 +58,8 @@ public class EnemyRed_Script : MonoBehaviour
 		if(other.tag == "PlayerLaser")
 		{
 			Instantiate (LaserGreenHit, transform.position , transform.rotation);		//Instantiate LaserGreenHit 
-			Destroy(other.gameObject);													//Destroy the Other (PlayerLaser)
-			
+			//Destroy(other.gameObject);													//Destroy the Other (PlayerLaser)
+			other.gameObject.SetActive(false); //return to pool
 			//Check the Health if greater than 0
 			if(health > 0)
 				health--; 																//Decrement Health by 1

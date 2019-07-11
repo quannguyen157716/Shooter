@@ -60,6 +60,7 @@
      <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\explosions_script.cs" />
      <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\GameController_Script.cs" />
      <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\LaserHit_Script.cs" />
+     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\ObjectPooler.cs" />
      <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\Player_Script.cs" />
      <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\PlayerConfiguration.cs" />
      <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\PlayerShipShots_Script.cs" />

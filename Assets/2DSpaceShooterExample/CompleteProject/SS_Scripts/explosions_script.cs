@@ -20,5 +20,6 @@ public class explosions_script : MonoBehaviour
 	{
 		audio2=GetComponent<AudioSource>();
 		audio2.Play(); //Play Explosion Sound
+		Destroy(gameObject,3);
 	}
 }

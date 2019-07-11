@@ -32,7 +32,7 @@ public class EnemyGreen_Script : MonoBehaviour
 	AudioSource audio2;
 
 	// Use this for initialization
-	void Start () 
+	void OnEnable () 
 	{
 		rigidbody2=GetComponent<Rigidbody2D>();
 		audio2=GetComponent<AudioSource>();
@@ -58,8 +58,8 @@ public class EnemyGreen_Script : MonoBehaviour
 		if(other.tag == "PlayerLaser")
 		{
 			Instantiate (LaserGreenHit, transform.position , transform.rotation); 		//Instantiate LaserGreenHit 
-			Destroy(other.gameObject); 													//Destroy the Other (PlayerLaser)
-			
+			//Destroy(other.gameObject); 													//Destroy the Other (PlayerLaser)
+			other.gameObject.SetActive(false); //return to pool
 			//Check the Health if greater than 0
 			if(health > 0)
 				health--; 																//Decrement Health by 1
@@ -69,7 +69,8 @@ public class EnemyGreen_Script : MonoBehaviour
 			{
 				Instantiate (Explosion, transform.position , transform.rotation); 		//Instantiate Explosion
 				SharedValues_Script.score +=ScoreValue; 								//Increment score by ScoreValue
-				Destroy(gameObject); 													//Destroy The Object (Enemy Ship)
+				//Destroy(gameObject); 													//Destroy The Object (Enemy Ship)
+				gameObject.SetActive(false); //return to pool
 			}
 		}
 		

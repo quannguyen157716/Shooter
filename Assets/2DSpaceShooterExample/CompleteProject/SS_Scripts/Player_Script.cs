@@ -26,18 +26,16 @@ public class Player_Script : MonoBehaviour
 	//Public Var
 	public float speed; 			//Player Ship Speed
 	public Boundary boundary; 		//make an Object from Class Boundary
-	public GameObject shot;			//Fire Prefab
+	GameObject shot;			//Fire Prefab
 	public Transform shotSpawn;		//Where the Fire Spawn
 	public float fireRate = 0.5F;	//Fire Rate between Shots
 	public GameObject Explosion;	//Explosion Prefab
 
 	//Private Var
 	private float nextFire = 0.0F;	//First fire & Next fire Time
-	Vector3 mousePosition;
-	Vector3 currentMPosition;
-	Vector3 objPosition;
 	Vector3 direction;
 	Vector3 touchPosition;
+	Vector3 lastTouchPosition;
 	Rigidbody2D rigidbody2;
 	AudioSource audio2;
 	// Update is called once per frame
@@ -48,6 +46,11 @@ public class Player_Script : MonoBehaviour
 	}
 	void Update () 
 	{
+		Fire2();
+	}
+
+	void Fire()
+	{
 		//Excute When the Current Time is bigger than the nextFire time
 		if (Time.time > nextFire) 
 		{
@@ -57,6 +60,23 @@ public class Player_Script : MonoBehaviour
 		}
 	}
 
+	void Fire2()
+	{
+		if(Time.time >nextFire)
+		{
+			nextFire = Time.time + fireRate;
+			shot = ObjectPooler.SharedInstance.GetPooledObject("PlayerLaser"); 
+  			if (shot != null) 
+			{
+   			shot.transform.position = shotSpawn.transform.position;
+    		shot.transform.rotation = shotSpawn.transform.rotation;
+    		shot.SetActive(true);
+			Debug.Log("What");
+			}
+			else
+			Debug.Log("null");
+		}
+	}
 	// FixedUpdate is called one per specific time
 	/* void FixedUpdate ()
 	{
@@ -75,47 +95,24 @@ public class Player_Script : MonoBehaviour
 	}*/
 
 	void FixedUpdate()
-	{
-	
-		/* 
-		rigidbody2.velocity=objPosition*0.1f;
-		if(Input.GetMouseButton(0))
-		{
-			mousePosition = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 3);
-			if(mousePosition!=currentMPosition)
-			{
-				objPosition = Camera.main.ScreenToWorldPoint (mousePosition);
-				rigidbody2.velocity = objPosition*speed;
-			}
-			else
-			{
-				objPosition = Camera.main.ScreenToWorldPoint (currentMPosition);
-				rigidbody2.velocity = objPosition*0.2f;
-			}
-				
-		}
-
-		rigidbody2.position = new Vector2 
-		(
-			Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
-			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
-		);
-		currentMPosition=mousePosition; */
-		
+	{	
 		if(Input.touchCount>0)
 		{
 			Touch touch=Input.GetTouch(0);
+			
 			touchPosition=Camera.main.ScreenToWorldPoint(touch.position);
 			touchPosition.z=0;
+	
 			direction=touchPosition-transform.position;
-			rigidbody2.velocity=new Vector2(direction.x,direction.y) *speed;
-
+			rigidbody2.velocity=new Vector2(direction.x,direction.y+1) *speed;
+			
 			if(touch.phase==TouchPhase.Ended)
 			{
 				rigidbody2.velocity=Vector2.zero;
 			}
 		}
-			rigidbody2.position = new Vector2 
+
+		rigidbody2.position = new Vector2 
 		(
 			Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
 			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y

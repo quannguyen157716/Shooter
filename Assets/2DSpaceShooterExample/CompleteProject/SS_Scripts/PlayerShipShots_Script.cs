@@ -17,8 +17,8 @@ public class PlayerShipShots_Script : MonoBehaviour
 	//Public Var
 	public float speed; //Speed of the velocity
 	Rigidbody2D rigidbody2;
-	// Use this for initialization
-	void Start ()
+	
+	void OnEnable()
 	{
 		rigidbody2=GetComponent<Rigidbody2D>();
 		rigidbody2.velocity = transform.up * speed; //Give Velocity to the Player ship shot

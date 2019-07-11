@@ -20,7 +20,7 @@ public class SharedValues_Script : MonoBehaviour
 	public Text scoreText; 				//GUI Score
 	public Text GameOverText; 			//GUI GameOver
 	public Text FinalScoreText; 			//GUI Final Score
-	public Text ReplayText; 				//GUI Replay
+	//public Text ReplayText; 				//
 
 	//Public Shared Var
 	public static int score = 0; 			//Total in-game Score
@@ -37,14 +37,12 @@ public class SharedValues_Script : MonoBehaviour
 	void Update ()
 	{
 		scoreText.text = "Score: " + score; 			//Update the GUI Score
-		//scoreText.text="dsfs";
 		//Excute when the GameOver Trigger is True
 		if (gameover == true)
 		{
 			
 			GameOverText.text = "GAME OVER"; 			//Show GUI GameOver
 			FinalScoreText.text = "" + score; 			//Show GUI FinalScore
-			//ReplayText.text = "PRESS R TO REPLAY"; 		//Show GUI Replay
 		}
 	}
 }
