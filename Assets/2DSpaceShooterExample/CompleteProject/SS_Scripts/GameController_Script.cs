@@ -23,7 +23,7 @@ public class Buttons
 	public GameObject Panel;
 }
 //Asteroid Properties
-[System.Serializable]
+/* [System.Serializable]
 public class Asteroid 
 {
 	public GameObject asteroidBigObj; 		//Object Prefab
@@ -55,16 +55,6 @@ public class EnemyGreen
 	public float WaveWait;					//Time to wait till a new wave
 }
 
-[System.Serializable]
-public class Hazard
-{
-	public GameObject hazard;		//Object Prefab
-	public int Count;						//Number of the object in 1 wave
-	public float SpawnWait;					//Time to wait before a new spawn
-	public float StartWait;					//Time to Start spawning
-	public float WaveWait;					//Time to wait till a new wave
-}
-
 //EnemyRed Properties
 [System.Serializable]
 public class EnemyRed 
@@ -75,11 +65,19 @@ public class EnemyRed
 	public float StartWait;				//Time to Start spawning
 	public float WaveWait;				//Time to wait till a new wave
 }
-
-
+*/
+[System.Serializable]
+public class Hazard
+{
+	public GameObject hazard;		//Object Prefab
+	public int Count;						//Number of the object in 1 wave
+	public float RandomMin, RandomMax;
+	public float SpawnWait;					//Time to wait before a new spawn
+	public float StartWait;					//Time to Start spawning
+	public float WaveWait;					//Time to wait till a new wave
+}
 public class GameController_Script : MonoBehaviour 
 {	
-	//Public Var
 	//public Asteroid asteroid;			//make an Object from Class asteroid
 	//public EnemyBlue enemyBlue;			//make an Object from Class enemyBlue
 	//public EnemyGreen enemyGreen;		//make an Object from Class enemyGreen
@@ -128,8 +126,7 @@ public class GameController_Script : MonoBehaviour
 		//StartCoroutine (asteroidSpawnWaves());  	//Start IEnumerator function
 		StartCoroutine (enemyBlueSpawnWaves());		//Start IEnumerator function
 		//StartCoroutine (enemyGreenSpawnWaves());	//Start IEnumerator function
-		//StartCoroutine (enemyRedSpawnWaves());		//Start IEnumerator function
-		ListButton.StartButton.gameObject.SetActive(false);
+		//StartCoroutine (enemyRedSpawnWaves());		//Start IEnumerator function 
 		ListButton.Panel.gameObject.SetActive(false);
 		Player.gameObject.SetActive(true);
 	}
@@ -146,7 +143,7 @@ public class GameController_Script : MonoBehaviour
 			{
 				Vector2 spawnPosition = new Vector2 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y);		//Random Spawn Position
 				Quaternion spawnRotation = Quaternion.identity;							 								//Default Rotation
-				Instantiate (asteroid.hazard, spawnPosition, spawnRotation); 						//Instantiate Object
+				Instantiate (asteroid.hazard, spawnPosition, spawnRotation); 						
 				yield return new WaitForSeconds (asteroid.SpawnWait); 													//Wait for seconds before spawning the next object
 			}
 			yield return new WaitForSeconds (asteroid.WaveWait); 														//wait for seconds before the next wave
@@ -158,16 +155,17 @@ public class GameController_Script : MonoBehaviour
 	{
 		yield return new WaitForSeconds (enemyBlue.StartWait);															//Wait for Seconds before start the wave
 
-		//Infinite Loop
+		//Infinite Loop 
 		while (true)
 		{
 			//Spawn Specific number of Objects in 1 wave
 			for (int i = 0; i < enemyBlue.Count; i++)
 			{
-				enemyBlue.hazard=ObjectPooler.SharedInstance.GetPooledObject("Enemy");
+				enemyBlue.hazard=ObjectPooler.SharedInstance.GetPooledObject("EnemyBlue");
 				Vector2 spawnPosition = new Vector2 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y);		//Random Spawn Position
 				Quaternion spawnRotation = Quaternion.identity;															//Default Rotation
-				//Instantiate (enemyBlue.hazard, spawnPosition, spawnRotation);		 //Instantiate Object
+				//Instantiate (enemyBlue.hazard, spawnPosition, spawnRotation);	
+				enemyBlue.SpawnWait=Random.Range(enemyBlue.RandomMin, enemyBlue.RandomMax);
 				enemyBlue.hazard.transform.position=spawnPosition;
 				enemyBlue.hazard.transform.rotation=spawnRotation;
 				enemyBlue.hazard.SetActive(true);
@@ -182,7 +180,7 @@ public class GameController_Script : MonoBehaviour
 	{
 		yield return new WaitForSeconds (enemyGreen.StartWait);															//Wait for Seconds before start the wave
 
-		//Infinite Loop
+		//Infinite Loop 
 		while (true)
 		{
 			//Spawn Specific number of Objects in 1 wave
@@ -202,7 +200,7 @@ public class GameController_Script : MonoBehaviour
 	{
 		yield return new WaitForSeconds (enemyRed.StartWait);															//Wait for Seconds before start the wave
 
-		//Infinite Loop
+		//Infinite Loop 
 		while (true)
 		{
 			//Spawn Specific number of Objects in 1 wave

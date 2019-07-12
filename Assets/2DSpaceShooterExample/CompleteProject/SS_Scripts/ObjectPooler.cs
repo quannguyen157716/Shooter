@@ -9,9 +9,7 @@ public class ObjectPoolItem
 	public int amountToPool;
 	public bool ExpandPool=false;
 }
-
-
-
+//
 public class ObjectPooler : MonoBehaviour {
 	public static ObjectPooler SharedInstance;//static 
 	public List<ObjectPoolItem> itemsToPool;

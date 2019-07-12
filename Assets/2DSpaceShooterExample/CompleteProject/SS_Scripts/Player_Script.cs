@@ -64,17 +64,14 @@ public class Player_Script : MonoBehaviour
 	{
 		if(Time.time >nextFire)
 		{
-			nextFire = Time.time + fireRate;
+			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
 			shot = ObjectPooler.SharedInstance.GetPooledObject("PlayerLaser"); 
   			if (shot != null) 
 			{
    			shot.transform.position = shotSpawn.transform.position;
     		shot.transform.rotation = shotSpawn.transform.rotation;
     		shot.SetActive(true);
-			Debug.Log("What");
 			}
-			else
-			Debug.Log("null");
 		}
 	}
 	// FixedUpdate is called one per specific time
@@ -118,11 +115,11 @@ public class Player_Script : MonoBehaviour
 			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
 		);
 	}
-	//Called when the Trigger entered
+	//Called when the Trigger entered hate 
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		//Excute if the object tag was equal to one of these
-		if(other.tag == "Enemy" || other.tag == "Asteroid" || other.tag == "EnemyShot") 
+		if(other.tag == "Enemy" || other.tag == "Asteroid" || other.tag == "EnemyShot" ||other.tag=="EnemyBlue") 
 		{
 			Instantiate (Explosion, transform.position , transform.rotation); 				//Instantiate Explosion
 			SharedValues_Script.gameover = true; 											//Trigger That its a GameOver
