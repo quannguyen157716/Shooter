@@ -65,7 +65,7 @@ public class Player_Script : MonoBehaviour
 		if(Time.time >nextFire)
 		{
 			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
-			shot = ObjectPooler.SharedInstance.GetPooledObject("PlayerLaser"); 
+			shot = BulletPooler.SharedBulletPool.GetPooledObject("PlayerLaser"); 
   			if (shot != null) 
 			{
    			shot.transform.position = shotSpawn.transform.position;
@@ -123,7 +123,7 @@ public class Player_Script : MonoBehaviour
 		{
 			Instantiate (Explosion, transform.position , transform.rotation); 				//Instantiate Explosion
 			SharedValues_Script.gameover = true; 											//Trigger That its a GameOver
-			Destroy(gameObject); 															//Destroy Player Ship Object
+			gameObject.SetActive(false); 															//Destroy Player Ship Object
 		}
 	}
 }

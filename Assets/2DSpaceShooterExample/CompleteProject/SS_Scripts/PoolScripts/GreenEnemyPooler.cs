@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class ObjectPoolItem 
-{
-	public GameObject objectToPool;
-	public int amountToPool;
-	public bool ExpandPool=false;
-}
+
 //
-public class ObjectPooler : MonoBehaviour {
-	public static ObjectPooler SharedInstance;//static 
+public class GreenEnemyPooler : MonoBehaviour {
+	public static GreenEnemyPooler SharedGreenEnemyPool;//static 
 	public List<ObjectPoolItem> itemsToPool;
 	
 	public List<GameObject> pooledObjects;
 	
 	void Awake()
 	{
-		SharedInstance=this;
+		SharedGreenEnemyPool=this;
 	}
 
 	void Start()

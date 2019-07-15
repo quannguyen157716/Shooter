@@ -82,7 +82,6 @@ public class GameController_Script : MonoBehaviour
 	//public EnemyBlue enemyBlue;			//make an Object from Class enemyBlue
 	//public EnemyGreen enemyGreen;		//make an Object from Class enemyGreen
 	//public EnemyRed enemyRed;			//make an Object from Class enemyRed
-
 	public Hazard asteroid;
 	public Hazard enemyBlue;
 	public Hazard enemyGreen;
@@ -90,15 +89,17 @@ public class GameController_Script : MonoBehaviour
 	public Vector2 spawnValues;			//Store spawning (x,y) values
 	public Buttons ListButton; 
 	public GameObject Player;
+	public GameObject UI_controller;
+	UICOntroller UIControllerS;
 	
 	// Use this for initialization
 	void Start ()
 	{
-		
-		ListButton.ReplayButton.gameObject.SetActive(false);
-		ListButton.ReplayButton.onClick.AddListener(Replay);
-		ListButton.StartButton.gameObject.SetActive(true);
-		ListButton.StartButton.onClick.AddListener(StartGame);
+		UIControllerS=UI_controller.GetComponent<UICOntroller>();
+		UIControllerS.ListElements.ReplayButton.gameObject.SetActive(false);
+		UIControllerS.ListElements.ReplayButton.onClick.AddListener(Replay);
+		UIControllerS.ListElements.StartButton.onClick.AddListener(StartGame);
+		UIControllerS.ListElements.InGamePanel.gameObject.SetActive(false);
 	}
 
 	// Update is called once per frame
@@ -106,7 +107,8 @@ public class GameController_Script : MonoBehaviour
 	{
 		if(SharedValues_Script.gameover)
 		{
-			ListButton.ReplayButton.gameObject.SetActive(true);
+			//ListButton.ReplayButton.gameObject.SetActive(true);
+			UIControllerS.ListElements.ReplayButton.gameObject.SetActive(true);
 		}
 		//Excute when keyboard button R pressed
 		/* if(ListButton.ReplayButton)
@@ -116,18 +118,19 @@ public class GameController_Script : MonoBehaviour
 		}*/
 	}
 
-	void Replay()
+	public void Replay()
 	{
 		SceneManager.LoadScene("Scene_01");
+		StartGame();
 	}
 
-	void StartGame()
+	public void StartGame()
 	{
 		//StartCoroutine (asteroidSpawnWaves());  	//Start IEnumerator function
 		StartCoroutine (enemyBlueSpawnWaves());		//Start IEnumerator function
 		//StartCoroutine (enemyGreenSpawnWaves());	//Start IEnumerator function
 		//StartCoroutine (enemyRedSpawnWaves());		//Start IEnumerator function 
-		ListButton.Panel.gameObject.SetActive(false);
+		UIControllerS.ListElements.MainMenuPanel.gameObject.SetActive(false);
 		Player.gameObject.SetActive(true);
 	}
 	//Asteroid IEnumerator Coroutine
@@ -161,7 +164,7 @@ public class GameController_Script : MonoBehaviour
 			//Spawn Specific number of Objects in 1 wave
 			for (int i = 0; i < enemyBlue.Count; i++)
 			{
-				enemyBlue.hazard=ObjectPooler.SharedInstance.GetPooledObject("EnemyBlue");
+				enemyBlue.hazard=BlueEnemyPooler.SharedBlueEnemyPool.GetPooledObject("EnemyBlue");
 				Vector2 spawnPosition = new Vector2 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y);		//Random Spawn Position
 				Quaternion spawnRotation = Quaternion.identity;															//Default Rotation
 				//Instantiate (enemyBlue.hazard, spawnPosition, spawnRotation);	
