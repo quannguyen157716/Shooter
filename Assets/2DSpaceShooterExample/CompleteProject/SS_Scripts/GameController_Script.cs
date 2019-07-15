@@ -121,7 +121,7 @@ public class GameController_Script : MonoBehaviour
 	public void Replay()
 	{
 		SceneManager.LoadScene("Scene_01");
-		StartGame();
+		//StartGame();
 	}
 
 	public void StartGame()
