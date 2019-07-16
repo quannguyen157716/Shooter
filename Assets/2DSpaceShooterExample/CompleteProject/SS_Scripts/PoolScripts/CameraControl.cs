@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraControl : MonoBehaviour {
-	public Text t;
+	//public Text t;
 	public Camera OrthoCamera;
 	float asp;
 	//Supported screen size: 16:9/ 16:10/3:2/4:3/18:9(this is my phone) 
@@ -37,7 +37,7 @@ public class CameraControl : MonoBehaviour {
 		OrthoCamera.orthographicSize=4.7f;
 	}
 
-	t.text="width: "+ w+ " height: "+ h+" asp: "+asp;
+	//t.text="width: "+ w+ " height: "+ h+" asp: "+asp;
     }
 
 }

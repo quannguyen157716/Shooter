@@ -15,7 +15,7 @@ using System.Collections;
 public class PlayerShipShots_Script : MonoBehaviour 
 {
 	//Public Var
-	public float speed; //Speed of the velocity
+	public float speed; //Speed of the velocity 
 	Rigidbody2D rigidbody2;
 	
 	void OnEnable()

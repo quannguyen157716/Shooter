@@ -14,14 +14,6 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class Buttons
-{
-	public Button ReplayButton;
-	public Button StartButton;
-	public Button SettingsButton;
-	public GameObject Panel;
-}
 //Asteroid Properties
 /* [System.Serializable]
 public class Asteroid 
@@ -75,6 +67,7 @@ public class Hazard
 	public float SpawnWait;					//Time to wait before a new spawn
 	public float StartWait;					//Time to Start spawning
 	public float WaveWait;					//Time to wait till a new wave
+	public float x_pos, y_pos; //position to spawn //
 }
 public class GameController_Script : MonoBehaviour 
 {	
@@ -87,7 +80,6 @@ public class GameController_Script : MonoBehaviour
 	public Hazard enemyGreen;
 	public Hazard enemyRed;
 	public Vector2 spawnValues;			//Store spawning (x,y) values
-	public Buttons ListButton; 
 	public GameObject Player;
 	public GameObject UI_controller;
 	UICOntroller UIControllerS;
@@ -110,12 +102,6 @@ public class GameController_Script : MonoBehaviour
 			//ListButton.ReplayButton.gameObject.SetActive(true);
 			UIControllerS.ListElements.ReplayButton.gameObject.SetActive(true);
 		}
-		//Excute when keyboard button R pressed
-		/* if(ListButton.ReplayButton)
-		{
-			SceneManager.LoadScene("Scene_01");
-			//Load Level 0 (same Level) to make a restart
-		}*/
 	}
 
 	public void Replay()
@@ -133,6 +119,7 @@ public class GameController_Script : MonoBehaviour
 		UIControllerS.ListElements.MainMenuPanel.gameObject.SetActive(false);
 		Player.gameObject.SetActive(true);
 	}
+	//Regular spawn
 	//Asteroid IEnumerator Coroutine
 	IEnumerator asteroidSpawnWaves()
 	{
@@ -165,7 +152,7 @@ public class GameController_Script : MonoBehaviour
 			for (int i = 0; i < enemyBlue.Count; i++)
 			{
 				enemyBlue.hazard=BlueEnemyPooler.SharedBlueEnemyPool.GetPooledObject("EnemyBlue");
-				Vector2 spawnPosition = new Vector2 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y);		//Random Spawn Position
+				Vector2 spawnPosition = new Vector2 (Random.Range (-enemyBlue.x_pos, enemyBlue.x_pos), enemyBlue.y_pos);		//Random Spawn Position
 				Quaternion spawnRotation = Quaternion.identity;															//Default Rotation
 				//Instantiate (enemyBlue.hazard, spawnPosition, spawnRotation);	
 				enemyBlue.SpawnWait=Random.Range(enemyBlue.RandomMin, enemyBlue.RandomMax);
