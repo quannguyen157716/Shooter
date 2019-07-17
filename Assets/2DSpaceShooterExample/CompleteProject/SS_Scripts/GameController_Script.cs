@@ -69,6 +69,8 @@ public class Hazard
 	public float WaveWait;					//Time to wait till a new wave
 	public float x_pos, y_pos; //position to spawn //
 }
+//Stream of enemy(Enemey object, Spawn_Position, Behaviour) 
+//player info: playership, score, bullet type, skin
 public class GameController_Script : MonoBehaviour 
 {	
 	//public Asteroid asteroid;			//make an Object from Class asteroid
@@ -107,7 +109,7 @@ public class GameController_Script : MonoBehaviour
 	public void Replay()
 	{
 		SceneManager.LoadScene("Scene_01");
-		//StartGame();
+		//StartGame(); 
 	}
 
 	public void StartGame()
