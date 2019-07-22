@@ -51,26 +51,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\Asteroid_Script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\DestroyByBoundary_Script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\EnemyBlue_Script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\EnemyGreen_Script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\EnemyRed_Script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\EnemyShot_Script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\explosions_script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\GameController_Script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\LaserHit_Script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\Player_Script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\PlayerConfiguration.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\PlayerShipShots_Script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\PoolScripts\BlueEnemyPooler.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\PoolScripts\BulletPooler.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\PoolScripts\CameraControl.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\PoolScripts\GreenEnemyPooler.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\PoolScripts\RedEnemyPooler.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\PoolScripts\TestingScript.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\SharedValues_Script.cs" />
-     <Compile Include="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\UICOntroller.cs" />
+     <Compile Include="Assets\SS_Scripts\Asteroid_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\DestroyByBoundary_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\Enemy_Script\EnemyBlue_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\Enemy_Script\EnemyGreen_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\Enemy_Script\EnemyRed_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\Enemy_Script\Maneuver.cs" />
+     <Compile Include="Assets\SS_Scripts\EnemyShot_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\explosions_script.cs" />
+     <Compile Include="Assets\SS_Scripts\GameController_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\LaserHit_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\PlayerScript\Player_RegularShot.cs" />
+     <Compile Include="Assets\SS_Scripts\PlayerScript\Player_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\PlayerScript\PlayerConfiguration.cs" />
+     <Compile Include="Assets\SS_Scripts\PlayerScript\PlayerGun.cs" />
+     <Compile Include="Assets\SS_Scripts\PoolScripts\BlueEnemyPooler.cs" />
+     <Compile Include="Assets\SS_Scripts\PoolScripts\BulletPooler.cs" />
+     <Compile Include="Assets\SS_Scripts\PoolScripts\CameraControl.cs" />
+     <Compile Include="Assets\SS_Scripts\PoolScripts\GameDataInitializer.cs" />
+     <Compile Include="Assets\SS_Scripts\PoolScripts\GreenEnemyPooler.cs" />
+     <Compile Include="Assets\SS_Scripts\PoolScripts\RedEnemyPooler.cs" />
+     <Compile Include="Assets\SS_Scripts\SharedValues_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\UICOntroller.cs" />
  <Reference Include="UnityEngine.CoreModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2017.4.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
  </Reference>
