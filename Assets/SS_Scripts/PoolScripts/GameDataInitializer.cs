@@ -38,7 +38,10 @@ public class GameDataInitializer : MonoBehaviour {
     PlayerGun PlayerWeapon;
     
 	void Start () {
+        //Based value for object attributes
         Debug.Log(Application.persistentDataPath);
+        //Gun Type 
+        //Gun type and round type are different
         if(!File.Exists(Application.persistentDataPath+"/PlayerRegularShot.json"))
         {
             RegularShot=new PlayerWeapon();
@@ -51,7 +54,7 @@ public class GameDataInitializer : MonoBehaviour {
             File.WriteAllText(Application.persistentDataPath+"/PlayerRegularShot.json",json);
 
         }
-
+        //
         if(!File.Exists(Application.persistentDataPath+"/PlayerBurstShot.json"))
         {
             RegularShot=new PlayerWeapon();
@@ -75,9 +78,42 @@ public class GameDataInitializer : MonoBehaviour {
             string json=JsonUtility.ToJson(RegularShot,true);        
             File.WriteAllText(Application.persistentDataPath+"//PlayerTracingShot.json",json);
         }
+        //Round type
+        if(!File.Exists(Application.persistentDataPath+"/PlayerRegularRound.json"))
+        {
+            Player_RegularShot RegularRound=new Player_RegularShot();
+            RegularRound.damage=1;
+            RegularRound.speed=10;
+            Debug.Log(Application.persistentDataPath+"/PlayerRegularRound.json");
+
+            string json=JsonUtility.ToJson(RegularShot,true);        
+            File.WriteAllText(Application.persistentDataPath+"//PlayerRegularRound.json",json);
+        }
+
+        if(!File.Exists(Application.persistentDataPath+"/PlayerBurstRound.json"))
+        {
+            Player_BurstShot BurstRound=new Player_BurstShot();
+            BurstRound.damage=5;
+            BurstRound.speed=8;
+            Debug.Log(Application.persistentDataPath+"/PlayerRegularRound.json");
+
+            string json=JsonUtility.ToJson(RegularShot,true);        
+            File.WriteAllText(Application.persistentDataPath+"//PlayerRegularRound.json",json);
+        }
+        
+        if(!File.Exists(Application.persistentDataPath+"/PlayerTracingRound.json"))
+        {
+            Player_TracingShot TracingRound=new Player_TracingShot();
+            TracingRound.damage=3;
+            TracingRound.speed=3;
+            Debug.Log(Application.persistentDataPath+"/PlayerRegularRound.json");
+
+            string json=JsonUtility.ToJson(RegularShot,true);        
+            File.WriteAllText(Application.persistentDataPath+"//PlayerRegularRound.json",json);
+        }
     }
 /* 		string json=JsonUtility.ToJson(Obja,true);
-		Debug.Log(json);
+		Debug.Log(json);//
 		Debug.Log(Application.persistentDataPath);
 		File.WriteAllText(Application.persistentDataPath+"/F.json",json);
 		json=File.ReadAllText(Application.persistentDataPath+"/F.json");

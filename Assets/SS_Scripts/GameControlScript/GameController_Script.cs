@@ -111,7 +111,7 @@ public class GameController_Script : MonoBehaviour
 		UIControllerS.ListElements.MainMenuPanel.gameObject.SetActive(false);
 		Player.gameObject.SetActive(true);
 	}
-	//Regular spawn
+	//Regular spawn 
 	IEnumerator asteroidSpawnWaves()
 	{
 		yield return new WaitForSeconds (asteroid.StartWait); 															//Wait for Seconds before start the wave

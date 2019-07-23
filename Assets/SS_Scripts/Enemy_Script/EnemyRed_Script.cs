@@ -62,7 +62,7 @@ public class EnemyRed_Script : MonoBehaviour
 			other.gameObject.SetActive(false); //return to pool
 			//Check the Health if greater than 0
 			if(health > 0)
-				health--; 																//Decrement Health by 1
+				health--; 																//Decrement Health by 1 
 			
 			//Check the Health if less or equal 0
 			if(health <= 0)

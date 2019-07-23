@@ -32,7 +32,7 @@ public class PlayerGun : MonoBehaviour {
 		
 		if(Time.time >nextFire)
 		{
-			Debug.Log("Trace");
+			Debug.Log(fireRate);
 			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
 			shot = BulletPooler.SharedBulletPool.GetPooledObject(shotTag); 
   			if (shot != null) 
@@ -40,7 +40,6 @@ public class PlayerGun : MonoBehaviour {
    			shot.transform.position = shotSpawn.transform.position;
     		shot.transform.rotation = shotSpawn.transform.rotation;
     		shot.SetActive(true);
-			Debug.Log("Trace");
 			audio2.Play();
 			}
 		}

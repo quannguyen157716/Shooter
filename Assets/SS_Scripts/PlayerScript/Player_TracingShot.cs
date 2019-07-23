@@ -14,7 +14,7 @@ public class Player_TracingShot : MonoBehaviour {
 		DataController_Script.playerDamage=damage;
 	}
 	
-	// Update is called once per frame
+	// Update is called once per frame 
 	void Update () {
 		if(!transform.GetChild(0).gameObject.activeInHierarchy)
 		gameObject.SetActive(false);
@@ -24,10 +24,13 @@ public class Player_TracingShot : MonoBehaviour {
 			return;
 		}
 		Vector2 direction =(Vector2)Target.position-rigidbody2.position;
+		Debug.Log("Before: "+ direction);
 		direction.Normalize();
+		Debug.Log("After: "+direction);
 		float rotateAmount=Vector3.Cross(direction,transform.up).z;
 		rigidbody2.angularVelocity=-rotateAmount*200f;
 		rigidbody2.velocity=transform.up *speed;
+		
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

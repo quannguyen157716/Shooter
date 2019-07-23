@@ -33,7 +33,7 @@ public class Maneuver : MonoBehaviour {
             yield return new WaitForSeconds (Random.Range (maneuverWait.x, maneuverWait.y));
         }
     }
-
+    
 	 void FixedUpdate ()
     {
 		float newManeuver = Mathf.MoveTowards (rb.velocity.x, targetManeuver, Time.deltaTime*smoothing);
