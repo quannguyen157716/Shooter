@@ -41,7 +41,6 @@ public class BulletPooler : MonoBehaviour {
 		{
     		if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].tag==tag) 
 			{
-	
       			return pooledObjects[i];
     		}
  		}

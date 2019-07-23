@@ -34,57 +34,46 @@ public static class JsonHelper
 
 
 public class GameDataInitializer : MonoBehaviour {
-    PlayerShot RegularShot;
+    PlayerWeapon RegularShot;
     PlayerGun PlayerWeapon;
     
 	void Start () {
         Debug.Log(Application.persistentDataPath);
-        if(!File.Exists(Application.persistentDataPath+"/RegularShot.json"))
+        if(!File.Exists(Application.persistentDataPath+"/PlayerRegularShot.json"))
         {
-            RegularShot=new PlayerShot();
-            RegularShot.shotTag="RegularShot";
-            RegularShot.damage=1;
-            RegularShot.speed=10;
-            Debug.Log(Application.persistentDataPath+"/RegularShot.json");
+            RegularShot=new PlayerWeapon();
+            RegularShot.shotTag="PlayerRegularShot";
+            RegularShot.nextFire=0f;
+            RegularShot.fireRate=0.4f;
+            Debug.Log(Application.persistentDataPath+"/PlayerRegularShot.json");
 
             string json=JsonUtility.ToJson(RegularShot,true);        
-            File.WriteAllText(Application.persistentDataPath+"/RegularShot.json",json);
+            File.WriteAllText(Application.persistentDataPath+"/PlayerRegularShot.json",json);
 
         }
 
-        if(!File.Exists(Application.persistentDataPath+"/BurstShot.json"))
+        if(!File.Exists(Application.persistentDataPath+"/PlayerBurstShot.json"))
         {
-            RegularShot=new PlayerShot();
-            RegularShot.shotTag="BurstShot";
-            RegularShot.damage=3;
-            RegularShot.speed=10;
-            Debug.Log(Application.persistentDataPath+"/BurstShot.json");
+            RegularShot=new PlayerWeapon();
+            RegularShot.shotTag="PlayerBurstShot";
+            RegularShot.nextFire=0f;
+            RegularShot.fireRate=1.5f;
+            Debug.Log(Application.persistentDataPath+"/PlayerBurstShot.json");
 
             string json=JsonUtility.ToJson(RegularShot,true);        
-            File.WriteAllText(Application.persistentDataPath+"/BurstShot.json",json);
+            File.WriteAllText(Application.persistentDataPath+"/PlayerBurstShot.json",json);
         }
 
-        if(!File.Exists(Application.persistentDataPath+"/TracingShot.json"))
+        if(!File.Exists(Application.persistentDataPath+"/PlayerTracingShot.json"))
         {
-            RegularShot=new PlayerShot();
-            RegularShot.shotTag="TracingShot";
-            RegularShot.damage=3;
-            RegularShot.speed=10;
-            Debug.Log(Application.persistentDataPath+"/TracingShot.json");
+            RegularShot=new PlayerWeapon();
+            RegularShot.shotTag="PlayerTracingShot";
+            RegularShot.nextFire=0f;
+            RegularShot.fireRate=1f;
+            Debug.Log(Application.persistentDataPath+"/PlayerTracingShot.json");
 
             string json=JsonUtility.ToJson(RegularShot,true);        
-            File.WriteAllText(Application.persistentDataPath+"/TracingShot.json",json);
-        }
-
-        if(!File.Exists(Application.persistentDataPath+"/PlayerGunConfig.json"))
-        {
-            PlayerWeapon= new PlayerGun();
-            PlayerWeapon.fireRate=1f;
-            PlayerWeapon.nextFire=0.0f;
-            Debug.Log(Application.persistentDataPath+"/PlayerGunConfig.json");
-
-            string json=JsonUtility.ToJson(RegularShot,true);        
-            File.WriteAllText(Application.persistentDataPath+"/PlayerGunConfig.json",json);
+            File.WriteAllText(Application.persistentDataPath+"//PlayerTracingShot.json",json);
         }
     }
 /* 		string json=JsonUtility.ToJson(Obja,true);

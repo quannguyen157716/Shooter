@@ -30,10 +30,10 @@ public class Player_Script : MonoBehaviour
 		rigidbody2=GetComponent<Rigidbody2D>();
 		//audio2=GetComponent<AudioSource>();
 	}
-	void Update () 
-	{
+	//void Update () 
+	//{
 		//Fire2();
-	}
+	//}
 	/* 
 	void Fire()
 	{

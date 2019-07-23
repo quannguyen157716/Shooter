@@ -59,10 +59,13 @@
      <Compile Include="Assets\SS_Scripts\Enemy_Script\Maneuver.cs" />
      <Compile Include="Assets\SS_Scripts\EnemyShot_Script.cs" />
      <Compile Include="Assets\SS_Scripts\explosions_script.cs" />
-     <Compile Include="Assets\SS_Scripts\GameController_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\GameControlScript\DataController_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\GameControlScript\GameController_Script.cs" />
      <Compile Include="Assets\SS_Scripts\LaserHit_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\PlayerScript\Player_BurstShot.cs" />
      <Compile Include="Assets\SS_Scripts\PlayerScript\Player_RegularShot.cs" />
      <Compile Include="Assets\SS_Scripts\PlayerScript\Player_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\PlayerScript\Player_TracingShot.cs" />
      <Compile Include="Assets\SS_Scripts\PlayerScript\PlayerConfiguration.cs" />
      <Compile Include="Assets\SS_Scripts\PlayerScript\PlayerGun.cs" />
      <Compile Include="Assets\SS_Scripts\PoolScripts\BlueEnemyPooler.cs" />

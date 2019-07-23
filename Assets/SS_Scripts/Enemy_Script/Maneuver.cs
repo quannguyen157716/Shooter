@@ -27,7 +27,6 @@ public class Maneuver : MonoBehaviour {
 
         while (true)
         {
-			Debug.Log("m1");
             targetManeuver = Random.Range (1, dodge) * -Mathf.Sign (transform.position.x);
             yield return new WaitForSeconds (Random.Range (maneuverTime.x, maneuverTime.y));
             targetManeuver = 0;
