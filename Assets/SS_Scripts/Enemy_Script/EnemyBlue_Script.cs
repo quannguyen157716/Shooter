@@ -1,16 +1,4 @@
-﻿/// <summary>
-/// 2D Space Shooter Example
-/// By Bug Games www.Bug-Games.net
-/// Programmer: Danar Kayfi - Twitter: @DanarKayfi
-/// Special Thanks to Kenney for the CC0 Graphic Assets: www.kenney.nl
-/// 
-/// This is the EnemyBlue Script:
-/// - Enemy Ship Movement/Health/Score
-/// - Explosion Trigger
-/// 
-/// </summary>
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class EnemyBlue_Script : MonoBehaviour 
@@ -19,16 +7,17 @@ public class EnemyBlue_Script : MonoBehaviour
 	public float speed; //Enemy Ship Speed
 	public int health; //Enemy Ship Health
 	int currentHealth;
+	public int ScoreValue; //How much the Enemy Ship give score after explosion
 	public GameObject LaserGreenHit; //LaserGreenHit Prefab
 	public GameObject Explosion; //Explosion Prefab
-	public int ScoreValue; //How much the Enemy Ship give score after explosion
-	Rigidbody2D rigidbody2;
+	
+	public Rigidbody2D rigidbody2;
 	
 	// Use this for initialization
 	void OnEnable () 
 	{
 		currentHealth=health;
-		rigidbody2=GetComponent<Rigidbody2D>();
+		//rigidbody2=GetComponent<Rigidbody2D>();      
 		rigidbody2.velocity = -1 * transform.up * speed; //Enemy Ship Movement
 	}
 
@@ -44,8 +33,7 @@ public class EnemyBlue_Script : MonoBehaviour
 			//Check the Health if greater than 0
 			if(currentHealth > 0)
 			currentHealth-=DataController_Script.playerDamage; 																	//Decrement Health by 1
-
-			Debug.Log(DataController_Script.playerDamage);
+			
 			//Check the Health if less or equal 0
 			if(currentHealth <= 0)
 			{

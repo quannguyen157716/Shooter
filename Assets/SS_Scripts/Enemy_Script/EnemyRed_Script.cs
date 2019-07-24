@@ -1,16 +1,4 @@
-﻿/// <summary>
-/// 2D Space Shooter Example
-/// By Bug Games www.Bug-Games.net
-/// Programmer: Danar Kayfi - Twitter: @DanarKayfi
-/// Special Thanks to Kenney for the CC0 Graphic Assets: www.kenney.nl
-/// 
-/// This is the EnemyRed Script:
-/// - Enemy Ship Movement/Health/Score
-/// - Explosion Trigger
-/// 
-/// </summary>
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class EnemyRed_Script : MonoBehaviour 
@@ -19,15 +7,16 @@ public class EnemyRed_Script : MonoBehaviour
 	//Public Var
 	public float speed;						//Enemy Ship Speed
 	public int health;						//Enemy Ship Health
-	public GameObject LaserGreenHit;		//LaserGreenHit Prefab
-	public GameObject Explosion;			//Explosion Prefab
 	public int ScoreValue;					//How much the Enemy Ship give score after explosion
-	public GameObject shot;					//Fire Prefab
-	public Transform shotSpawn;				//Where the Fire Spawn
 	public float fireRate = 0.5F;			//Fire Rate between Shots
 
 	//Private Var
 	private float nextFire = 0.0F;			//First fire & Next fire Time
+	public GameObject LaserGreenHit;		//LaserGreenHit Prefab
+	public GameObject Explosion;			//Explosion Prefab
+	
+	public GameObject shot;					//Fire Prefab
+	public Transform shotSpawn;				//Where the Fire Spawn
 	Rigidbody2D rigidbody2;
 	AudioSource audio2;
 	//
@@ -55,7 +44,7 @@ public class EnemyRed_Script : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		//Excute if the object tag was equal to one of these
-		if(other.tag == "PlayerRegularShot")
+		if(other.tag == "PlayerRegularShot" || other.tag=="PlayerBurstShot" ||other.tag=="TracingHead")
 		{
 			Instantiate (LaserGreenHit, transform.position , transform.rotation);		//Instantiate LaserGreenHit 
 			//Destroy(other.gameObject);													//Destroy the Other (PlayerLaser)

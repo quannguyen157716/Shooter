@@ -56,8 +56,9 @@
      <Compile Include="Assets\SS_Scripts\Enemy_Script\EnemyBlue_Script.cs" />
      <Compile Include="Assets\SS_Scripts\Enemy_Script\EnemyGreen_Script.cs" />
      <Compile Include="Assets\SS_Scripts\Enemy_Script\EnemyRed_Script.cs" />
+     <Compile Include="Assets\SS_Scripts\Enemy_Script\EnemyShot\Enemy_RegularShot.cs" />
+     <Compile Include="Assets\SS_Scripts\Enemy_Script\EnemyShot\EnemyShot_Script.cs" />
      <Compile Include="Assets\SS_Scripts\Enemy_Script\Maneuver.cs" />
-     <Compile Include="Assets\SS_Scripts\EnemyShot_Script.cs" />
      <Compile Include="Assets\SS_Scripts\explosions_script.cs" />
      <Compile Include="Assets\SS_Scripts\GameControlScript\DataController_Script.cs" />
      <Compile Include="Assets\SS_Scripts\GameControlScript\GameController_Script.cs" />

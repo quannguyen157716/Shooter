@@ -5,9 +5,12 @@ using System.IO;
 [System.Serializable]
 public class PlayerWeapon
 {
-	public string shotTag;//for prefab
+	public string shotType;//for prefab
 	public float nextFire;	//First fire & Next fire Time
 	public float fireRate;	//Fire Rate between Shots
+
+	public int shotDamage;
+	public float shotSpeed;
 }
 public class PlayerGun : MonoBehaviour {
 	public GameObject shotSpawn;
@@ -47,9 +50,9 @@ public class PlayerGun : MonoBehaviour {
 
 	void GetGunConfig()
 	{
-		string json=File.ReadAllText(Application.persistentDataPath+"/PlayerTracingShot.json");
+		string json=File.ReadAllText(Application.persistentDataPath+"/PlayerRegularGun.json");
 		PlayerWeapon ob=JsonUtility.FromJson<PlayerWeapon>(json);
-		shotTag=ob.shotTag;
+		shotTag=ob.shotType;
 		nextFire=ob.nextFire;
 		fireRate=ob.fireRate;
 		shot = BulletPooler.SharedBulletPool.GetPooledObject(shotTag);
