@@ -25,7 +25,8 @@ public class EnemyRed_Script : MonoBehaviour
 	{
 		rigidbody2=GetComponent<Rigidbody2D>();
 		audio2=GetComponent<AudioSource>();
-		rigidbody2.velocity = -1 * transform.up * speed;	//Enemy Ship Movement
+		StartCoroutine(Move());
+			//Enemy Ship Movement
 	}
 
 	// Update is called once per frame
@@ -40,6 +41,14 @@ public class EnemyRed_Script : MonoBehaviour
 		}
 	}
 
+	IEnumerator Move()
+	{
+		rigidbody2.velocity = -1 * transform.up * speed;
+		yield return new WaitForSeconds (Random.Range(1,3));
+		rigidbody2.velocity =Vector2.zero;
+		yield return new WaitForSeconds (Random.Range(1,5));
+		rigidbody2.velocity = -1 * transform.up * speed;
+	}
 	//Called when the Trigger entered
 	void OnTriggerEnter2D(Collider2D other)
 	{

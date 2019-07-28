@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 public class SharedValues_Script : MonoBehaviour 
 {
-	
 	//Public Var
 	public Text scoreText; 				//GUI Score
 	public Text GameOverText; 			//GUI GameOver

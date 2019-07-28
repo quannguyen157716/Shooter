@@ -9,82 +9,51 @@ public class Boundary
 
 public class Player_Script : MonoBehaviour 
 {
+	public static Player_Script PlayerInstance;
 	//Public Var
 	public float speed; 			//Player Ship Speed
 	public Boundary boundary; 		//make an Object from Class Boundary
-	//GameObject shot;			//Fire Prefab
-	//public Transform shotSpawn;		//Where the Fire Spawn
-	//public float fireRate = 0.5F;	//Fire Rate between Shots
 	public GameObject Explosion;	//Explosion Prefab
-
-	//Private Var
-	//private float nextFire = 0.0F;	//First fire & Next fire Time
 	Vector3 direction;
 	Vector3 touchPosition;
 	Vector3 lastTouchPosition;
 	Rigidbody2D rigidbody2;
+	public Transform position;
+	Camera mCamera;
 	//AudioSource audio2;
 	// Update is called once per frame
 	void Start()
 	{
+		mCamera=Camera.main;
+		PlayerInstance=this;
 		rigidbody2=GetComponent<Rigidbody2D>();
 		//audio2=GetComponent<AudioSource>();
 	}
-	//void Update () 
-	//{
-		//Fire2();
-	//}
-	/* 
-	void Fire()
-	{
-		//Excute When the Current Time is bigger than the nextFire time
-		if (Time.time > nextFire) 
-		{
-			nextFire = Time.time + fireRate; 								//Increment nextFire time with the current system time + fireRate
-			Instantiate (shot , shotSpawn.position ,shotSpawn.rotation); 	//Instantiate fire shot 
-			audio2.Play (); 													//Play Fire sound
-		}
-	}
-
-	void Fire2()
-	{
-		if(Time.time >nextFire)
-		{
-			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
-			shot = BulletPooler.SharedBulletPool.GetPooledObject("PlayerLaser"); 
-  			if (shot != null) 
-			{
-   			shot.transform.position = shotSpawn.transform.position;
-    		shot.transform.rotation = shotSpawn.transform.rotation;
-    		shot.SetActive(true);
-			audio2.Play();
-			}
-		}
-	}
-	// FixedUpdate is called one per specific time
-	/* void FixedUpdate ()
-	{
-		float moveHorizontal = Input.GetAxis ("Horizontal"); 				//Get if Any Horizontal Keys pressed
-		float moveVertical = Input.GetAxis ("Vertical");					//Get if Any Vertical Keys pressed
-		Vector2 movement = new Vector2 (moveHorizontal, moveVertical); 		//Put them in a Vector2 Variable (x,y)
-		rigidbody2.velocity = movement * speed; 							//Add Velocity to the player ship rigidbody
-
-		//Lock the position in the screen by putting a boundaries
-		rigidbody2.position = new Vector2 
-			(
-				Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
-				Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
-			);
-		
-	}*/
-
 	void FixedUpdate()
 	{	
+		MovingPC();
+	}
+
+	//Called when the Trigger entered 
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		//Excute if the object tag was equal to one of these
+		if(other.tag == "Enemy" || other.tag == "Asteroid" || other.tag == "EnemyShot" ||other.tag=="EnemyBlue"||other.tag=="EnemyGreen") 
+		{
+			Instantiate (Explosion, transform.position , transform.rotation); 				//Instantiate Explosion
+			SharedValues_Script.gameover = true;
+			TakeDamage(1); 											
+			//gameObject.SetActive(false); 															//Destroy Player Ship Object
+		}
+	}
+	//Moving touch pad only
+	void Moving()
+	{
 		if(Input.touchCount>0)
 		{
 			Touch touch=Input.GetTouch(0);
 			
-			touchPosition=Camera.main.ScreenToWorldPoint(touch.position);
+			touchPosition=mCamera.ScreenToWorldPoint(touch.position);
 			touchPosition.z=0;
 	
 			direction=touchPosition-transform.position;
@@ -102,15 +71,31 @@ public class Player_Script : MonoBehaviour
 			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
 		);
 	}
-	//Called when the Trigger entered hate 
-	void OnTriggerEnter2D(Collider2D other)
+
+	void MovingPC()
 	{
-		//Excute if the object tag was equal to one of these
-		if(other.tag == "Enemy" || other.tag == "Asteroid" || other.tag == "EnemyShot" ||other.tag=="EnemyBlue") 
-		{
-			Instantiate (Explosion, transform.position , transform.rotation); 				//Instantiate Explosion
-			SharedValues_Script.gameover = true; 											//Trigger That its a GameOver
-			gameObject.SetActive(false); 															//Destroy Player Ship Object
-		}
+		if (Input.GetMouseButton(0)) //if mouse button was pressed       
+            {
+                Vector3 mousePosition = mCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
+                mousePosition.z = transform.position.z;
+                transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
+            }
+			
+		rigidbody2.position = new Vector2 
+		(
+			Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
+			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
+		);
+	}
+	void TakeDamage(int damage)
+	{
+		Destruct();
+	}
+
+	void Destruct()
+	{
+		//Destroy(gameObject);
+		SharedValues_Script.gameover = true;   //Trigger That its a GameOver
+		gameObject.SetActive(false);
 	}
 }

@@ -8,36 +8,36 @@ public class PlayerWeapon
 	public string shotType;//for prefab
 	public float nextFire;	//First fire & Next fire Time
 	public float fireRate;	//Fire Rate between Shots
-
 	public int shotDamage;
 	public float shotSpeed;
 }
 public class PlayerGun : MonoBehaviour {
+	public static PlayerGun PlayerGunInstance;
 	public GameObject shotSpawn;
 	GameObject shot;
-	string shotTag="PlayerRegularShot";
+	string shotType="PlayerRegularShot";
 	float nextFire=0f;	//First fire & Next fire Time
 	float fireRate=1f;	//Fire Rate between Shots
+	public int shotDamage;
 	AudioSource audio2;
 	void Start()
 	{
-		//shotSpawn=GameObject.FindGameObjectWithTag("PlayerShotSpawn");
+		PlayerGunInstance=this;
 		audio2=GetComponent<AudioSource>();
 		GetGunConfig();
 	}
 
 	void Update () 
 	{
-		Fire();
+		Fire2();
 	}
 	void Fire()
 	{
 		
 		if(Time.time >nextFire)
 		{
-			Debug.Log(fireRate);
 			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
-			shot = BulletPooler.SharedBulletPool.GetPooledObject(shotTag); 
+			shot = BulletPooler.SharedBulletPool.GetPooledObject(shotType); 
   			if (shot != null) 
 			{
    			shot.transform.position = shotSpawn.transform.position;
@@ -45,17 +45,33 @@ public class PlayerGun : MonoBehaviour {
     		shot.SetActive(true);
 			audio2.Play();
 			}
+			else
+			return;
 		}
 	}
 
+	void Fire2()
+	{
+		if(Time.time >nextFire)
+		{
+			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
+			shot = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shotType, shotSpawn.transform.position); 
+  			if (shot != null) 
+			{
+				audio2.Play();
+			}
+			else
+			return;
+		}
+	}
 	void GetGunConfig()
 	{
-		string json=File.ReadAllText(Application.persistentDataPath+"/PlayerRegularGun.json");
+		string json=File.ReadAllText(Application.persistentDataPath+"/PlayerTracingGun.json");
 		PlayerWeapon ob=JsonUtility.FromJson<PlayerWeapon>(json);
-		shotTag=ob.shotType;
+		shotType=ob.shotType;
 		nextFire=ob.nextFire;
 		fireRate=ob.fireRate;
-		shot = BulletPooler.SharedBulletPool.GetPooledObject(shotTag);
-		
+		shotDamage=ob.shotDamage;
+		//shot = BulletPooler.SharedBulletPool.GetPooledObject(shotType);
 	}
 }
