@@ -28,7 +28,7 @@ public class Hazard
 	public float WaveWait;					//Time to wait till a new wave
 	public float x_pos, y_pos; //position to spawn 
 }
-
+[System.Serializable]
 public class SpawnInfo
 {
 	public string ID;
@@ -238,6 +238,7 @@ public class GameController_Script : MonoBehaviour
 			}
 			numberofWave++;
 			Debug.Log("Wave: "+numberofWave);
+			Debug.Log("Time: "+ Time.time);
 			float waveWait=Random.Range(ifo.wavewaitMin, ifo.RandomSpawnWaitMax);
 			yield return new WaitForSeconds (waveWait);		//wait for seconds before the next wave
 		}

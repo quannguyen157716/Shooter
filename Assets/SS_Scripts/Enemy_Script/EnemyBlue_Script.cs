@@ -52,7 +52,7 @@ public class EnemyBlue_Script : MonoBehaviour
 	void TakeDamage(int damage)
 	{
 		currentHealth-=damage;
-		Debug.Log(currentHealth);
+		//Debug.Log(currentHealth);
 	}
 
 	void Destruct()

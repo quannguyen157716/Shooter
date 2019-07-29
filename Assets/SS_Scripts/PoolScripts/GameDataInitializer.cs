@@ -31,15 +31,16 @@ public static class JsonHelper
         public T[] Items;
     }
 }
-
-public class shit
+    
+[System.Serializable]
+public class test
 {
     public int i=1;
 }
 public class GameDataInitializer : MonoBehaviour {
     PlayerWeapon gun;
     SpawnInfo info;
-	void Start () {
+	void Awake () {
         //Based value for object attributes
         Debug.Log(Application.persistentDataPath);
         //Gun Type 
@@ -125,14 +126,14 @@ public class GameDataInitializer : MonoBehaviour {
         {
             Level level=new Level();
             level.name="Level 1";
-            level.timeToStartEachEvent=new float[4]{1,2,3,4};
 
-
-            /* level.events=new SpawnInfo[1];
+            
+            level.events=new SpawnInfo[2];
 
             level.events[0]=new SpawnInfo();
-            level.events[0].ID="00";
+            level.events[0].ID="LV_E00";
             level.events[0].enemyTag="EnemyBlue";
+            level.events[0].typeOfSpawn="enemyRandomSpawn";
             level.events[0].numberOfWave=15;
             level.events[0].numberOfObject=6; //number of object in one wave
 	        level.events[0].start_Wait=3; //Time to Start spawning
@@ -141,16 +142,25 @@ public class GameDataInitializer : MonoBehaviour {
         	level.events[0].wavewaitMin=1;  //Time to wait till a new wave
         	level.events[0].wavewaitMin=4;
         	level.events[0].position=new Vector2(3,6);  //position to spawn */
-            shit[] a=new shit[2];
 
-            a[0]=new shit();
-            a[0].i=0;
+            level.events[1]=new SpawnInfo();
+            level.events[1].ID="LV_E01";
+            level.events[1].enemyTag="EnemyGreen";
+            level.events[1].typeOfSpawn="enemyRandomSpawn";
+            level.events[1].numberOfWave=5;
+            level.events[1].numberOfObject=3; //number of object in one wave
+	        level.events[1].start_Wait=3; //Time to Start spawning
+        	level.events[1].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
+        	level.events[1].RandomSpawnWaitMax=5;
+        	level.events[1].wavewaitMin=2;  //Time to wait till a new wave
+        	level.events[1].wavewaitMin=5;
+        	level.events[1].position=new Vector2(3,6);  //position to spawn */
 
-            a[1]=new shit();
-            a[1].i=1;
-            string json=JsonHelper.ToJson(a,true);    
-            Debug.Log(json);    
-            //File.WriteAllText(Application.persistentDataPath+"//Level1.json",json);
+            level.timeToStartEachEvent=new float[4]{3,300,3,3};
+            string json =JsonUtility.ToJson(level,true);
+            Debug.Log(json);
+            //string json=JsonHelper.ToJson(level);
+            File.WriteAllText(Application.persistentDataPath+"//Level1.json",json);
         }
 
 /* 		string json=JsonUtility.ToJson(Obja,true);
