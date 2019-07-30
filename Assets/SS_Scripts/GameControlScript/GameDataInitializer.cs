@@ -128,7 +128,7 @@ public class GameDataInitializer : MonoBehaviour {
             level.name="Level 1";
 
             
-            level.events=new SpawnInfo[2];
+            level.events=new SpawnInfo[3];
 
             level.events[0]=new SpawnInfo();
             level.events[0].ID="LV_E00";
@@ -147,7 +147,7 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[1].ID="LV_E01";
             level.events[1].enemyTag="EnemyGreen";
             level.events[1].typeOfSpawn="enemyRandomSpawn";
-            level.events[1].numberOfWave=5;
+            level.events[1].numberOfWave=10;
             level.events[1].numberOfObject=3; //number of object in one wave
 	        level.events[1].start_Wait=3; //Time to Start spawning
         	level.events[1].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
@@ -156,9 +156,23 @@ public class GameDataInitializer : MonoBehaviour {
         	level.events[1].wavewaitMin=5;
         	level.events[1].position=new Vector2(3,6);  //position to spawn */
 
-            level.timeToStartEachEvent=new float[4]{3,300,3,3};
+            level.events[2]=new SpawnInfo();
+            level.events[2].ID="LV_E02";
+            level.events[2].enemyTag="EnemyBlue";
+            level.events[2].typeOfSpawn="enemyRandomSpawn";
+            level.events[2].numberOfWave=12;
+            level.events[2].numberOfObject=4; //number of object in one wave
+	        level.events[2].start_Wait=10; //Time to Start spawning
+        	level.events[2].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
+        	level.events[2].RandomSpawnWaitMax=7;
+        	level.events[2].wavewaitMin=2;  //Time to wait till a new wave
+        	level.events[2].wavewaitMin=6;
+        	level.events[2].position=new Vector2(3,6);  //position to spawn */
+
+            level.timeToStartEachEvent=new float[4]{3,300,4,3};
             string json =JsonUtility.ToJson(level,true);
             Debug.Log(json);
+            Debug.Log(json.Length);
             //string json=JsonHelper.ToJson(level);
             File.WriteAllText(Application.persistentDataPath+"//Level1.json",json);
         }
