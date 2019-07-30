@@ -12,7 +12,8 @@ public class EnemyRed_Script : MonoBehaviour
 
 	//Private Var
 	private float nextFire = 0.0F;			//First fire & Next fire Time
-	public GameObject LaserGreenHit;		//LaserGreenHit Prefab
+	int currentHealth;
+	public GameObject LaserHit;		//LaserGreenHit Prefab
 	public GameObject Explosion;			//Explosion Prefab
 	
 	public GameObject shot;					//Fire Prefab
@@ -23,6 +24,7 @@ public class EnemyRed_Script : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		currentHealth=health;
 		rigidbody2=GetComponent<Rigidbody2D>();
 		audio2=GetComponent<AudioSource>();
 		StartCoroutine(Move());
@@ -32,13 +34,14 @@ public class EnemyRed_Script : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		//Excute When the Current Time is bigger than the nextFire time
+		/* //Excute When the Current Time is bigger than the nextFire time
 		if (Time.time > nextFire)
 		{
 			nextFire = Time.time + fireRate; 									//Increment nextFire time with the current system time + fireRate
 			Instantiate (shot , shotSpawn.position ,shotSpawn.rotation); 		//Instantiate fire shot 
 			audio2.Play ();														//Play Fire sound
-		}
+		}*/
+		Fire2();
 	}
 
 	IEnumerator Move()
@@ -52,24 +55,45 @@ public class EnemyRed_Script : MonoBehaviour
 	//Called when the Trigger entered
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		//Excute if the object tag was equal to one of these
 		if(other.tag == "PlayerRegularShot" || other.tag=="PlayerBurstShot" ||other.tag=="TracingHead")
 		{
-			Instantiate (LaserGreenHit, transform.position , transform.rotation);		//Instantiate LaserGreenHit 
-			//Destroy(other.gameObject);													//Destroy the Other (PlayerLaser)
-			other.gameObject.SetActive(false); //return to pool
+			Instantiate (LaserHit, transform.position , transform.rotation); 			//Instantiate LaserGreenHit 
+			//Destroy(other.gameObject); 														//Destroy the Other (PlayerLaser)
+			other.gameObject.SetActive(false);
 			//Check the Health if greater than 0
-			if(health > 0)
-				health--; 																//Decrement Health by 1 
+			if(currentHealth > 0)
+			TakeDamage(PlayerGun.PlayerGunInstance.shotDamage);													//Decrement Health by 1
 			
 			//Check the Health if less or equal 0
-			if(health <= 0)
+			if(currentHealth <= 0)
 			{
-				Instantiate (Explosion, transform.position , transform.rotation); 		//Instantiate Explosion
-				SharedValues_Script.score +=ScoreValue;									//Increment score by ScoreValue
-				Destroy(gameObject);													//Destroy The Object (Enemy Ship)
+				Instantiate (Explosion, transform.position , transform.rotation); 			//Instantiate Explosion							
+				Destruct();												
 			}
 		}
-		
+	}
+
+	void Fire2()
+	{
+		if(Time.time >nextFire)
+		{
+			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
+			shot = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shot.tag, shotSpawn.transform.position); 
+  			if (shot != null) 
+			audio2.Play();
+			else
+			return;
+		}
+	}
+
+	void TakeDamage(int damage)
+	{
+		currentHealth-=damage;
+	}
+
+	void Destruct()
+	{
+		SharedValues_Script.score +=ScoreValue; //Increment score by ScoreValue 
+		gameObject.SetActive(false);//return to pool
 	}
 }

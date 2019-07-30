@@ -81,7 +81,7 @@ public class Wave : MonoBehaviour {
         else if (!Loop)
             Destroy(gameObject); 
     }
-
+//
     void OnDrawGizmos()  
     {
         DrawPath(pathPoints);  
@@ -106,7 +106,7 @@ public class Wave : MonoBehaviour {
             previosPositions = currentPositions;
         }
     }
-
+    //
     Vector3 Interpolate(Vector3[] path, float t) 
     {
         int numSections = path.Length - 3;

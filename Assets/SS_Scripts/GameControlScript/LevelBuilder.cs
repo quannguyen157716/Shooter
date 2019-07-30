@@ -7,12 +7,13 @@ public class Level
 {
 	public string name;
     public SpawnInfo[] events;
-	public float[] timeToStartEachEvent; 
+	public float[] timeToStartEachEvent;
 }
 
 public class LevelBuilder : MonoBehaviour {
 	List<Level> lv;
 
+	public int numberOflevel;
 	void Start()
 	{
 		lv=new List<Level>();
@@ -22,11 +23,12 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	IEnumerator RunLevel()
 	{
+		int i;
 		Debug.Log("Level start");
 		foreach(Level l in lv)
 		{
-			Debug.Log("Level1" );
-			for(int i=0; i<l.events.Length; i++)
+			Debug.Log(l.name);
+			for(i=0; i<l.events.Length; i++)
 			{
 				yield return new WaitForSeconds (l.timeToStartEachEvent[i]);
 				Debug.Log("Event "+i );
@@ -38,18 +40,24 @@ public class LevelBuilder : MonoBehaviour {
 				{
 					StartCoroutine(GameController_Script.GameControllerInstance.singleSpawn(l.events[i]));
 				}
-				
-				//else if(l.events[i].typeOfSpawn=="streamOfEnemySpawn")
+				Debug.Log(i+" "+l.events[i].spawnEnd);
+				//else if(l.events[i].typeOfSpawn=="streamOfEnemySpawn") 
 				//StartCoroutine(GameController_Script.GameControllerInstance.streamOfEnemySpawn(l.events[i]));
 			}
+			yield return new WaitUntil(()=>l.events[i-1].spawnEnd==true);
+			Debug.Log("End Level");
 		}
 	}
 
 	void loadLevel()
 	{
-		string json=File.ReadAllText(Application.persistentDataPath+"/Level1.json");
-		Level l=JsonUtility.FromJson<Level>(json);
-		Debug.Log(l.name);
-		lv.Add(l);
+		Debug.Log("Load Level");
+	    for(int i=0; i<numberOflevel;i++)
+		{
+			string json=File.ReadAllText(Application.persistentDataPath+"/Level_"+(i+1)+".json");
+			Level l=JsonUtility.FromJson<Level>(json);
+			Debug.Log(l.name);
+			lv.Add(l);
+		}
 	}
 }

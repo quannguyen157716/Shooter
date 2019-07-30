@@ -42,6 +42,7 @@ public class SpawnInfo
 	public float wavewaitMin;  //Time to wait till a new wave
 	public float wavewaitMax;
 	public Vector2 position;  //position to spawn 
+	public bool spawnEnd=false;
 }
 //Stream of enemy(Enemey object, Spawn_Position, Behaviour) 
 //player info: playership, score, bullet type, skin
@@ -242,6 +243,7 @@ public class GameController_Script : MonoBehaviour
 			float waveWait=Random.Range(ifo.wavewaitMin, ifo.RandomSpawnWaitMax);
 			yield return new WaitForSeconds (waveWait);		//wait for seconds before the next wave
 		}
+		ifo.spawnEnd=true;
 	}	
 
 	//wait to spawn an object at specific location after specific time

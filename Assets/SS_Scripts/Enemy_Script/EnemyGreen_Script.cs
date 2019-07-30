@@ -60,9 +60,9 @@ public class EnemyGreen_Script : MonoBehaviour
 	{
 
 		if(Time.time >nextFire)
-		{Debug.Log("Fire");
+		{
 			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
-			shot = EnemyBulletPool.SharedEnemyBulletPool.GetPooledObject("Fireball"); 
+			shot = EnemyBulletPool.SharedEnemyBulletPool.GetPooledObject(shot.tag); 
   			if (shot != null) 
 			{
 				
@@ -81,7 +81,7 @@ public class EnemyGreen_Script : MonoBehaviour
 		if(Time.time >nextFire)
 		{
 			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
-			shot = ObjectPooler.ObjectPoolerInstance.GetPooledObject("Fireball", shotSpawn.transform.position); 
+			shot = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shot.tag, shotSpawn.transform.position); 
   			if (shot != null) 
 			audio2.Play();
 			else
