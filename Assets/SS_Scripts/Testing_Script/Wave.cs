@@ -109,13 +109,13 @@ public class Wave : MonoBehaviour {
     //
     Vector3 Interpolate(Vector3[] path, float t) 
     {
-        int numSections = path.Length - 3;
+        int numSections = path.Length - 3; 
         int currPt = Mathf.Min(Mathf.FloorToInt(t * numSections), numSections - 1);
         float u = t * numSections - currPt;
         Vector3 a = path[currPt];
         Vector3 b = path[currPt + 1];
         Vector3 c = path[currPt + 2];
-        Vector3 d = path[currPt + 3];
+        Vector3 d = path[currPt + 3];//quadratic
         return 0.5f * ((-a + 3f * b - 3f * c + d) * (u * u * u) + (2f * a - 5f * b + 4f * c - d) * (u * u) + (-a + c) * u + 2f * b);
     }
 
