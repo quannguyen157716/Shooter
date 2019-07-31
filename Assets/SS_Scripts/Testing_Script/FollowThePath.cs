@@ -43,7 +43,7 @@ public class FollowThePath : MonoBehaviour {
                 transform.right = Interpolate(CreatePoints(pathPositions), currentPathPercent + 0.01f) - transform.position;
                 transform.Rotate(Vector3.forward * 90);
             }
-            if (currentPathPercent > 1)                    //when the path is complete
+            if (currentPathPercent > 1)                    //when the path is complete 
             {
                 if (loop)                                   //when loop is set, moving to the path starting point; if not, destroying or deactivating the 'Enemy'
                     currentPathPercent = 0;

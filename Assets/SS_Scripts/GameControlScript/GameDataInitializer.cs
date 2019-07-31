@@ -87,7 +87,7 @@ public class GameDataInitializer : MonoBehaviour {
             string json=JsonUtility.ToJson(gun,true);        
             File.WriteAllText(Application.persistentDataPath+"//PlayerTracingGun.json",json);
         }
-    
+    /* 
         if(!File.Exists(Application.persistentDataPath+"/S01.json"))
         {
             info=new SpawnInfo();
@@ -120,7 +120,7 @@ public class GameDataInitializer : MonoBehaviour {
         	info.position=new Vector2(3,6);  //position to spawn
             string json=JsonUtility.ToJson(info,true);        
             File.WriteAllText(Application.persistentDataPath+"//S00.json",json);
-        }
+        } */
 
         if(!File.Exists(Application.persistentDataPath+"/Level_1.json"))
         {
@@ -140,16 +140,14 @@ public class GameDataInitializer : MonoBehaviour {
         	level.events[0].RandomSpawnWaitMin=1;  //Time to wait before a new spawn
         	level.events[0].RandomSpawnWaitMax=5;
         	level.events[0].wavewaitMin=1;  //Time to wait till a new wave
-        	level.events[0].wavewaitMin=4;
-        	level.events[0].position=new Vector2(3,6);  //position to spawn */
+        	level.events[0].wavewaitMax=4;
+        	level.events[0].position=new Vector2(3,6);  //position to spawn 
 
             level.timeToStartEachEvent=new float[1]{3};
             string json =JsonUtility.ToJson(level,true);
-            Debug.Log(json);
-            Debug.Log(json.Length);
+       
             //string json=JsonHelper.ToJson(level);
             File.WriteAllText(Application.persistentDataPath+"//Level_1.json",json);
-
         }
 
         if(!File.Exists(Application.persistentDataPath+"/Level_2.json"))
@@ -169,7 +167,7 @@ public class GameDataInitializer : MonoBehaviour {
         	level.events[0].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
         	level.events[0].RandomSpawnWaitMax=5;
         	level.events[0].wavewaitMin=2;  //Time to wait till a new wave
-        	level.events[0].wavewaitMin=5;
+        	level.events[0].wavewaitMax=5;
         	level.events[0].position=new Vector2(3,6);  //position to spawn */
 
             level.events[1]=new SpawnInfo();
@@ -182,15 +180,55 @@ public class GameDataInitializer : MonoBehaviour {
         	level.events[1].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
         	level.events[1].RandomSpawnWaitMax=6;
         	level.events[1].wavewaitMin=2;  //Time to wait till a new wave
-        	level.events[1].wavewaitMin=4;
+        	level.events[1].wavewaitMax=4;
         	level.events[1].position=new Vector2(3,6);  //position to spawn */
 
             level.timeToStartEachEvent=new float[2]{3,15};
             string json =JsonUtility.ToJson(level,true);
-            Debug.Log(json);
-            Debug.Log(json.Length);
+           
             //string json=JsonHelper.ToJson(level);
             File.WriteAllText(Application.persistentDataPath+"//Level_2.json",json);
+        }
+
+        if(!File.Exists(Application.persistentDataPath+"/Level_3.json"))
+        {
+            Level level=new Level();
+            level.name="Level_3";
+
+            
+            level.events=new SpawnInfo[2];
+
+            level.events[0]=new SpawnInfo();
+            level.events[0].ID="LV3_E00";
+            level.events[0].enemyTag="Asteroid";
+            level.events[0].typeOfSpawn="enemyRandomSpawn";
+            level.events[0].numberOfWave=10;
+            level.events[0].numberOfObject=4; //number of object in one wave
+	        level.events[0].start_Wait=3; //Time to Start spawning
+        	level.events[0].RandomSpawnWaitMin=1;  //Time to wait before a new spawn//
+        	level.events[0].RandomSpawnWaitMax=5;
+        	level.events[0].wavewaitMin=1;  //Time to wait till a new wave
+        	level.events[0].wavewaitMax=4;
+        	level.events[0].position=new Vector2(3,6);  //position to spawn 
+
+            level.events[1]=new SpawnInfo();
+            level.events[1].ID="LV3_E00";
+            level.events[1].enemyTag="EnemyRed";
+            level.events[1].typeOfSpawn="enemyRandomSpawn";
+            level.events[1].numberOfWave=5;
+            level.events[1].numberOfObject=2; //number of object in one wave
+	        level.events[1].start_Wait=3; //Time to Start spawning
+        	level.events[1].RandomSpawnWaitMin=4;  //Time to wait before a new spawn
+        	level.events[1].RandomSpawnWaitMax=8;
+        	level.events[1].wavewaitMin=4;  //Time to wait till a new wave
+        	level.events[1].wavewaitMax=8;
+        	level.events[1].position=new Vector2(3,6);  //position to spawn 
+
+            level.timeToStartEachEvent=new float[2]{3,10};
+            string json =JsonUtility.ToJson(level,true);
+          
+            //string json=JsonHelper.ToJson(level);
+            File.WriteAllText(Application.persistentDataPath+"//Level_3.json",json);
         }
 
 /* 		string json=JsonUtility.ToJson(Obja,true);
@@ -200,7 +238,7 @@ public class GameDataInitializer : MonoBehaviour {
 		json=File.ReadAllText(Application.persistentDataPath+"/F.json");
 		TestingS myOb=JsonUtility.FromJson<TestingS>(json);
 		Debug.Log(myOb.position);
-		Debug.Log(myOb.health); */
+		Debug.Log(myOb.health); */ //
     }
 	
 }

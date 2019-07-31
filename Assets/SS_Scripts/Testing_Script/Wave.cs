@@ -52,7 +52,6 @@ public class Wave : MonoBehaviour {
 
     private void Start()
     {
-        Debug.Log("s");
         StartCoroutine(CreateEnemyWave()); 
     }
 
@@ -109,7 +108,7 @@ public class Wave : MonoBehaviour {
     //
     Vector3 Interpolate(Vector3[] path, float t) 
     {
-        int numSections = path.Length - 3; 
+        int numSections = path.Length - 3;  
         int currPt = Mathf.Min(Mathf.FloorToInt(t * numSections), numSections - 1);
         float u = t * numSections - currPt;
         Vector3 a = path[currPt];
@@ -118,7 +117,7 @@ public class Wave : MonoBehaviour {
         Vector3 d = path[currPt + 3];//quadratic
         return 0.5f * ((-a + 3f * b - 3f * c + d) * (u * u * u) + (2f * a - 5f * b + 4f * c - d) * (u * u) + (-a + c) * u + 2f * b);
     }
-
+    //what's going to happen? 
     Vector3[] CreatePoints(Vector3[] path)  //using interpolation method calculating the path along the path points
     {
         Vector3[] pathPositions;
@@ -136,7 +135,7 @@ public class Wave : MonoBehaviour {
             LoopSpline[0] = LoopSpline[LoopSpline.Length - 3];
             LoopSpline[LoopSpline.Length - 1] = LoopSpline[2];
             newPathPos = new Vector3[LoopSpline.Length];
-            Array.Copy(LoopSpline, newPathPos, LoopSpline.Length);
+            Array.Copy(LoopSpline, newPathPos, LoopSpline.Length);//
         }
         return (newPathPos);
     }
