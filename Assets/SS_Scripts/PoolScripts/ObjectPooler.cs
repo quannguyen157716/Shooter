@@ -24,9 +24,6 @@ public class ObjectPooler : MonoBehaviour {
 	void Awake()
 	{
 		ObjectPoolerInstance=this;
-	}
-	void Start()
-	{
 		poolDictionary=new Dictionary<string, Queue<GameObject>>();
 		foreach (Pool p in pools)
 		{
@@ -40,8 +37,8 @@ public class ObjectPooler : MonoBehaviour {
 			poolDictionary.Add(p.tag, objectPool);
 		}
 	}
-
-	public GameObject GetPooledObject(string tag, Vector2 position)
+	
+	public GameObject GetPooledObject(string tag, Vector2 position, bool Enable)
 	{
 		//Debug.Log(tag+": " +poolDictionary[tag].Count);
 		if(!poolDictionary.ContainsKey(tag) || poolDictionary[tag].Count==0)
@@ -55,6 +52,7 @@ public class ObjectPooler : MonoBehaviour {
 		{
 			obj.transform.position=position;
 			obj.transform.rotation=Quaternion.identity;
+			if(Enable)
 			obj.SetActive(true);
 			poolDictionary[tag].Enqueue(obj);
 			return obj;

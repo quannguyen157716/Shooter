@@ -36,7 +36,7 @@ public class FollowThePath : MonoBehaviour {
         if (movingIsActive)
         {
             currentPathPercent += speed / 100 * Time.deltaTime;     //every update calculating current path percentage according to the defined speed
-
+            Debug.Log(currentPathPercent);
             transform.position = NewPositionByPath(pathPositions, currentPathPercent); //moving the 'Enemy' to the path position, calculated in method NewPositionByPath
             if (rotationByPath)                            //rotating the 'Enemy' in path direction, if set 'rotationByPath'
             {

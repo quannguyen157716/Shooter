@@ -59,7 +59,6 @@ public class Wave : MonoBehaviour {
     {
         for (int i = 0; i < count; i++) 
         {
-            Debug.Log("df");
             GameObject newEnemy;
             newEnemy = Instantiate(enemy, enemy.transform.position, Quaternion.identity);
             FollowThePath followComponent = newEnemy.GetComponent<FollowThePath>(); 
@@ -81,13 +80,14 @@ public class Wave : MonoBehaviour {
             Destroy(gameObject); 
     }
 //
-    void OnDrawGizmos()  
+    void Update()  
     {
         DrawPath(pathPoints);  
     }
     
     void DrawPath(Transform[] path) //drawing the path in the Editor
     {
+        Debug.Log(path.Length);
         Vector3[] pathPositions = new Vector3[path.Length];
         for (int i = 0; i < path.Length; i++)
         {
@@ -101,7 +101,7 @@ public class Wave : MonoBehaviour {
         {
             float t = (float)i / SmoothAmount;
             Vector3 currentPositions = Interpolate(newPathPositions, t);
-            Gizmos.DrawLine(currentPositions, previosPositions);
+            Debug.DrawLine(currentPositions, previosPositions);
             previosPositions = currentPositions;
         }
     }
@@ -109,6 +109,7 @@ public class Wave : MonoBehaviour {
     Vector3 Interpolate(Vector3[] path, float t) 
     {
         int numSections = path.Length - 3;  
+        //Debug.Log(path.Length);
         int currPt = Mathf.Min(Mathf.FloorToInt(t * numSections), numSections - 1);
         float u = t * numSections - currPt;
         Vector3 a = path[currPt];
@@ -126,7 +127,7 @@ public class Wave : MonoBehaviour {
         pathPositions = path;
         newPathPos = new Vector3[pathPositions.Length + dist];
         Array.Copy(pathPositions, 0, newPathPos, 1, pathPositions.Length);
-        newPathPos[0] = newPathPos[1] + (newPathPos[1] - newPathPos[2]);
+        newPathPos[0] = newPathPos[1] + (newPathPos[1] - newPathPos[2]);//interpolation between p0, p1
         newPathPos[newPathPos.Length - 1] = newPathPos[newPathPos.Length - 2] + (newPathPos[newPathPos.Length - 2] - newPathPos[newPathPos.Length - 3]);
         if (newPathPos[1] == newPathPos[newPathPos.Length - 2])
         {

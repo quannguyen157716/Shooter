@@ -3,50 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Test : MonoBehaviour {
-	//[Tooltip("Enemy's prefab")]
-    public GameObject enemy;
+	GameObject enemy;
+	public Transform[] points;
+	Vector2 GizmoPosition;
+	Vector2 p,p1,p2,p3;
+	public int NumberOfEnemy;
+	
+	public float TimeBetween;
 
-    //[Tooltip("a number of enemies in the wave")]
-    public int count;
-
-    //[Tooltip("path passage speed")]
-    public float speed;
-
-    //[Tooltip("time between emerging of the enemies in the wave")]
-    public float timeBetween;
-
-    //[Tooltip("points of the path. delete or add elements to the list if you want to change the number of the points")]
-    public Transform[] pathPoints;
-
-    public Vector2 a,b,c;
-  
-   
-    //[Tooltip("color of the path in the Editor")]
-    public Color pathColor = Color.yellow;
-       public bool testMode;
-
-	public Vector2 QuadraticCurve(Vector2 a, Vector2 b, Vector2 c, float t)
+	void Start()
 	{
-		Vector2 p0=Vector2.Lerp(a,b,t);
-		Vector2 p1=Vector2.Lerp(b,c,t);
-		return Vector2.Lerp(p0,p1,t);
+		StartCoroutine(CreateStream());
 	}
 
-	void Awake()
+	void OnDrawGizmos()
 	{
-		Debug.Log(QuadraticCurve(pathPoints[0].position,pathPoints[1].position,pathPoints[2].position,0.5f));
+		p=points[0].position;
+		p1=points[1].position;
+		p2=points[2].position;
+		p3=points[3].position;
+		for(float t=0; t<=1; t+=0.05f)
+		{
+			GizmoPosition=Mathf.Pow(1-t,3)*p+
+			3*Mathf.Pow(1-t,2)*t*p1+
+			3*(1-t)*Mathf.Pow(t,2)*p2+
+			Mathf.Pow(t,3)*p3;
+
+			Gizmos.DrawSphere(GizmoPosition,0.2f);
+		}
+
+		Gizmos.DrawLine(p,p1);
+		Gizmos.DrawLine(p2,p3);
 	}
 
-	void OnDrawGizmos()  
-    {
-		a=pathPoints[0].position;
-		b=pathPoints[1].position;
-		c=pathPoints[2].position;
-
-        Gizmos.color=pathColor;
-		//Gizmos.DrawLine(pathPoints[0].position,pathPoints[1].position);
-		//Gizmos.DrawLine(pathPoints[1].position,pathPoints[2].position);
-		Gizmos.DrawLine(a,QuadraticCurve(a,b,c,0.5f));
-		Gizmos.DrawLine(c,QuadraticCurve(a,b,c,0.5f));
-    }
-}
+	IEnumerator CreateStream()
+	{
+		Debug.Log("Stream");
+		for(int i=0; i<NumberOfEnemy;i++)
+		{
+			
+			enemy=ObjectPooler.ObjectPoolerInstance.GetPooledObject("EnemyBlue1", points[0].position,false);
+			FollowTest TestC=enemy.GetComponent<FollowTest>();
+			TestC.path=points;
+			TestC.SetPath();
+			//TestC.InStream=true;
+			TestC.gameObject.SetActive(true);
+			yield return new WaitForSeconds(TimeBetween);
+		}
+	}
+}	

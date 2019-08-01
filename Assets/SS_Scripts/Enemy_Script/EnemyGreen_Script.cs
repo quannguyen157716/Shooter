@@ -56,32 +56,12 @@ public class EnemyGreen_Script : MonoBehaviour
 		}
 	}
 
-	void Fire()
-	{
-
-		if(Time.time >nextFire)
-		{
-			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
-			shot = EnemyBulletPool.SharedEnemyBulletPool.GetPooledObject(shot.tag); 
-  			if (shot != null) 
-			{
-				
-   			shot.transform.position = shotSpawn.transform.position;
-    		shot.transform.rotation = shotSpawn.transform.rotation;
-    		shot.SetActive(true);
-			audio2.Play();
-			}
-			else
-			return;
-		}
-	}
-
 	void Fire2()
 	{
 		if(Time.time >nextFire)
 		{
 			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
-			shot = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shot.tag, shotSpawn.transform.position); 
+			shot = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shot.tag, shotSpawn.transform.position,true); 
   			if (shot != null) 
 			audio2.Play();
 			else

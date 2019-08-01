@@ -55,7 +55,7 @@ public class PlayerGun : MonoBehaviour {
 		if(Time.time >nextFire)
 		{
 			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
-			shot = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shotType, shotSpawn.transform.position); 
+			shot = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shotType, shotSpawn.transform.position,true); 
   			if (shot != null) 
 			{
 				audio2.Play();

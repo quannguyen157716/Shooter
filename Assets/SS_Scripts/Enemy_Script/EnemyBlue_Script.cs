@@ -15,17 +15,18 @@ public class EnemyBlue_Script : MonoBehaviour
 	public int ScoreValue; //How much the Enemy Ship give score after explosion
 	public GameObject LaserHit; //LaserGreenHit Prefab
 	public GameObject Explosion; //Explosion Prefab
-	
 	public Rigidbody2D rigidbody2;
 	
+	bool Instream=false;
 	// Use this for initialization
 	void OnEnable () 
 	{
 		currentHealth=health;
-		//rigidbody2=GetComponent<Rigidbody2D>();      
-		rigidbody2.velocity = -1 * transform.up * speed; //Enemy Ship Movement
-		//behavior.MoveStraight(rigidbody2,speed);
+		//rigidbody2=GetComponent<Rigidbody2D>();   
+		Move();
 	}
+
+
 
 	//Called when the Trigger entered
 	void OnTriggerEnter2D(Collider2D other)
@@ -38,7 +39,7 @@ public class EnemyBlue_Script : MonoBehaviour
 			other.gameObject.SetActive(false);
 			//Check the Health if greater than 0
 			if(currentHealth > 0)
-			TakeDamage(PlayerGun.PlayerGunInstance.shotDamage);													//Decrement Health by 1
+			TakeDamage(PlayerGun.PlayerGunInstance.shotDamage);	//Decrement Health by 1
 			
 			//Check the Health if less or equal 0
 			if(currentHealth <= 0)
@@ -49,6 +50,10 @@ public class EnemyBlue_Script : MonoBehaviour
 		}
 	}
 
+	void Move()
+	{
+		rigidbody2.velocity = -1 * transform.up * speed; //Enemy Ship Movement
+	}
 	void TakeDamage(int damage)
 	{
 		currentHealth-=damage;
