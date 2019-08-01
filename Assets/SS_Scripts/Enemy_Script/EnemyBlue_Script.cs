@@ -17,16 +17,39 @@ public class EnemyBlue_Script : MonoBehaviour
 	public GameObject Explosion; //Explosion Prefab
 	public Rigidbody2D rigidbody2;
 	
-	bool Instream=false;
-	// Use this for initialization
+	
+	[HideInInspector]
+	public Transform[] path;
+	//public int NumberOfWave=1;
+	int pathToGo;
+	float tParam;
+	Vector2 objPostion;
+	
+	[HideInInspector]
+	public bool InStream=false;
+	
+
 	void OnEnable () 
 	{
 		currentHealth=health;
 		//rigidbody2=GetComponent<Rigidbody2D>();   
-		Move();
+		//Move();
+		if(InStream)
+		StartCoroutine(GoByPath(pathToGo));
+		else
+		{
+			//Debug.Log("Move");
+			Move();
+		}
+		
+		InStream=false;
 	}
 
-
+	public void SetPath()
+	{
+		pathToGo=0;
+		tParam=0f;
+	}
 
 	//Called when the Trigger entered
 	void OnTriggerEnter2D(Collider2D other)
@@ -48,6 +71,37 @@ public class EnemyBlue_Script : MonoBehaviour
 				Destruct();												
 			}
 		}
+	}
+
+	IEnumerator GoByPath(int pathNumber)
+	{
+		
+		//coroutine=false;
+		/* 
+		Vector2 p=path[pathNumber].GetChild(0).position;
+		Vector2 p1=path[pathNumber].GetChild(1).position;
+		Vector2 p2=path[pathNumber].GetChild(2).position;
+		Vector2 p3=path[pathNumber].GetChild(3).position;
+		*/
+		Vector2 p=path[0].position;
+		Vector2 p1=path[1].position;
+		Vector2 p2=path[2].position;
+		Vector2 p3=path[3].position;
+		//Debug.Log(NumberOfWave);
+		//Debug.Log("Moving");
+		while(tParam<1)
+		{
+			tParam+=Time.deltaTime * (speed/10);
+			objPostion=Mathf.Pow(1-tParam,3)*p+
+			3*Mathf.Pow(1-tParam,2)*tParam*p1+
+			3*(1-tParam)*Mathf.Pow(tParam,2)*p2+
+			Mathf.Pow(tParam,3)*p3;
+
+			transform.position= objPostion;
+			yield return new WaitForEndOfFrame();
+		}
+		tParam=0f;
+		gameObject.SetActive(false);
 	}
 
 	void Move()

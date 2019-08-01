@@ -42,11 +42,11 @@ public class Test : MonoBehaviour {
 		for(int i=0; i<NumberOfEnemy;i++)
 		{
 			
-			enemy=ObjectPooler.ObjectPoolerInstance.GetPooledObject("EnemyBlue1", points[0].position,false);
-			FollowTest TestC=enemy.GetComponent<FollowTest>();
+			enemy=ObjectPooler.ObjectPoolerInstance.GetPooledObject("EnemyBlue", points[0].position,false);
+			EnemyBlue_Script TestC=enemy.GetComponent<EnemyBlue_Script>();
 			TestC.path=points;
 			TestC.SetPath();
-			//TestC.InStream=true;
+			TestC.InStream=false;
 			TestC.gameObject.SetActive(true);
 			yield return new WaitForSeconds(TimeBetween);
 		}

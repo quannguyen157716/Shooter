@@ -105,22 +105,7 @@ public class GameDataInitializer : MonoBehaviour {
             File.WriteAllText(Application.persistentDataPath+"//S01.json",json);
         }
 
-        if(!File.Exists(Application.persistentDataPath+"/S00.json"))
-        {
-            info=new SpawnInfo();
-            info.ID="00";
-            info.enemyTag="EnemyBlue";
-            info.numberOfWave=15;
-            info.numberOfObject=6; //number of object in one wave
-	        info.start_Wait=3; //Time to Start spawning
-        	info.RandomSpawnWaitMin=1;  //Time to wait before a new spawn
-        	info.RandomSpawnWaitMax=4;
-        	info.wavewaitMin=1;  //Time to wait till a new wave
-        	info.wavewaitMin=4;
-        	info.position=new Vector2(3,6);  //position to spawn
-            string json=JsonUtility.ToJson(info,true);        
-            File.WriteAllText(Application.persistentDataPath+"//S00.json",json);
-        } */
+        */
 
         if(!File.Exists(Application.persistentDataPath+"/Level_1.json"))
         {
