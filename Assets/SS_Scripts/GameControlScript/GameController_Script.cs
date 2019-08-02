@@ -157,6 +157,31 @@ public class GameController_Script : MonoBehaviour
 		ifo.spawnEnd=true;
 	}	
 
+	public IEnumerator enemyHorizontalRandomSpawn(SpawnInfo ifo)
+	{
+		float numberofWave=0;
+		yield return new WaitForSeconds (ifo.start_Wait);		//Wait for Seconds before start the wave
+		//Infinite Loop 
+		while (numberofWave <ifo.numberOfWave)
+		{
+			//Spawn Specific number of Objects in 1 wave
+			for (int i = 0; i < ifo.numberOfObject; i++)
+			{
+				Vector2 spawnPosition = new Vector2 (ifo.position.x, Random.Range(-ifo.position.y,ifo.position.y));		
+				Quaternion spawnRotation = Quaternion.identity;			
+				ObjectPooler.ObjectPoolerInstance.GetPooledObject(ifo.enemyTag, spawnPosition,true);											
+				float spawnWait=Random.Range(ifo.RandomSpawnWaitMin, ifo.RandomSpawnWaitMax);
+				yield return new WaitForSeconds (spawnWait);													
+			}
+			numberofWave++;
+			Debug.Log("Wave: "+numberofWave);
+			Debug.Log("Time: "+ Time.time);
+			float waveWait=Random.Range(ifo.wavewaitMin, ifo.RandomSpawnWaitMax);
+			yield return new WaitForSeconds (waveWait);		//wait for seconds before the next wave
+		}
+		ifo.spawnEnd=true;
+	}	
+
 	//wait to spawn an object at specific location after specific time
 	public IEnumerator singleSpawn(SpawnInfo ifo)
 	{

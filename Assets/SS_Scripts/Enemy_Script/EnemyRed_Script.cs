@@ -47,9 +47,9 @@ public class EnemyRed_Script : MonoBehaviour
 	IEnumerator Move()
 	{
 		rigidbody2.velocity = -1 * transform.up * speed;
-		yield return new WaitForSeconds (Random.Range(1,3));
+		yield return new WaitForSeconds (Random.Range(2,5));
 		rigidbody2.velocity =Vector2.zero;
-		yield return new WaitForSeconds (Random.Range(1,5));
+		yield return new WaitForSeconds (Random.Range(3,6));
 		rigidbody2.velocity = -1 * transform.up * speed;
 	}
 	//Called when the Trigger entered

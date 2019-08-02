@@ -8,7 +8,7 @@ public class Enemy
 }
 public class EnemyBlue_Script : MonoBehaviour 
 {
-	//Public Var
+	//General configuration
 	public float speed; //Enemy Ship Speed
 	public int health; //Enemy Ship Health
 	int currentHealth;
@@ -17,17 +17,17 @@ public class EnemyBlue_Script : MonoBehaviour
 	public GameObject Explosion; //Explosion Prefab
 	public Rigidbody2D rigidbody2;
 	
-	
-	[HideInInspector]
+	//InPathconfiguration
 	public Transform[] path;
 	//public int NumberOfWave=1;
-	int pathToGo;
+	int pathToGo;//
 	float tParam;
 	Vector2 objPostion;
 	
 	[HideInInspector]
 	public bool InStream=false;
-	
+	public bool pathReverse=false;
+	public bool loop=false;
 
 	void OnEnable () 
 	{
@@ -75,7 +75,7 @@ public class EnemyBlue_Script : MonoBehaviour
 
 	IEnumerator GoByPath(int pathNumber)
 	{
-		
+		bool repeat=true;
 		//coroutine=false;
 		/* 
 		Vector2 p=path[pathNumber].GetChild(0).position;
@@ -89,8 +89,11 @@ public class EnemyBlue_Script : MonoBehaviour
 		Vector2 p3=path[3].position;
 		//Debug.Log(NumberOfWave);
 		//Debug.Log("Moving");
-		while(tParam<1)
+		while(repeat)
 		{
+			Debug.Log("Loop");
+			while(tParam<1)
+			{
 			tParam+=Time.deltaTime * (speed/10);
 			objPostion=Mathf.Pow(1-tParam,3)*p+
 			3*Mathf.Pow(1-tParam,2)*tParam*p1+
@@ -99,8 +102,26 @@ public class EnemyBlue_Script : MonoBehaviour
 
 			transform.position= objPostion;
 			yield return new WaitForEndOfFrame();
+			}
+			tParam=0;
+			if(pathReverse)
+			{
+				while(tParam<1)
+				{
+				tParam+=Time.deltaTime * (speed/10);
+				objPostion=Mathf.Pow(1-tParam,3)*p3+
+				3*Mathf.Pow(1-tParam,2)*tParam*p2+
+				3*(1-tParam)*Mathf.Pow(tParam,2)*p1+
+				Mathf.Pow(tParam,3)*p;
+
+				transform.position= objPostion;
+				yield return new WaitForEndOfFrame();
+				}
+			}
+			tParam=0f;
+			if(!loop)
+			repeat=loop;
 		}
-		tParam=0f;
 		gameObject.SetActive(false);
 	}
 

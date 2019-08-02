@@ -12,7 +12,7 @@ public class Level
 
 public class LevelBuilder : MonoBehaviour {
 	List<Level> lv;
-
+	public string[] LevelName;
 	public int numberOflevel;
 	void Start()
 	{
@@ -40,6 +40,10 @@ public class LevelBuilder : MonoBehaviour {
 				{
 					StartCoroutine(GameController_Script.GameControllerInstance.singleSpawn(l.events[i]));
 				}
+				else if(l.events[i].typeOfSpawn=="enemyHorizontalRandomSpawn")
+				{
+					StartCoroutine(GameController_Script.GameControllerInstance.enemyHorizontalRandomSpawn(l.events[i]));
+				}
 				Debug.Log(i+" "+l.events[i].spawnEnd);
 				//else if(l.events[i].typeOfSpawn=="streamOfEnemySpawn") 
 				//StartCoroutine(GameController_Script.GameControllerInstance.streamOfEnemySpawn(l.events[i]));
@@ -54,7 +58,7 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log("Load Level");
 	    for(int i=0; i<numberOflevel;i++)
 		{
-			string json=File.ReadAllText(Application.persistentDataPath+"/Level_"+(i+1)+".json");
+			string json=File.ReadAllText(Application.persistentDataPath+"/"+LevelName[i]+".json");
 			Level l=JsonUtility.FromJson<Level>(json);
 			Debug.Log(l.name);
 			lv.Add(l);
