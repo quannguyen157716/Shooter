@@ -55,7 +55,7 @@ public class EnemyBlue_Script : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		//Excute if the object tag was equal to one of these
-		if(other.tag == "PlayerRegularShot" || other.tag=="PlayerBurstShot" ||other.tag=="TracingHead")
+		if(other.tag == "PlayerRegularShot" || other.tag=="PlayerBurstShot" ||other.tag=="TracingHead"||other.tag=="Player")
 		{
 			Instantiate (LaserHit, transform.position , transform.rotation); 			//Instantiate LaserGreenHit 
 			//Destroy(other.gameObject); 														//Destroy the Other (PlayerLaser)

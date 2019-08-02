@@ -55,5 +55,6 @@ public class EnemyStream : MonoBehaviour {
 			Debug.Log("No object");
 			yield return new WaitForSeconds(TimeBetween);
 		}
+		gameObject.SetActive(false);
 	}
 }

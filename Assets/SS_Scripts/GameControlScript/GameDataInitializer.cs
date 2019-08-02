@@ -113,22 +113,35 @@ public class GameDataInitializer : MonoBehaviour {
             level.name="Level_1";
 
             
-            level.events=new SpawnInfo[1];
+            level.events=new SpawnInfo[2];
 
             level.events[0]=new SpawnInfo();
             level.events[0].ID="LV1_E00";
             level.events[0].enemyTag="EnemyBlue";
             level.events[0].typeOfSpawn="enemyRandomSpawn";
-            level.events[0].numberOfWave=15;
+            level.events[0].numberOfWave=12;
             level.events[0].numberOfObject=6; //number of object in one wave
 	        level.events[0].start_Wait=3; //Time to Start spawning
-        	level.events[0].RandomSpawnWaitMin=1;  //Time to wait before a new spawn
+        	level.events[0].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
         	level.events[0].RandomSpawnWaitMax=5;
-        	level.events[0].wavewaitMin=1;  //Time to wait till a new wave
-        	level.events[0].wavewaitMax=4;
+        	level.events[0].wavewaitMin=15;  //Time to wait till a new wave
+        	level.events[0].wavewaitMax=17;
         	level.events[0].position=new Vector2(3,6);  //position to spawn 
 
-            level.timeToStartEachEvent=new float[1]{3};
+            level.events[1]=new SpawnInfo();
+            level.events[1].ID="LV1_E01";
+            level.events[1].enemyTag="EnemyStream1";
+            level.events[1].typeOfSpawn="enemyRandomSpawn";
+            level.events[1].numberOfWave=6;
+            level.events[1].numberOfObject=2; //number of object in one wave
+	        level.events[1].start_Wait=3; //Time to Start spawning
+        	level.events[1].RandomSpawnWaitMin=4;  //Time to wait before a new spawn
+        	level.events[1].RandomSpawnWaitMax=6;
+        	level.events[1].wavewaitMin=6;  //Time to wait till a new wave
+        	level.events[1].wavewaitMax=8;
+        	level.events[1].position=new Vector2(3,6);  //position to spawn 
+
+            level.timeToStartEachEvent=new float[2]{3,45};
             string json =JsonUtility.ToJson(level,true);
        
             //string json=JsonHelper.ToJson(level);

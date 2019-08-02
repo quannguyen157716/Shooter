@@ -31,7 +31,7 @@ public class LevelBuilder : MonoBehaviour {
 			for(i=0; i<l.events.Length; i++)
 			{
 				yield return new WaitForSeconds (l.timeToStartEachEvent[i]);
-				Debug.Log("Event "+i );
+				Debug.Log("Event "+l.events[i].ID );
 				if(l.events[i].typeOfSpawn=="enemyRandomSpawn")
 				{
 					StartCoroutine(GameController_Script.GameControllerInstance.enemyRandomSpawn(l.events[i]));
