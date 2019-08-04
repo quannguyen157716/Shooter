@@ -15,13 +15,17 @@ public class PlayerGun : MonoBehaviour {
 	public static PlayerGun PlayerGunInstance;
 	public GameObject shotSpawn;
 	GameObject shot;
-	string shotType="PlayerRegularShot";
+	[HideInInspector]
+	public string shotType="PlayerRegularShot";
 	float nextFire=0f;	//First fire & Next fire Time
 	float fireRate=1f;	//Fire Rate between Shots
 	public int shotDamage;
+	public string[] Gun;
+	Dictionary<string, PlayerWeapon> gunDictionary;
 	AudioSource audio2;
-	void Start()
+	void Awake()
 	{
+		gunDictionary=new Dictionary<string, PlayerWeapon>();
 		PlayerGunInstance=this;
 		audio2=GetComponent<AudioSource>();
 		GetGunConfig();
@@ -66,12 +70,19 @@ public class PlayerGun : MonoBehaviour {
 	}
 	void GetGunConfig()
 	{
-		string json=File.ReadAllText(Application.persistentDataPath+"/PlayerTracingGun.json");
-		PlayerWeapon ob=JsonUtility.FromJson<PlayerWeapon>(json);
+		string json;
+		PlayerWeapon ob;
+		foreach(string f in Gun)
+		{
+			json=File.ReadAllText(Application.persistentDataPath+"/"+f+".json");
+			ob=JsonUtility.FromJson<PlayerWeapon>(json);
+			gunDictionary.Add(f,ob);
+		}
+		ob=gunDictionary["PlayerRegularGun"];
 		shotType=ob.shotType;
 		nextFire=ob.nextFire;
 		fireRate=ob.fireRate;
 		shotDamage=ob.shotDamage;
-		//shot = BulletPooler.SharedBulletPool.GetPooledObject(shotType);
+		Debug.Log("ok");
 	}
 }

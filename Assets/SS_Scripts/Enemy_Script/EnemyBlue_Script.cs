@@ -6,6 +6,8 @@ public class Enemy
 	public int health; //Enemy Ship Health
 	public int ScoreValue; //How much the Enemy Ship give score after explosion
 }
+
+
 public class EnemyBlue_Script : MonoBehaviour 
 {
 	//General configuration
@@ -17,53 +19,49 @@ public class EnemyBlue_Script : MonoBehaviour
 	public GameObject Explosion; //Explosion Prefab
 	public Rigidbody2D rigidbody2;
 	
-	//InPathconfiguration
-	public Transform[] path;
-	//public int NumberOfWave=1;
-	int pathToGo;//
-	float tParam;
-	Vector2 objPostion;
-	
-	[HideInInspector]
-	public bool InStream=false;
-	public bool pathReverse=false;
-	public bool loop=false;
+	//public StreamPara inPath;
+	public FollowAPath path;
+	public SubBehavior behavior;
 
+	int test;
 	void OnEnable () 
 	{
 		currentHealth=health;
 		//rigidbody2=GetComponent<Rigidbody2D>();   
 		//Move();
-		if(InStream)
-		StartCoroutine(GoByPath(pathToGo));
+		if(path.inPath.InStream)
+		{
+			//StartCoroutine(GoByPath(inPath.pathToGo));
+			path.FollowPath(speed);
+		}
 		else
 		{
 			//Debug.Log("Move");
-			Move();
+			behavior.MoveStraight(rigidbody2, speed);
 		}
-		
-		InStream=false;
+		path.inPath.InStream=false;
 	}
 
-	public void SetPath()
+/* 	public void SetPath()
 	{
-		pathToGo=0;
-		tParam=0f;
-	}
+		inPath.pathToGo=0;
+		inPath.tParam=0f;
+	}*/
 
 	//Called when the Trigger entered
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		//Excute if the object tag was equal to one of these
-		if(other.tag == "PlayerRegularShot" || other.tag=="PlayerBurstShot" ||other.tag=="TracingHead"||other.tag=="Player")
+		if(other.tag == PlayerGun.PlayerGunInstance.shotType)
 		{
-			Instantiate (LaserHit, transform.position , transform.rotation); 			//Instantiate LaserGreenHit 
+			ObjectPooler.ObjectPoolerInstance.GetPooledObject(LaserHit.tag, transform.position,true);
+			//Instantiate (LaserHit, transform.position , transform.rotation); 			//Instantiate LaserGreenHit 
 			//Destroy(other.gameObject); 														//Destroy the Other (PlayerLaser)
 			other.gameObject.SetActive(false);
 			//Check the Health if greater than 0
 			if(currentHealth > 0)
-			TakeDamage(PlayerGun.PlayerGunInstance.shotDamage);	//Decrement Health by 1
-			
+			TakeDamage(PlayerGun.PlayerGunInstance.shotDamage);	
+
 			//Check the Health if less or equal 0
 			if(currentHealth <= 0)
 			{
@@ -72,63 +70,70 @@ public class EnemyBlue_Script : MonoBehaviour
 			}
 		}
 	}
-
+/* 
 	IEnumerator GoByPath(int pathNumber)
 	{
 		bool repeat=true;
 		//coroutine=false;
-		/* 
-		Vector2 p=path[pathNumber].GetChild(0).position;
-		Vector2 p1=path[pathNumber].GetChild(1).position;
-		Vector2 p2=path[pathNumber].GetChild(2).position;
-		Vector2 p3=path[pathNumber].GetChild(3).position;
-		*/
-		Vector2 p=path[0].position;
-		Vector2 p1=path[1].position;
-		Vector2 p2=path[2].position;
-		Vector2 p3=path[3].position;
+		
+		//Vector2 p=path[pathNumber].GetChild(0).position;
+		//Vector2 p1=path[pathNumber].GetChild(1).position;
+		//Vector2 p2=path[pathNumber].GetChild(2).position;
+		//Vector2 p3=path[pathNumber].GetChild(3).position;
+		
+		Vector2 p=inPath.path[0].position;
+		Vector2 p1=inPath.path[1].position;
+		Vector2 p2=inPath.path[2].position;
+		Vector2 p3=inPath.path[3].position;
+//		Debug.Log(inPath.loop);
 		//Debug.Log(NumberOfWave);
 		//Debug.Log("Moving");
 		while(repeat)
 		{
-			Debug.Log("Loop");
-			while(tParam<1)
+			while(inPath.tParam<1)
 			{
-			tParam+=Time.deltaTime * (speed/10);
-			objPostion=Mathf.Pow(1-tParam,3)*p+
-			3*Mathf.Pow(1-tParam,2)*tParam*p1+
-			3*(1-tParam)*Mathf.Pow(tParam,2)*p2+
-			Mathf.Pow(tParam,3)*p3;
+			inPath.tParam+=Time.deltaTime * (speed/10);
+			inPath.objPostion=Mathf.Pow(1-inPath.tParam,3)*p+
+			3*Mathf.Pow(1-inPath.tParam,2)*inPath.tParam*p1+
+			3*(1-inPath.tParam)*Mathf.Pow(inPath.tParam,2)*p2+
+			Mathf.Pow(inPath.tParam,3)*p3;
 
-			transform.position= objPostion;
+			transform.position= inPath.objPostion;
 			yield return new WaitForEndOfFrame();
 			}
-			tParam=0;
-			if(pathReverse)
-			{
-				while(tParam<1)
-				{
-				tParam+=Time.deltaTime * (speed/10);
-				objPostion=Mathf.Pow(1-tParam,3)*p3+
-				3*Mathf.Pow(1-tParam,2)*tParam*p2+
-				3*(1-tParam)*Mathf.Pow(tParam,2)*p1+
-				Mathf.Pow(tParam,3)*p;
 
-				transform.position= objPostion;
+			inPath.tParam=0;
+
+			if(inPath.pathReverse)
+			{
+				while(inPath.tParam<1)
+				{
+				inPath.tParam+=Time.deltaTime * (speed/10);
+				inPath.objPostion=Mathf.Pow(1-inPath.tParam,3)*p3+
+				3*Mathf.Pow(1-inPath.tParam,2)*inPath.tParam*p2+
+				3*(1-inPath.tParam)*Mathf.Pow(inPath.tParam,2)*p1+
+				Mathf.Pow(inPath.tParam,3)*p;
+
+				transform.position= inPath.objPostion;
 				yield return new WaitForEndOfFrame();
 				}
 			}
-			tParam=0f;
-			if(!loop)
-			repeat=loop;
+			inPath.tParam=0f;
+			
+			if(!inPath.loop)
+			{
+				repeat=inPath.loop;
+				//Debug.Log("notLoop");
+			}
 		}
 		gameObject.SetActive(false);
-	}
-
+} */
+/* 
 	void Move()
 	{
 		rigidbody2.velocity = -1 * transform.up * speed; //Enemy Ship Movement
 	}
+*/
 	void TakeDamage(int damage)
 	{
 		currentHealth-=damage;

@@ -18,46 +18,50 @@ public class EnemyRed_Script : MonoBehaviour
 	
 	public GameObject shot;					//Fire Prefab
 	public Transform shotSpawn;				//Where the Fire Spawn
-	Rigidbody2D rigidbody2;
-	AudioSource audio2;
-	//
-	// Use this for initialization
-	void Start () 
+	public Rigidbody2D rigidbody2;
+	public AudioSource audio2;
+	
+	public StreamPara inPath;
+	public FollowAPath path;
+	public SubBehavior behavior;
+
+	void OnEnable () 
 	{
 		currentHealth=health;
-		rigidbody2=GetComponent<Rigidbody2D>();
-		audio2=GetComponent<AudioSource>();
-		StartCoroutine(Move());
-			//Enemy Ship Movement
+		if(path.inPath.InStream)
+		{
+			//StartCoroutine(GoByPath(inPath.pathToGo));
+			path.FollowPath(speed);
+		}
+		else
+		{
+			behavior.Patrol(rigidbody2,Random.Range(3f,4f),speed, 60);
+		}
+		path.inPath.InStream=false;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-		/* //Excute When the Current Time is bigger than the nextFire time
-		if (Time.time > nextFire)
-		{
-			nextFire = Time.time + fireRate; 									//Increment nextFire time with the current system time + fireRate
-			Instantiate (shot , shotSpawn.position ,shotSpawn.rotation); 		//Instantiate fire shot 
-			audio2.Play ();														//Play Fire sound
-		}*/
 		Fire2();
 	}
-
-	IEnumerator Move()
+/* 
+	void Move()
 	{
 		rigidbody2.velocity = -1 * transform.up * speed;
-		yield return new WaitForSeconds (Random.Range(2,5));
-		rigidbody2.velocity =Vector2.zero;
-		yield return new WaitForSeconds (Random.Range(3,6));
-		rigidbody2.velocity = -1 * transform.up * speed;
+		//yield return new WaitForSeconds (2);
+		//rigidbody2.velocity =Vector2.zero;
+		//yield return new WaitForSeconds (40);
+		//rigidbody2.velocity = -1 * transform.up * speed;
 	}
+*/
 	//Called when the Trigger entered
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.tag == "PlayerRegularShot" || other.tag=="PlayerBurstShot" ||other.tag=="TracingHead")
 		{
-			Instantiate (LaserHit, transform.position , transform.rotation); 			//Instantiate LaserGreenHit 
+			ObjectPooler.ObjectPoolerInstance.GetPooledObject(LaserHit.tag, transform.position,true);
+			//Instantiate (LaserHit, transform.position , transform.rotation); 			//Instantiate LaserGreenHit 
 			//Destroy(other.gameObject); 														//Destroy the Other (PlayerLaser)
 			other.gameObject.SetActive(false);
 			//Check the Health if greater than 0
@@ -72,7 +76,70 @@ public class EnemyRed_Script : MonoBehaviour
 			}
 		}
 	}
+/* 
+	IEnumerator GoByPath(int pathNumber)
+	{
+		bool repeat=true;
+		//coroutine=false;
+		/* 
+		Vector2 p=path[pathNumber].GetChild(0).position;
+		Vector2 p1=path[pathNumber].GetChild(1).position;
+		Vector2 p2=path[pathNumber].GetChild(2).position;
+		Vector2 p3=path[pathNumber].GetChild(3).position;
+		
+		Vector2 p=inPath.path[0].position;
+		Vector2 p1=inPath.path[1].position;
+		Vector2 p2=inPath.path[2].position;
+		Vector2 p3=inPath.path[3].position;
+		Debug.Log(inPath.loop);
 
+		while(repeat)
+		{
+			while(inPath.tParam<1)
+			{
+			inPath.tParam+=Time.deltaTime * (speed/10);
+			inPath.objPostion=Mathf.Pow(1-inPath.tParam,3)*p+
+			3*Mathf.Pow(1-inPath.tParam,2)*inPath.tParam*p1+
+			3*(1-inPath.tParam)*Mathf.Pow(inPath.tParam,2)*p2+
+			Mathf.Pow(inPath.tParam,3)*p3;
+
+			transform.position= inPath.objPostion;
+			yield return new WaitForEndOfFrame();
+			}
+
+			inPath.tParam=0;
+
+			if(inPath.pathReverse)
+			{
+				while(inPath.tParam<1)
+				{
+				inPath.tParam+=Time.deltaTime * (speed/10);
+				inPath.objPostion=Mathf.Pow(1-inPath.tParam,3)*p3+
+				3*Mathf.Pow(1-inPath.tParam,2)*inPath.tParam*p2+
+				3*(1-inPath.tParam)*Mathf.Pow(inPath.tParam,2)*p1+
+				Mathf.Pow(inPath.tParam,3)*p;
+
+				transform.position= inPath.objPostion;
+				yield return new WaitForEndOfFrame();
+				}
+			}
+			inPath.tParam=0f;
+			
+			if(!inPath.loop)
+			{
+				repeat=inPath.loop;
+				Debug.Log("notLoop");
+			}
+		}
+		gameObject.SetActive(false);
+	}
+
+	public void SetPath()
+	{
+		inPath.pathToGo=0;
+		inPath.tParam=0f;
+	}
+*/	
 	void Fire2()
 	{
 		if(Time.time >nextFire)

@@ -11,7 +11,7 @@ public class Player_TracingShot : MonoBehaviour {
 	void OnEnable () {
 		if(!transform.GetChild(0).gameObject.activeInHierarchy)
 		transform.GetChild(0).gameObject.SetActive(true);
-		DataController_Script.playerDamage=damage;
+//		PlayerGun.PlayerGunInstance.shotDamage=damage;
 	}
 	
 	// Update is called once per frame 

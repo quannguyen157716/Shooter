@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyStream : MonoBehaviour {
-	GameObject enemy;
+	public GameObject enemy;
 	public Transform[] points;
 	Vector2 GizmoPosition;
 	Vector2 p,p1,p2,p3;
 	public int NumberOfEnemy;
-	
+	public bool loop;
+	public bool reverse;
+	public bool InStream;
 	public float TimeBetween;
-
 	void OnEnable()
 	{
 		StartCoroutine(CreateStream());
@@ -41,14 +42,17 @@ public class EnemyStream : MonoBehaviour {
 		//Debug.Log("Stream"); 
 		for(int i=0; i<NumberOfEnemy;i++)
 		{
-			enemy=ObjectPooler.ObjectPoolerInstance.GetPooledObject("EnemyBlue", points[0].position,false);
+			enemy=ObjectPooler.ObjectPoolerInstance.GetPooledObject(enemy.tag, points[0].position,false);
 			if(enemy!=null)
 			{
 				
-				EnemyBlue_Script TestC=enemy.GetComponent<EnemyBlue_Script>();
-				TestC.path=points;
-				TestC.SetPath();
-				TestC.InStream=true;
+				//EnemyBlue_Script TestC=enemy.GetComponent<EnemyBlue_Script>();
+				FollowAPath TestC=enemy.GetComponent<FollowAPath>();
+				TestC.inPath.path=points;
+				//TestC.SetPath();
+				TestC.inPath.InStream=InStream;
+				TestC.inPath.loop=loop;
+				TestC.inPath.pathReverse=reverse;
 				TestC.gameObject.SetActive(true);
 			}
 			else

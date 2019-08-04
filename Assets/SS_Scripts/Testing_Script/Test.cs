@@ -44,9 +44,9 @@ public class Test : MonoBehaviour {
 			
 			enemy=ObjectPooler.ObjectPoolerInstance.GetPooledObject("EnemyBlue", points[0].position,false);
 			EnemyBlue_Script TestC=enemy.GetComponent<EnemyBlue_Script>();
-			TestC.path=points;
-			TestC.SetPath();
-			TestC.InStream=false;
+			//TestC.path=points;
+			//TestC.SetPath();
+			//TestC.InStream=false;
 			TestC.gameObject.SetActive(true);
 			yield return new WaitForSeconds(TimeBetween);
 		}

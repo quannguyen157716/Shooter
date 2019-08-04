@@ -16,16 +16,27 @@ public class EnemyGreen_Script : MonoBehaviour
 	public Transform shotSpawn;				//Where the Fire Spawn
 	int currentHealth;
 	//Private Var
-	Rigidbody2D rigidbody2;
-	AudioSource audio2;
+	public Rigidbody2D rigidbody2;
+	public AudioSource audio2;
+
+	public FollowAPath path;
+	public SubBehavior behavior;
 
 	// Use this for initialization
 	void OnEnable () 
 	{
 		currentHealth=health;
-		rigidbody2=GetComponent<Rigidbody2D>();
-		audio2=GetComponent<AudioSource>();
-		rigidbody2.velocity = -1 * transform.up * speed;	//Enemy Ship Movement
+		currentHealth=health;
+		if(path.inPath.InStream)
+		{
+			path.FollowPath(speed);
+		}
+		else
+		{
+			//Debug.Log("Move");
+			behavior.MoveStraight(rigidbody2, speed);
+		}
+		path.inPath.InStream=false;
 	}
 
 	// Update is called once per frame
@@ -40,7 +51,8 @@ public class EnemyGreen_Script : MonoBehaviour
 		//Excute if the object tag was equal to one of these
 		if(other.tag == "PlayerRegularShot" || other.tag=="PlayerBurstShot" ||other.tag=="TracingHead")
 		{
-			Instantiate (LaserHit, transform.position , transform.rotation); 			//Instantiate LaserGreenHit 
+			ObjectPooler.ObjectPoolerInstance.GetPooledObject(LaserHit.tag, transform.position,true);
+			//Instantiate (LaserHit, transform.position , transform.rotation); 			//Instantiate LaserGreenHit 
 			//Destroy(other.gameObject); 														//Destroy the Other (PlayerLaser)
 			other.gameObject.SetActive(false);
 			//Check the Health if greater than 0

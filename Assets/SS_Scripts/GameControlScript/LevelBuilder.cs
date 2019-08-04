@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-
+[System.Serializable]
 public class Level
 {
 	public string name;
@@ -11,12 +11,15 @@ public class Level
 }
 
 public class LevelBuilder : MonoBehaviour {
-	List<Level> lv;
+	[Tooltip ("List of level and their configuration")]
+	public List<Level> lv;
+	[Tooltip ("List of level to load")]
 	public string[] LevelName;
-	public int numberOflevel;
-	void Start()
+	int numberOflevel;
+	void Awake()
 	{
 		lv=new List<Level>();
+		numberOflevel=LevelName.Length;
 		loadLevel();
 		StartCoroutine(RunLevel());
 		Debug.Log("Run level");
@@ -38,17 +41,17 @@ public class LevelBuilder : MonoBehaviour {
 				}	
 				else if(l.events[i].typeOfSpawn=="singleSpawn")
 				{
-					StartCoroutine(GameController_Script.GameControllerInstance.singleSpawn(l.events[i]));
+					GameController_Script.GameControllerInstance.singleSpawn(l.events[i]);
 				}
 				else if(l.events[i].typeOfSpawn=="enemyHorizontalRandomSpawn")
 				{
 					StartCoroutine(GameController_Script.GameControllerInstance.enemyHorizontalRandomSpawn(l.events[i]));
 				}
-				Debug.Log(i+" "+l.events[i].spawnEnd);
 				//else if(l.events[i].typeOfSpawn=="streamOfEnemySpawn") 
 				//StartCoroutine(GameController_Script.GameControllerInstance.streamOfEnemySpawn(l.events[i]));
 			}
-			yield return new WaitUntil(()=>l.events[i-1].spawnEnd==true);
+			Debug.Log(i+" "+l.events[i-1].spawnEnd);
+			yield return new WaitUntil(()=>l.events[i-1].spawnEnd==true);//make sure levels do not mix
 			Debug.Log("End Level");
 		}
 	}

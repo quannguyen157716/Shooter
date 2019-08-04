@@ -10,13 +10,13 @@ public class Maneuver : MonoBehaviour {
     public Vector2 maneuverTime;
     public Vector2 maneuverWait;
 	public bool maneuver=false;
-    private float currentSpeed=1;
+//    private float currentSpeed=1;
     private float targetManeuver;
     private Rigidbody2D rb;
 	void OnEnable()
 	{
 		rb = GetComponent <Rigidbody2D> ();
-        currentSpeed =1;
+       // currentSpeed =1;
 		if(maneuver)
         StartCoroutine (Evade ());
 	}

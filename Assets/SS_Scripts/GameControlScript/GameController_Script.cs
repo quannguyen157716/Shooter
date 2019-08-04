@@ -17,6 +17,7 @@ public class EnemyRed
 	public float WaveWait;				//Time to wait till a new wave
 }
 */
+/* 
 [System.Serializable]
 public class Hazard
 {
@@ -28,22 +29,7 @@ public class Hazard
 	public float WaveWait;					//Time to wait till a new wave
 	public float x_pos, y_pos; //position to spawn 
 }
-[System.Serializable]
-public class SpawnInfo
-{
-	public string ID;
-	public string enemyTag; //tag of enemy to spawn
-	public string typeOfSpawn;
-	public int numberOfWave; //number of wave =0 it is individual spawn
-	public int numberOfObject; //number of object in one wave
-	public float start_Wait; //Time to Start spawning
-	public float RandomSpawnWaitMin;  //Time to wait before a new spawn
-	public float RandomSpawnWaitMax;
-	public float wavewaitMin;  //Time to wait till a new wave
-	public float wavewaitMax;
-	public Vector2 position;  //position to spawn 
-	public bool spawnEnd=false;
-}
+*/
 //Stream of enemy(Enemey object, Spawn_Position, Behaviour) 
 //player info: playership, score, bullet type, skin
 
@@ -54,14 +40,14 @@ public class GameController_Script : MonoBehaviour
 	//public EnemyGreen enemyGreen;		//make an Object from Class enemyGreen
 	//public EnemyRed enemyRed;			//make an Object from Class enemyRed
 	public static GameController_Script GameControllerInstance;
-	public Hazard asteroid;
-	public Hazard enemyBlue;
-	public Hazard enemyGreen;
-	public Hazard enemyRed;
-	public Vector2 spawnValues;			//Store spawning (x,y) values
+	//public Hazard asteroid;
+	//public Hazard enemyBlue;
+	//public Hazard enemyGreen;
+	//public Hazard enemyRed;
+	//public Vector2 spawnValues;			//Store spawning (x,y) values
 	public GameObject Player;
 	public GameObject UI_controller;
-	UICOntroller UIControllerS;
+	//UICOntroller UIControllerS;
 	SpawnInfo s;
 	
 	// Use this for initialization
@@ -134,8 +120,12 @@ public class GameController_Script : MonoBehaviour
 	//Random spawn from range of position
 	public IEnumerator enemyRandomSpawn(SpawnInfo ifo)
 	{
+		//Debug.Log("New cor");
+		float startTime=Time.time;
+		float duration=0;
+		//Debug.Log("StarTime: " +startTime);
 		float numberofWave=0;
-		yield return new WaitForSeconds (ifo.start_Wait);		//Wait for Seconds before start the wave
+		//yield return new WaitForSeconds (ifo.start_Wait);		//Wait for Seconds before start the wave
 		//Infinite Loop 
 		while (numberofWave <ifo.numberOfWave)
 		{
@@ -149,25 +139,34 @@ public class GameController_Script : MonoBehaviour
 				yield return new WaitForSeconds (spawnWait);													
 			}
 			numberofWave++;
-			Debug.Log("Wave: "+numberofWave);
-			Debug.Log("Time: "+ Time.time);
+			Debug.Log("Wave "+numberofWave);
 			float waveWait=Random.Range(ifo.wavewaitMin, ifo.RandomSpawnWaitMax);
 			yield return new WaitForSeconds (waveWait);		//wait for seconds before the next wave
+			duration+=(Time.time-startTime);
+			startTime=Time.time;
+			//Debug.Log("EndTime: " +Time.time);
+			//Debug.Log("CurrentDuration "+duration );
+			if(duration>ifo.duration)
+			{
+				yield break;
+			}
 		}
 		ifo.spawnEnd=true;
 	}	
 
 	public IEnumerator enemyHorizontalRandomSpawn(SpawnInfo ifo)
 	{
+		float startTime=Time.time;
+		float duration=0;
 		float numberofWave=0;
-		yield return new WaitForSeconds (ifo.start_Wait);		//Wait for Seconds before start the wave
+		//yield return new WaitForSeconds (ifo.start_Wait);		//Wait for Seconds before start the wave
 		//Infinite Loop 
 		while (numberofWave <ifo.numberOfWave)
 		{
 			//Spawn Specific number of Objects in 1 wave
 			for (int i = 0; i < ifo.numberOfObject; i++)
 			{
-				Vector2 spawnPosition = new Vector2 (ifo.position.x, Random.Range(-ifo.position.y,ifo.position.y));		
+				Vector2 spawnPosition = new Vector2 (ifo.position.x, Random.Range(2,ifo.position.y));		
 				Quaternion spawnRotation = Quaternion.identity;			
 				ObjectPooler.ObjectPoolerInstance.GetPooledObject(ifo.enemyTag, spawnPosition,true);											
 				float spawnWait=Random.Range(ifo.RandomSpawnWaitMin, ifo.RandomSpawnWaitMax);
@@ -175,19 +174,26 @@ public class GameController_Script : MonoBehaviour
 			}
 			numberofWave++;
 			Debug.Log("Wave: "+numberofWave);
-			Debug.Log("Time: "+ Time.time);
 			float waveWait=Random.Range(ifo.wavewaitMin, ifo.RandomSpawnWaitMax);
 			yield return new WaitForSeconds (waveWait);		//wait for seconds before the next wave
+			duration+=(Time.time-startTime);
+			startTime=Time.time;
+			//Debug.Log("EndTime: " +Time.time);
+			//Debug.Log("CurrentDuration "+duration );
+			if(duration>ifo.duration)
+			{
+				yield break;
+			}
 		}
 		ifo.spawnEnd=true;
 	}	
 
 	//wait to spawn an object at specific location after specific time
-	public IEnumerator singleSpawn(SpawnInfo ifo)
+	public void singleSpawn(SpawnInfo ifo)
 	{
-		yield return new WaitForSeconds (ifo.start_Wait);		//Wait for Seconds before start the wave			
+		Debug.Log("ss");
+		//yield return new WaitForSeconds (ifo.start_Wait);					
 		ObjectPooler.ObjectPoolerInstance.GetPooledObject(ifo.enemyTag, ifo.position,true);											
-
 	}
 	void GetInfo()
 	{

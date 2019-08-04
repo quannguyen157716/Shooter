@@ -9,7 +9,7 @@ public class Player_BurstShot : MonoBehaviour {
 	
 	void OnEnable()
 	{
-		DataController_Script.playerDamage=damage;
+	//	PlayerGun.PlayerGunInstance.shotDamage=damage;
 		//rigidbody2=GetComponent<Rigidbody2D>();
 		rigidbody2.angularVelocity = 30f;
 		rigidbody2.velocity = transform.up * speed; //Give Velocity to the Player ship shot

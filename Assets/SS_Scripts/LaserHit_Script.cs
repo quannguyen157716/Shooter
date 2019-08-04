@@ -14,10 +14,11 @@ using System.Collections;
 
 public class LaserHit_Script : MonoBehaviour 
 {
+	public ParticleSystem p;
 
-	// Use this for initialization
-	void Start () 
+	void Update()
 	{
-		Destroy(gameObject,1f); //Destroy the object after specific time
+		if(p.isStopped)
+		gameObject.SetActive(false);
 	}
 }

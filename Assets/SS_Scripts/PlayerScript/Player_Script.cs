@@ -38,8 +38,9 @@ public class Player_Script : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		//Excute if the object tag was equal to one of these
-		if(other.tag == "Enemy" || other.tag == "Asteroid" || other.tag == "EnemyShot" ||other.tag=="EnemyBlue"||other.tag=="EnemyGreen") 
+		if(other.tag!=PlayerGun.PlayerGunInstance.shotType && other.tag!="Boundary") 
 		{
+			Debug.Log(other.tag);
 			Instantiate (Explosion, transform.position , transform.rotation); 				//Instantiate Explosion
 			SharedValues_Script.gameover = true;
 			TakeDamage(1); 											

@@ -8,39 +8,54 @@ public class Asteroid_Script : MonoBehaviour
 	public float minTumble; 			//Minimum Speed of the angular velocity
 	public float speed; 				//Asteroid Speed
 	public int health; 					//Asteroid Health (how much hit can it take)
-	public GameObject LaserGreenHit; 	//LaserGreenHit Prefab
+	public GameObject LaserHit; 	//LaserGreenHit Prefab
 	public GameObject Explosion; 		//Explosion Prefab
 	public int ScoreValue; 				//How much the Asteroid give score after explosion
-	Rigidbody2D rigidbody2;
+	public Rigidbody2D rigidbody2;
+
+	int currentHealth;
 	
 	// Use this for initialization
 	void OnEnable() 
 	{
-		rigidbody2=GetComponent<Rigidbody2D>();
+		//rigidbody2=GetComponent<Rigidbody2D>();
 		rigidbody2.angularVelocity = Random.Range(minTumble, maxTumble); 		//Angular movement based on random speed values
-		rigidbody2.velocity = -1 * transform.up * speed; 						//Negative Velocity to move down towards the player ship
+		rigidbody2.velocity = -1 * transform.up * speed; 
+		currentHealth=health;						//Negative Velocity to move down towards the player ship
 	}
 
 	//Called when the Trigger entered
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		//Excute if the object tag was equal to one of these
-		if(other.tag == "PlayerRegularShot")
+		if(other.tag == PlayerGun.PlayerGunInstance.shotType)
 		{
-			Instantiate (LaserGreenHit, transform.position , transform.rotation); 		//Instantiate LaserGreenHit 
-			//Destroy(other.gameObject);													//Destroy the Other (PlayerLaser)
-			other.gameObject.SetActive(false); //return to pool
+			ObjectPooler.ObjectPoolerInstance.GetPooledObject(LaserHit.tag, transform.position,true);
+			//Instantiate (LaserHit, transform.position , transform.rotation); 			//Instantiate LaserGreenHit 
+			//Destroy(other.gameObject); 														//Destroy the Other (PlayerLaser)
+			other.gameObject.SetActive(false);
 			//Check the Health if greater than 0
-			if(health > 0)
-				health--; 																//Decrement Health by 1
-
+			if(currentHealth > 0)
+			TakeDamage(PlayerGun.PlayerGunInstance.shotDamage);	
+			
 			//Check the Health if less or equal 0
-			if(health <= 0)
+			if(currentHealth <= 0)
 			{
-				Instantiate (Explosion, transform.position , transform.rotation); 		//Instantiate Explosion
-				SharedValues_Script.score +=ScoreValue; 								//Increment score by ScoreValue
-				Destroy(gameObject); 													//Destroy the Asteroid
+				Instantiate (Explosion, transform.position , transform.rotation); 			//Instantiate Explosion							
+				Destruct();												
 			}
 		}
+	}
+
+	void TakeDamage(int damage)
+	{
+		currentHealth-=damage;
+		//Debug.Log(currentHealth);
+	}
+
+	void Destruct()
+	{
+		SharedValues_Script.score +=ScoreValue; //Increment score by ScoreValue 
+		gameObject.SetActive(false);//return to pool
 	}
 }

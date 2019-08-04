@@ -15,11 +15,16 @@ public class EnemyAimShot : MonoBehaviour {
 	{
 		//rigidbody2=GetComponent<Rigidbody2D>();
 		//rigidbody2.velocity = -1 * transform.up * speed; //Give Velocity to the Enemy ship shot
-		target=(Player_Script.PlayerInstance.transform.position-transform.position);
+		try
+		{
+			target=(Player_Script.PlayerInstance.transform.position-transform.position);
+		}
+		catch(System.NullReferenceException)
+		{
+			rigidbody2.velocity = -1 * transform.up * speed;
+			return;
+		}
 		target.Normalize();
 		rigidbody2.velocity=target*speed;
-		
 	}
-
-
 }
