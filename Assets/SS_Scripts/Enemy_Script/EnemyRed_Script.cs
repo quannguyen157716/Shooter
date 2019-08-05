@@ -25,6 +25,20 @@ public class EnemyRed_Script : MonoBehaviour
 	public FollowAPath path;
 	public SubBehavior behavior;
 
+	void Awake()
+	{
+		Load();
+	}
+
+	void Load()
+	{
+		EnemyInfo info=EnemyCommander.EnemyCommanderInstance.EDictionary[gameObject.tag];
+		speed=info.speed;
+		health=info.health;
+		ScoreValue=info.ScoreValue;
+		fireRate=info.fireRate;
+	}
+
 	void OnEnable () 
 	{
 		currentHealth=health;

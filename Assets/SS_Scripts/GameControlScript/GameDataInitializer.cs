@@ -20,7 +20,7 @@ public class SpawnInfo
 	public bool spawnEnd=false;
     public float duration;
 }
-
+[System.Serializable]
 public class EnemyInfo
 {
     public string name;
@@ -72,7 +72,7 @@ public class GameDataInitializer : MonoBehaviour {
 	void Awake () {
         //Based value for object attributes
         Debug.Log(Application.persistentDataPath);
-        //Gun Type 
+        //Gun Type  
         //Gun type and round type are different
         if(!File.Exists(Application.persistentDataPath+"/EnemyBlue.json"))
         {

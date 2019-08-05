@@ -15,13 +15,26 @@ public class Asteroid_Script : MonoBehaviour
 
 	int currentHealth;
 	
-	// Use this for initialization
+	void Awake()
+	{
+		Load();
+	}
+
 	void OnEnable() 
 	{
 		//rigidbody2=GetComponent<Rigidbody2D>();
 		rigidbody2.angularVelocity = Random.Range(minTumble, maxTumble); 		//Angular movement based on random speed values
 		rigidbody2.velocity = -1 * transform.up * speed; 
 		currentHealth=health;						//Negative Velocity to move down towards the player ship
+	}
+
+	void Load()
+	{
+		//Debug.Log(EnemyCommander.EnemyCommanderInstance.EDictionary[gameObject.tag]);
+		EnemyInfo info=EnemyCommander.EnemyCommanderInstance.EDictionary[gameObject.tag];
+		speed=info.speed;
+		health=info.health;
+		ScoreValue=info.ScoreValue;
 	}
 
 	//Called when the Trigger entered

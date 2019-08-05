@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 public class Enemy
 {
 	public float speed; //Enemy Ship Speed
@@ -24,8 +25,14 @@ public class EnemyBlue_Script : MonoBehaviour
 	public SubBehavior behavior;
 
 	int test;
+
+	void Awake()
+	{
+		Load();
+	}
 	void OnEnable () 
 	{
+		//Debug.Log(EnemyCommander.EnemyCommanderInstance.EDictionary[gameObject.tag].speed);
 		currentHealth=health;
 		//rigidbody2=GetComponent<Rigidbody2D>();   
 		//Move();
@@ -41,7 +48,15 @@ public class EnemyBlue_Script : MonoBehaviour
 		}
 		path.inPath.InStream=false;
 	}
-
+	//Load initial attribute
+	void Load()
+	{
+		//Debug.Log(EnemyCommander.EnemyCommanderInstance.EDictionary[gameObject.tag]);
+		EnemyInfo info=EnemyCommander.EnemyCommanderInstance.EDictionary[gameObject.tag];
+		speed=info.speed;
+		health=info.health;
+		ScoreValue=info.ScoreValue;
+	}
 /* 	public void SetPath()
 	{
 		inPath.pathToGo=0;

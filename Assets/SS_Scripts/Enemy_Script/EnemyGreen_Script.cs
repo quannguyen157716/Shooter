@@ -22,7 +22,11 @@ public class EnemyGreen_Script : MonoBehaviour
 	public FollowAPath path;
 	public SubBehavior behavior;
 
-	// Use this for initialization
+	void Awake()
+	{
+		Load();
+	}
+
 	void OnEnable () 
 	{
 		currentHealth=health;
@@ -39,7 +43,15 @@ public class EnemyGreen_Script : MonoBehaviour
 		path.inPath.InStream=false;
 	}
 
-	// Update is called once per frame
+	void Load()
+	{
+		EnemyInfo info=EnemyCommander.EnemyCommanderInstance.EDictionary[gameObject.tag];
+		speed=info.speed;
+		health=info.health;
+		ScoreValue=info.ScoreValue;
+		fireRate=info.fireRate;
+	}
+
 	void Update () 
 	{
 		Fire2();
