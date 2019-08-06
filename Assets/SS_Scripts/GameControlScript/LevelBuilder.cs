@@ -18,6 +18,8 @@ public class LevelBuilder : MonoBehaviour {
 	[Tooltip ("List of level to load")]
 	public string[] LevelName;
 	int numberOflevel;
+
+	
 	void Awake()
 	{
 		LevelBuilderInstance=this;

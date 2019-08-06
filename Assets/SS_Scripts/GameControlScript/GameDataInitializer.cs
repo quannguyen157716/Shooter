@@ -4,6 +4,14 @@ using UnityEngine;
 using System.IO;
 
 [System.Serializable]
+public class Items
+{
+    public string[] enemy;
+    public string[] gun;
+
+}
+
+[System.Serializable]
 public class SpawnInfo
 {
 	public string ID;
@@ -74,6 +82,23 @@ public class GameDataInitializer : MonoBehaviour {
         Debug.Log(Application.persistentDataPath);
         //Gun Type  
         //Gun type and round type are different
+        if(!File.Exists(Application.persistentDataPath+"/Items.json"))
+        {
+            Items i=new Items();
+            i.enemy=new string[4];
+            i.enemy[0]="EnemyBlue";
+            i.enemy[1]="EnemyGreen";
+            i.enemy[2]="EnemyRed";
+            i.enemy[3]="Asteroid";
+
+            i.gun=new string[3];
+            i.gun[0]="PlayerRegularShot";
+            i.gun[1]="PlayerTracingShot";
+            i.gun[2]="PlayerBurstShot";
+            string json=JsonUtility.ToJson(i,true);
+            File.WriteAllText(Application.persistentDataPath+"/Items.json",json);
+        }
+
         if(!File.Exists(Application.persistentDataPath+"/EnemyBlue.json"))
         {
            enemyInfo=new EnemyInfo();

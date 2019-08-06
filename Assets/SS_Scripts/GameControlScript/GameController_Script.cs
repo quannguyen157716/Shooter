@@ -60,7 +60,7 @@ public class GameController_Script : MonoBehaviour
 		UICOntroller.UIControllerInstance.ListElements.ReplayButton.onClick.AddListener(Replay);
 		UICOntroller.UIControllerInstance.ListElements.StartButton.onClick.AddListener(StartGame);
 		UICOntroller.UIControllerInstance.ListElements.InGamePanel.gameObject.SetActive(false);
-		Debug.Log("GameController");
+		//Debug.Log("GameController");
 	}
 
 	// Update is called once per frame

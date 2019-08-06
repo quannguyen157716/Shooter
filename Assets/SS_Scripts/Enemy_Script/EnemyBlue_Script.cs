@@ -67,7 +67,7 @@ public class EnemyBlue_Script : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		//Excute if the object tag was equal to one of these
-		if(other.tag == PlayerGun.PlayerGunInstance.shotType)
+		if(other.tag == PlayerGun.PlayerGunInstance.shotDealDamage)
 		{
 			ObjectPooler.ObjectPoolerInstance.GetPooledObject(LaserHit.tag, transform.position,true);
 			//Instantiate (LaserHit, transform.position , transform.rotation); 			//Instantiate LaserGreenHit 

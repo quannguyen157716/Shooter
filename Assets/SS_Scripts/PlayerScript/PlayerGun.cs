@@ -16,12 +16,16 @@ public class PlayerGun : MonoBehaviour {
 	public GameObject shotSpawn;
 	GameObject shot;
 	[HideInInspector]
+
 	public string shotType="PlayerRegularShot";
+	[HideInInspector]
+	public string shotDealDamage;//name that enemy will dectect to get hit
 	float nextFire=0f;	//First fire & Next fire Time
 	float fireRate=1f;	//Fire Rate between Shots
 	public int shotDamage;
+	//Gun level up? increase rate of fire lv1(starting point) lv2 increase rate fire, level 3:firing extra rounds(no time to do this) 
 	public string[] Gun;
-	Dictionary<string, PlayerWeapon> gunDictionary;
+	Dictionary<string, PlayerWeapon> gunDictionary;//current player's arsenal save all upgrade here
 	AudioSource audio2;
 	void Awake()
 	{
@@ -37,10 +41,9 @@ public class PlayerGun : MonoBehaviour {
 	}
 	void Fire()
 	{
-		
 		if(Time.time >nextFire)
 		{
-			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
+			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame 
 			shot = BulletPooler.SharedBulletPool.GetPooledObject(shotType); 
   			if (shot != null) 
 			{
@@ -68,6 +71,7 @@ public class PlayerGun : MonoBehaviour {
 			return;
 		}
 	}
+	//get based guns 
 	void GetGunConfig()
 	{
 		string json;
@@ -83,6 +87,20 @@ public class PlayerGun : MonoBehaviour {
 		nextFire=ob.nextFire;
 		fireRate=ob.fireRate;
 		shotDamage=ob.shotDamage;
+		shotDealDamage=shotType;
 		Debug.Log("ok");
+	}
+
+	public void ChangeShotType(string ShotName)
+	{
+		PlayerWeapon ob;
+		ob=gunDictionary[ShotName];
+		shotType=ob.shotType;
+		nextFire=ob.nextFire;
+		fireRate=ob.fireRate;
+		shotDamage=ob.shotDamage;
+		shotDealDamage=shotType;
+		if(shotType=="PlayerTracingShot")
+		shotDealDamage="TracingHead";
 	}
 }

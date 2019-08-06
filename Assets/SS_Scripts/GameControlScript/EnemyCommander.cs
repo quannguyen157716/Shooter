@@ -7,15 +7,16 @@ public class EnemyCommander : MonoBehaviour {
 	public static EnemyCommander EnemyCommanderInstance;
 	public string[] EnemyType;
 	[HideInInspector]
-	public Dictionary<string, EnemyInfo> EDictionary;
+	public Dictionary<string, EnemyInfo> EDictionary;//Enemy upgrade goes here
 	void Awake()
+
 	{
 		EnemyCommanderInstance=this;
 		EDictionary=new Dictionary<string, EnemyInfo>();
-		LoadEnemyInfo();
+		GetEnemyInfo();
 	}
-
-	void LoadEnemyInfo()
+	//Get Based enemy info
+	void GetEnemyInfo()
 	{
 		string json;
 		EnemyInfo ob;

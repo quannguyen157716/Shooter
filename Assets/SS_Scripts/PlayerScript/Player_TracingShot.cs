@@ -35,7 +35,7 @@ public class Player_TracingShot : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if(other.tag=="EnemyBlue")
+		if(other.tag=="EnemyBlue" || other.tag=="Asteroid")
 		Target=other.gameObject.transform;
 	}
 }

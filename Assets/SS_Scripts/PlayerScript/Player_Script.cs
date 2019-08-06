@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class Boundary 
@@ -32,7 +33,7 @@ public class Player_Script : MonoBehaviour
 	}
 	void FixedUpdate()
 	{	
-		Moving();
+		MovingPC();
 	}
 
 	//Called when the Trigger entered 
@@ -78,8 +79,11 @@ public class Player_Script : MonoBehaviour
 
 	void MovingPC()
 	{
+
 		if (Input.GetMouseButton(0)) //if mouse button was pressed       
             {
+				if(EventSystem.current.IsPointerOverGameObject())
+				return;
                 Vector3 mousePosition = mCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
                 mousePosition.z = transform.position.z;
                 transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
