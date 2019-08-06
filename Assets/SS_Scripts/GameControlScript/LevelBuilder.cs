@@ -11,6 +11,8 @@ public class Level
 }
 
 public class LevelBuilder : MonoBehaviour {
+
+	public static LevelBuilder LevelBuilderInstance;
 	[Tooltip ("List of level and their configuration")]
 	public List<Level> lv;
 	[Tooltip ("List of level to load")]
@@ -18,11 +20,12 @@ public class LevelBuilder : MonoBehaviour {
 	int numberOflevel;
 	void Awake()
 	{
+		LevelBuilderInstance=this;
 		lv=new List<Level>();
 		numberOflevel=LevelName.Length;
 		loadLevel();
-		StartCoroutine(RunLevel());
-		Debug.Log("Run level");
+		//StartCoroutine(RunLevel());
+		//Debug.Log("Run level");
 	}
 	IEnumerator RunLevel()
 	{
@@ -56,6 +59,10 @@ public class LevelBuilder : MonoBehaviour {
 		}
 	}
 
+	public void StartLevel()
+	{
+		StartCoroutine(RunLevel());
+	}
 	void loadLevel()
 	{
 		Debug.Log("Load Level");

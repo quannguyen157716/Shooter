@@ -16,8 +16,8 @@ public class UIElements
 public class UICOntroller : MonoBehaviour {
 	public static UICOntroller UIControllerInstance;
 	public UIElements ListElements;
-	public GameObject GameController;
-	GameController_Script gameCScript;
+	//public GameObject GameController;
+	//GameController_Script gameCScript;
 	
 	void Awake()
 	{

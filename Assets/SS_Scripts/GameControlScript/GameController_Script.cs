@@ -46,19 +46,21 @@ public class GameController_Script : MonoBehaviour
 	//public Hazard enemyRed;
 	//public Vector2 spawnValues;			//Store spawning (x,y) values
 	public GameObject Player;
-	public GameObject UI_controller;
+	//public GameObject UI_controller;
 	//UICOntroller UIControllerS;
 	SpawnInfo s;
 	
 	// Use this for initialization
 	void Start ()
 	{
+		//AudioListener.volume=0;
 		GameControllerInstance=this;
 		UICOntroller.UIControllerInstance.ListElements.ReplayButton.gameObject.SetActive(false);
 		UICOntroller.UIControllerInstance.ListElements.ReplayButton.gameObject.SetActive(false);
 		UICOntroller.UIControllerInstance.ListElements.ReplayButton.onClick.AddListener(Replay);
 		UICOntroller.UIControllerInstance.ListElements.StartButton.onClick.AddListener(StartGame);
 		UICOntroller.UIControllerInstance.ListElements.InGamePanel.gameObject.SetActive(false);
+		Debug.Log("GameController");
 	}
 
 	// Update is called once per frame
@@ -84,9 +86,11 @@ public class GameController_Script : MonoBehaviour
 		//StartCoroutine (StreamOfEnemy(3,new Vector2(0,5), enemyBlue.hazard));
 		//StartCoroutine (enemyGreenSpawnWaves());	//Start IEnumerator function
 		//StartCoroutine (enemyRedSpawnWaves());		//Start IEnumerator function 
-		StartCoroutine(enemyRandomSpawn(s));
+		//StartCoroutine(enemyRandomSpawn(s));
 		UICOntroller.UIControllerInstance.ListElements.MainMenuPanel.gameObject.SetActive(false);
+		UICOntroller.UIControllerInstance.ListElements.InGamePanel.gameObject.SetActive(true);
 		Player.gameObject.SetActive(true);
+		LevelBuilder.LevelBuilderInstance.StartLevel();
 	}
 	
 	//EnemyBlue IEnumerator Coroutine

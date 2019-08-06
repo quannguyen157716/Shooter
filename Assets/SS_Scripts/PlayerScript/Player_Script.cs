@@ -19,6 +19,7 @@ public class Player_Script : MonoBehaviour
 	Vector3 lastTouchPosition;
 	Rigidbody2D rigidbody2;
 	public Transform position;
+	float x,y;//calculate touch points
 	Camera mCamera;
 	//AudioSource audio2;
 	// Update is called once per frame
@@ -31,7 +32,7 @@ public class Player_Script : MonoBehaviour
 	}
 	void FixedUpdate()
 	{	
-		MovingPC();
+		Moving();
 	}
 
 	//Called when the Trigger entered 
@@ -53,13 +54,15 @@ public class Player_Script : MonoBehaviour
 		if(Input.touchCount>0)
 		{
 			Touch touch=Input.GetTouch(0);
-			
+	
 			touchPosition=mCamera.ScreenToWorldPoint(touch.position);
 			touchPosition.z=0;
-	
+		
+		
 			direction=touchPosition-transform.position;
 			rigidbody2.velocity=new Vector2(direction.x,direction.y+1) *speed;
 			
+		
 			if(touch.phase==TouchPhase.Ended)
 			{
 				rigidbody2.velocity=Vector2.zero;

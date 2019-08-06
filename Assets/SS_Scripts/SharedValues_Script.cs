@@ -7,6 +7,7 @@ public class SharedValues_Script : MonoBehaviour
 	public Text scoreText; 				//GUI Score
 	public Text GameOverText; 			//GUI GameOver
 	public Text FinalScoreText; 			//GUI Final Score
+	public GameObject GameOverPanel;
 	//public Text ReplayText; 				//
 
 	//Public Shared Var
@@ -27,7 +28,8 @@ public class SharedValues_Script : MonoBehaviour
 		//Excute when the GameOver Trigger is True
 		if (gameover == true)
 		{
-			
+			GameOverPanel.SetActive(true);	
+			UICOntroller.UIControllerInstance.ListElements.InGamePanel.SetActive(false);
 			GameOverText.text = "GAME OVER"; 			//Show GUI GameOver
 			FinalScoreText.text = "" + score; 			//Show GUI FinalScore
 		}
