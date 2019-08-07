@@ -157,6 +157,7 @@ public class GameDataInitializer : MonoBehaviour {
             gun.fireRate=0.4f;
             gun.shotDamage=1;
             gun.shotSpeed=9f;
+            gun.level=1;
             Debug.Log(Application.persistentDataPath+"/PlayerRegularGun.json");
 
             string json=JsonUtility.ToJson(gun,true);        
@@ -172,6 +173,7 @@ public class GameDataInitializer : MonoBehaviour {
             gun.fireRate=1.5f;
             gun.shotDamage=5;
             gun.shotSpeed=8f;
+            gun.level=1;
             Debug.Log(Application.persistentDataPath+"/PlayerBurstGun.json");
 
             string json=JsonUtility.ToJson(gun,true);        
@@ -186,6 +188,7 @@ public class GameDataInitializer : MonoBehaviour {
             gun.fireRate=3f;
             gun.shotDamage=3;
             gun.shotSpeed=3f;
+            gun.level=1;
             Debug.Log(Application.persistentDataPath+"/PlayerTracingGun.json");
 
             string json=JsonUtility.ToJson(gun,true);        

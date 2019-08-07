@@ -40,13 +40,23 @@ public class Player_Script : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		//Excute if the object tag was equal to one of these
-		if(other.tag!=PlayerGun.PlayerGunInstance.shotType && other.tag!="Boundary") 
+		if(other.tag!=PlayerGun.PlayerGunInstance.shotDealDamage && other.tag!="Boundary"&&other.tag!="PowerUp"&&other.tag!="PlayerTracingShot") 
 		{
 			Debug.Log(other.tag);
+			Debug.Log(PlayerGun.PlayerGunInstance.shotDealDamage);
 			Instantiate (Explosion, transform.position , transform.rotation); 				//Instantiate Explosion
 			SharedValues_Script.gameover = true;
 			TakeDamage(1); 											
 			//gameObject.SetActive(false); 															//Destroy Player Ship Object
+		}
+		if(other.tag=="PowerUp")
+		{
+			if(PlayerGun.PlayerGunInstance.level<2)
+			{
+				PlayerGun.PlayerGunInstance.level++;
+				PlayerGun.PlayerGunInstance.UpgradeGun();
+			}
+			
 		}
 	}
 	//Moving touch pad only

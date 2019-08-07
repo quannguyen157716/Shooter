@@ -12,6 +12,7 @@ public class UIElements
 	public Button SettingsButton;
 	public GameObject MainMenuPanel;
 	public GameObject InGamePanel;
+	public GameObject WeaponPanel;
 }
 public class UICOntroller : MonoBehaviour {
 	public static UICOntroller UIControllerInstance;

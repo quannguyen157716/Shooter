@@ -10,10 +10,14 @@ public class PlayerWeapon
 	public float fireRate;	//Fire Rate between Shots
 	public int shotDamage;
 	public float shotSpeed;
+
+	public int level;
 }
 public class PlayerGun : MonoBehaviour {
 	public static PlayerGun PlayerGunInstance;
 	public GameObject shotSpawn;
+	public GameObject LshotSpawn;
+	public GameObject RshotSpawn;
 	GameObject shot;
 	[HideInInspector]
 
@@ -24,6 +28,7 @@ public class PlayerGun : MonoBehaviour {
 	float fireRate=1f;	//Fire Rate between Shots
 	public int shotDamage;
 	//Gun level up? increase rate of fire lv1(starting point) lv2 increase rate fire, level 3:firing extra rounds(no time to do this) 
+	public int level=1;
 	public string[] Gun;
 	Dictionary<string, PlayerWeapon> gunDictionary;//current player's arsenal save all upgrade here
 	AudioSource audio2;
@@ -37,8 +42,12 @@ public class PlayerGun : MonoBehaviour {
 
 	void Update () 
 	{
+		if(level==1)
+		Fire1();
+		else
 		Fire2();
 	}
+	/* 
 	void Fire()
 	{
 		if(Time.time >nextFire)
@@ -55,9 +64,9 @@ public class PlayerGun : MonoBehaviour {
 			else
 			return;
 		}
-	}
+	}*/
 
-	void Fire2()
+	void Fire1()
 	{
 		if(Time.time >nextFire)
 		{
@@ -71,6 +80,20 @@ public class PlayerGun : MonoBehaviour {
 			return;
 		}
 	}
+
+	void Fire2()
+	{
+		if(Time.time >nextFire)
+		{
+			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
+			GameObject shot1 = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shotType, LshotSpawn.transform.position,true); 
+			GameObject shot2 = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shotType, RshotSpawn.transform.position,true); 
+  			if (shot1 == null ||shot2==null)  
+			{
+				return;
+			}
+		}
+	}
 	//get based guns 
 	void GetGunConfig()
 	{
@@ -80,14 +103,15 @@ public class PlayerGun : MonoBehaviour {
 		{
 			json=File.ReadAllText(Application.persistentDataPath+"/"+f+".json");
 			ob=JsonUtility.FromJson<PlayerWeapon>(json);
-			gunDictionary.Add(f,ob);
+			gunDictionary.Add(ob.shotType,ob);
 		}
-		ob=gunDictionary["PlayerRegularGun"];
+		ob=gunDictionary["PlayerRegularShot"];
 		shotType=ob.shotType;
 		nextFire=ob.nextFire;
 		fireRate=ob.fireRate;
 		shotDamage=ob.shotDamage;
 		shotDealDamage=shotType;
+		level=ob.level;
 		Debug.Log("ok");
 	}
 
@@ -100,7 +124,15 @@ public class PlayerGun : MonoBehaviour {
 		fireRate=ob.fireRate;
 		shotDamage=ob.shotDamage;
 		shotDealDamage=shotType;
+		level=ob.level;
 		if(shotType=="PlayerTracingShot")
 		shotDealDamage="TracingHead";
 	}
+
+	public void UpgradeGun()
+	{
+		Debug.Log(shotType);
+		//gunDictionary[shotType].level=level;
+	}
+
 }

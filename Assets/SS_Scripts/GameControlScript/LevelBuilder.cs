@@ -35,6 +35,7 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log("Level start");
 		foreach(Level l in lv)
 		{
+			yield return new WaitUntil(()=>UICOntroller.UIControllerInstance.ListElements.WeaponPanel.activeInHierarchy==false);
 			Debug.Log(l.name);
 			for(i=0; i<l.events.Length; i++)
 			{
@@ -58,6 +59,7 @@ public class LevelBuilder : MonoBehaviour {
 			Debug.Log(i+" "+l.events[i-1].spawnEnd);
 			yield return new WaitUntil(()=>l.events[i-1].spawnEnd==true);//make sure levels do not mix
 			Debug.Log("End Level");
+			UICOntroller.UIControllerInstance.ListElements.WeaponPanel.SetActive(true);
 		}
 	}
 

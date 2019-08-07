@@ -60,6 +60,7 @@ public class GameController_Script : MonoBehaviour
 		UICOntroller.UIControllerInstance.ListElements.ReplayButton.onClick.AddListener(Replay);
 		UICOntroller.UIControllerInstance.ListElements.StartButton.onClick.AddListener(StartGame);
 		UICOntroller.UIControllerInstance.ListElements.InGamePanel.gameObject.SetActive(false);
+		//UICOntroller.UIControllerInstance.ListElements.WeaponPanel.SetActive(false);
 		//Debug.Log("GameController");
 	}
 
@@ -87,6 +88,7 @@ public class GameController_Script : MonoBehaviour
 		//StartCoroutine (enemyGreenSpawnWaves());	//Start IEnumerator function
 		//StartCoroutine (enemyRedSpawnWaves());		//Start IEnumerator function 
 		//StartCoroutine(enemyRandomSpawn(s));
+
 		UICOntroller.UIControllerInstance.ListElements.MainMenuPanel.gameObject.SetActive(false);
 		UICOntroller.UIControllerInstance.ListElements.InGamePanel.gameObject.SetActive(true);
 		Player.gameObject.SetActive(true);
@@ -152,6 +154,7 @@ public class GameController_Script : MonoBehaviour
 			//Debug.Log("CurrentDuration "+duration );
 			if(duration>ifo.duration)
 			{
+				ifo.spawnEnd=true;
 				yield break;
 			}
 		}
