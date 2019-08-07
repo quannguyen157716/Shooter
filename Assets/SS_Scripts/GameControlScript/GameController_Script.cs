@@ -48,7 +48,7 @@ public class GameController_Script : MonoBehaviour
 	public GameObject Player;
 	//public GameObject UI_controller;
 	//UICOntroller UIControllerS;
-	SpawnInfo s;
+//	SpawnInfo s;
 	
 	// Use this for initialization
 	void Start ()
@@ -199,11 +199,4 @@ public class GameController_Script : MonoBehaviour
 		//yield return new WaitForSeconds (ifo.start_Wait);					
 		ObjectPooler.ObjectPoolerInstance.GetPooledObject(ifo.enemyTag, ifo.position,true);											
 	}
-	void GetInfo()
-	{
-		string json=File.ReadAllText(Application.persistentDataPath+"/S00.json");
-		s=JsonUtility.FromJson<SpawnInfo>(json);
-	}
-
-	
 }
