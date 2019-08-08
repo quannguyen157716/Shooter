@@ -20,10 +20,16 @@ public class Player_Script : MonoBehaviour
 	Vector3 lastTouchPosition;
 	Rigidbody2D rigidbody2;
 	public Transform position;
+	[HideInInspector]
+	public bool isDead=false;
 	float x,y;//calculate touch points
 	Camera mCamera;
 	//AudioSource audio2;
 	// Update is called once per frame
+	void OnEnable()
+	{
+		isDead=false;
+	}
 	void Start()
 	{
 		mCamera=Camera.main;
@@ -112,6 +118,7 @@ public class Player_Script : MonoBehaviour
 
 	void Destruct()
 	{
+		isDead=true;
 		//Destroy(gameObject);
 		SharedValues_Script.gameover = true;   //Trigger That its a GameOver
 		gameObject.SetActive(false);

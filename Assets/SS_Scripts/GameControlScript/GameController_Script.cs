@@ -39,6 +39,7 @@ public class GameController_Script : MonoBehaviour
 	//public EnemyBlue enemyBlue;			//make an Object from Class enemyBlue
 	//public EnemyGreen enemyGreen;		//make an Object from Class enemyGreen
 	//public EnemyRed enemyRed;			//make an Object from Class enemyRed
+	public GameObject PowerUp;
 	public static GameController_Script GameControllerInstance;
 	//public Hazard asteroid;
 	//public Hazard enemyBlue;
@@ -160,6 +161,12 @@ public class GameController_Script : MonoBehaviour
 		}
 		ifo.spawnEnd=true;
 	}	
+
+	public void SpawnPowerUp()
+	{
+		Vector3 spawnPosition=new Vector3(Random.Range(-3,3),6);
+		Instantiate(PowerUp,spawnPosition,Quaternion.identity);
+	}
 
 	public IEnumerator enemyHorizontalRandomSpawn(SpawnInfo ifo)
 	{
