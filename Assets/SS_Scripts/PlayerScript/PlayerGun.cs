@@ -132,7 +132,7 @@ public class PlayerGun : MonoBehaviour {
 	public void UpgradeGun()
 	{
 		Debug.Log(shotType);
-		//gunDictionary[shotType].level=level;
+		gunDictionary[shotType].level=level;
 	}
 
 }
