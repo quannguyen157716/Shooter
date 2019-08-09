@@ -72,7 +72,7 @@ public class EnemyRed_Script : MonoBehaviour
 	//Called when the Trigger entered
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if(other.tag == "PlayerRegularShot" || other.tag=="PlayerBurstShot" ||other.tag=="TracingHead")
+		if(other.tag == PlayerGun.PlayerGunInstance.shotDealDamage)
 		{
 			ObjectPooler.ObjectPoolerInstance.GetPooledObject(LaserHit.tag, transform.position,true);
 			//Instantiate (LaserHit, transform.position , transform.rotation); 			//Instantiate LaserGreenHit 

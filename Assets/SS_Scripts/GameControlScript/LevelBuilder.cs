@@ -95,7 +95,7 @@ public class LevelBuilder : MonoBehaviour {
 			{
 				if(l.timeToStartEachEvent[i]<10)
 				{
-					l.timeToStartEachEvent[i]-=(l.timeToStartEachEvent[i]/100)*20;
+					l.timeToStartEachEvent[i]-=(l.timeToStartEachEvent[i]/100)*50;
 					l.events[i].spawnEnd=false;
 				}
 			}

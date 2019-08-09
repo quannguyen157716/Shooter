@@ -42,14 +42,12 @@ public class EnemyStream : MonoBehaviour {
 		//Debug.Log("Stream"); 
 		for(int i=0; i<NumberOfEnemy;i++)
 		{
-			enemy=ObjectPooler.ObjectPoolerInstance.GetPooledObject(enemy.tag, points[0].position,false);
+			enemy=ObjectPooler.ObjectPoolerInstance.GetPooledObject(enemy.tag, p,false);
 			if(enemy!=null)
 			{
 				
-				//EnemyBlue_Script TestC=enemy.GetComponent<EnemyBlue_Script>();
 				FollowAPath TestC=enemy.GetComponent<FollowAPath>();
 				TestC.inPath.path=points;
-				//TestC.SetPath();
 				TestC.inPath.InStream=InStream;
 				TestC.inPath.loop=loop;
 				TestC.inPath.pathReverse=reverse;

@@ -50,7 +50,7 @@ public class GameController_Script : MonoBehaviour
 	//public GameObject UI_controller;
 	//UICOntroller UIControllerS;
 //	SpawnInfo s;
-	
+	public AudioSource audios;
 	// Use this for initialization
 	void Start ()
 	{
@@ -61,6 +61,7 @@ public class GameController_Script : MonoBehaviour
 		UICOntroller.UIControllerInstance.ListElements.ReplayButton.onClick.AddListener(Replay);
 		UICOntroller.UIControllerInstance.ListElements.StartButton.onClick.AddListener(StartGame);
 		UICOntroller.UIControllerInstance.ListElements.InGamePanel.gameObject.SetActive(false);
+		//audios.Play();
 		//UICOntroller.UIControllerInstance.ListElements.WeaponPanel.SetActive(false);
 		//Debug.Log("GameController");
 	}

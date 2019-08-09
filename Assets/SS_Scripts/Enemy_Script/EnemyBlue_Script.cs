@@ -24,7 +24,7 @@ public class EnemyBlue_Script : MonoBehaviour
 	public FollowAPath path;
 	public SubBehavior behavior;
 
-	int test;
+	//int test;
 
 	void Awake()
 	{

@@ -24,10 +24,12 @@ public class StreamPara
 	public bool pathReverse=false;
 	[HideInInspector]
 	public bool loop=true;
+	
 }
 
 public class FollowAPath : MonoBehaviour {
 	public StreamPara inPath; 
+	Vector2 p,p1,p2,p3;
 	void OnEnable()
 	{
 		inPath.pathToGo=0;
@@ -48,10 +50,10 @@ public class FollowAPath : MonoBehaviour {
 		Vector2 p2=path[pathNumber].GetChild(2).position;
 		Vector2 p3=path[pathNumber].GetChild(3).position;
 		*/
-		Vector2 p=inPath.path[0].position;
-		Vector2 p1=inPath.path[1].position;
-		Vector2 p2=inPath.path[2].position;
-		Vector2 p3=inPath.path[3].position;
+		p=inPath.path[0].position;
+		p1=inPath.path[1].position;
+		p2=inPath.path[2].position;
+		p3=inPath.path[3].position;
 //		Debug.Log(inPath.loop);
 		//Debug.Log(NumberOfWave);
 		//Debug.Log("Moving");
@@ -64,12 +66,12 @@ public class FollowAPath : MonoBehaviour {
 			3*Mathf.Pow(1-inPath.tParam,2)*inPath.tParam*p1+
 			3*(1-inPath.tParam)*Mathf.Pow(inPath.tParam,2)*p2+
 			Mathf.Pow(inPath.tParam,3)*p3;
-
+			
 			transform.position= inPath.objPostion;
 			yield return new WaitForEndOfFrame();
 			}
 
-			inPath.tParam=0;
+			inPath.tParam=0f;
 
 			if(inPath.pathReverse)
 			{

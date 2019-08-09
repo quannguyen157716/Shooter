@@ -344,7 +344,7 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[2].duration=60;
 
             level.events[3]=new SpawnInfo();
-            level.events[3].ID="LV2_Event03";
+            level.events[3].ID="LV3_Event03";
             level.events[3].enemyTag="EnemyStream2";
             level.events[3].typeOfSpawn="enemyHorizontalRandomSpawn";
             level.events[3].numberOfWave=3;
@@ -357,7 +357,7 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[3].duration=20;
 
             level.events[4]=new SpawnInfo();
-            level.events[4].ID="LV2_Event04";
+            level.events[4].ID="LV3_Event04";
             level.events[4].enemyTag="EnemyGreen";
             level.events[4].typeOfSpawn="enemyRandomSpawn";
             level.events[4].numberOfWave=8;
@@ -370,7 +370,7 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[4].duration=80;
 
             level.events[5]=new SpawnInfo();
-            level.events[5].ID="LV2_Event04";
+            level.events[5].ID="LV3_Event04";
             level.events[5].enemyTag="EnemyStream3";
             level.events[5].typeOfSpawn="enemyHorizontalRandomSpawn";
             level.events[5].numberOfWave=3;
@@ -383,7 +383,7 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[5].duration=20;
 
             level.events[6]=new SpawnInfo();
-            level.events[6].ID="LV2_Event05";
+            level.events[6].ID="LV3_Event05";
             level.events[6].enemyTag="EnemyStream4";
             level.events[6].typeOfSpawn="enemyHorizontalRandomSpawn";
             level.events[6].numberOfWave=3;
@@ -396,7 +396,7 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[6].duration=20;
 
             level.events[7]=new SpawnInfo();
-            level.events[7].ID="LV2_Event06";
+            level.events[7].ID="LV3_Event06";
             level.events[7].enemyTag="EnemyStream5";
             level.events[7].typeOfSpawn="enemyHorizontalRandomSpawn";
             level.events[7].numberOfWave=3;
@@ -457,7 +457,7 @@ public class GameDataInitializer : MonoBehaviour {
             level.timeToStartEachEvent=new float[6]{3,15,30,15,20,15};
 
             level.events[3]=new SpawnInfo();
-            level.events[3].ID="LV2_Event03";
+            level.events[3].ID="LV4_Event03";
             level.events[3].enemyTag="EnemyGreen";
             level.events[3].typeOfSpawn="enemyRandomSpawn";
             level.events[3].numberOfWave=8;
@@ -501,7 +501,46 @@ public class GameDataInitializer : MonoBehaviour {
             File.WriteAllText(Application.persistentDataPath+"//Level_4.json",json);
         }
 
+        if(!File.Exists(Application.persistentDataPath+"/Level_5.json"))
+        {
+            Level level=new Level();
+            level.name="Level_5";
+        
+            level.events=new SpawnInfo[2];
 
+            level.events[0]=new SpawnInfo();
+            level.events[0].ID="LV5_Event00";
+            level.events[0].enemyTag="EnemyGreen";
+            level.events[0].typeOfSpawn="enemyRandomSpawn";
+            level.events[0].numberOfWave=10;
+            level.events[0].numberOfObject=5; //number of object in one wave
+        	level.events[0].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
+        	level.events[0].RandomSpawnWaitMax=5;
+        	level.events[0].wavewaitMin=4;  //Time to wait till a new wave
+        	level.events[0].wavewaitMax=6;
+        	level.events[0].position=new Vector2(3,6);  //position to spawn */
+            level.events[0].duration=80;
+
+            level.events[1]=new SpawnInfo();
+            level.events[1].ID="LV4_Event05";
+            level.events[1].enemyTag="EnemyRed";
+            level.events[1].typeOfSpawn="enemyRandomSpawn";
+            level.events[1].numberOfWave=3;
+            level.events[1].numberOfObject=2; //number of object in one wave
+        	level.events[1].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
+        	level.events[1].RandomSpawnWaitMax=5;
+        	level.events[1].wavewaitMin=50;  //Time to wait till a new wave
+        	level.events[1].wavewaitMax=50;
+        	level.events[1].position=new Vector2(3,6);  //position to spawn 
+            level.events[1].duration=160;
+
+            level.timeToStartEachEvent=new float[2]{3,15};
+
+              string json =JsonUtility.ToJson(level,true);
+       
+            //string json=JsonHelper.ToJson(level);
+            File.WriteAllText(Application.persistentDataPath+"//Level_5.json",json);
+        }
 /* 		string json=JsonUtility.ToJson(Obja,true);
 		Debug.Log(json);//
 		Debug.Log(Application.persistentDataPath);
