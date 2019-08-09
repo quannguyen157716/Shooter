@@ -408,7 +408,7 @@ public class GameDataInitializer : MonoBehaviour {
         	level.events[7].position=new Vector2(5,4);  //position to spawn */
             level.events[7].duration=20;
 
-            level.timeToStartEachEvent=new float[7]{3,45,45,60,10,30,20};
+            level.timeToStartEachEvent=new float[8]{3,45,45,60,10,30,20,15};
             string json =JsonUtility.ToJson(level,true);
             Debug.Log(json.Length);
             //string json=JsonHelper.ToJson(level);
@@ -454,8 +454,6 @@ public class GameDataInitializer : MonoBehaviour {
         	level.events[2].position=new Vector2(3,6);  //position to spawn 
             level.events[2].duration=60;
 
-            level.timeToStartEachEvent=new float[6]{3,15,30,15,20,15};
-
             level.events[3]=new SpawnInfo();
             level.events[3].ID="LV4_Event03";
             level.events[3].enemyTag="EnemyGreen";
@@ -493,8 +491,9 @@ public class GameDataInitializer : MonoBehaviour {
         	level.events[5].wavewaitMin=50;  //Time to wait till a new wave
         	level.events[5].wavewaitMax=50;
         	level.events[5].position=new Vector2(3,6);  //position to spawn 
-            level.events[5].duration=80;
+            level.events[5].duration=120;
 
+            level.timeToStartEachEvent=new float[6]{3,15,30,15,20,15};
             string json =JsonUtility.ToJson(level,true);
        
             //string json=JsonHelper.ToJson(level);
@@ -522,7 +521,7 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[0].duration=80;
 
             level.events[1]=new SpawnInfo();
-            level.events[1].ID="LV4_Event05";
+            level.events[1].ID="LV5_Event01";
             level.events[1].enemyTag="EnemyRed";
             level.events[1].typeOfSpawn="enemyRandomSpawn";
             level.events[1].numberOfWave=3;
@@ -536,7 +535,7 @@ public class GameDataInitializer : MonoBehaviour {
 
             level.timeToStartEachEvent=new float[2]{3,15};
 
-              string json =JsonUtility.ToJson(level,true);
+            string json =JsonUtility.ToJson(level,true);
        
             //string json=JsonHelper.ToJson(level);
             File.WriteAllText(Application.persistentDataPath+"//Level_5.json",json);

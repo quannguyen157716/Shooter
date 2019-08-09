@@ -153,7 +153,7 @@ public class GameController_Script : MonoBehaviour
 			duration+=(Time.time-startTime);
 			startTime=Time.time;
 			//Debug.Log("EndTime: " +Time.time);
-			//Debug.Log("CurrentDuration "+duration );
+			Debug.Log("CurrentDuration "+duration );
 			if(duration>ifo.duration)
 			{
 				ifo.spawnEnd=true;
@@ -194,9 +194,10 @@ public class GameController_Script : MonoBehaviour
 			duration+=(Time.time-startTime);
 			startTime=Time.time;
 			//Debug.Log("EndTime: " +Time.time);
-			//Debug.Log("CurrentDuration "+duration );
+//			Debug.Log("CurrentDuration "+duration );
 			if(duration>ifo.duration)
 			{
+				ifo.spawnEnd=true;
 				yield break;
 			}
 		}
@@ -208,6 +209,7 @@ public class GameController_Script : MonoBehaviour
 	{
 		Debug.Log("ss");
 		//yield return new WaitForSeconds (ifo.start_Wait);					
-		ObjectPooler.ObjectPoolerInstance.GetPooledObject(ifo.enemyTag, ifo.position,true);											
+		ObjectPooler.ObjectPoolerInstance.GetPooledObject(ifo.enemyTag, ifo.position,true);	
+		ifo.spawnEnd=true;										
 	}
 }
