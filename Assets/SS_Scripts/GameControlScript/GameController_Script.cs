@@ -156,11 +156,17 @@ public class GameController_Script : MonoBehaviour
 			Debug.Log("CurrentDuration "+duration );
 			if(duration>ifo.duration)
 			{
-				ifo.spawnEnd=true;
+				ifo.spawnEnd=true;// not run out of wave
 				yield break;
 			}
 		}
-		ifo.spawnEnd=true;
+		
+		if(duration<ifo.duration)
+		{
+			yield return new WaitForSeconds(ifo.duration-duration);
+			ifo.spawnEnd=true;//run out of wave
+		}
+		
 	}	
 
 	public void SpawnPowerUp()
@@ -201,7 +207,12 @@ public class GameController_Script : MonoBehaviour
 				yield break;
 			}
 		}
-		ifo.spawnEnd=true;
+		
+		if(duration<ifo.duration)
+		{
+			yield return new WaitForSeconds(ifo.duration-duration);
+			ifo.spawnEnd=true;//run out of wave
+		}
 	}	
 
 	//wait to spawn an object at specific location after specific time

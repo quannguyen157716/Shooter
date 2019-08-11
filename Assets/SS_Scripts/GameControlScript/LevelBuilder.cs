@@ -59,15 +59,11 @@ public class LevelBuilder : MonoBehaviour {
 				{
 					StartCoroutine(GameController_Script.GameControllerInstance.enemyHorizontalRandomSpawn(l.events[i]));
 				}
-				//if(i!=0)
-				//Debug.Log(i+" "+l.events[i-1].spawnEnd);
-				//else if(l.events[i].typeOfSpawn=="streamOfEnemySpawn") 
-				//StartCoroutine(GameController_Script.GameControllerInstance.streamOfEnemySpawn(l.events[i]));
 			}
 			//Debug.Log(i+" "+l.events[i-1].spawnEnd);
-			Debug.Log(i+" "+l.events[5].spawnEnd);
+//			Debug.Log(i+" "+l.events[5].spawnEnd);
 			yield return new WaitUntil(()=>l.events[i-1].spawnEnd==true);//make sure levels do not mix
-			Debug.Log(i+" "+l.events[5].spawnEnd);//more duration for final wave of level 4
+//			Debug.Log(i+" "+l.events[5].spawnEnd);//more duration for final wave of level 4
 			Debug.Log("End Level: "+l.name);
 			UICOntroller.UIControllerInstance.ListElements.WeaponPanel.SetActive(true);
 		}

@@ -67,11 +67,6 @@ public static class JsonHelper
     }
 }
     
-[System.Serializable]
-public class test
-{
-    public int i=1;
-}
 public class GameDataInitializer : MonoBehaviour {
     PlayerWeapon gun;
     SpawnInfo info;
@@ -491,7 +486,7 @@ public class GameDataInitializer : MonoBehaviour {
         	level.events[5].wavewaitMin=50;  //Time to wait till a new wave
         	level.events[5].wavewaitMax=50;
         	level.events[5].position=new Vector2(3,6);  //position to spawn 
-            level.events[5].duration=120;
+            level.events[5].duration=140;
 
             level.timeToStartEachEvent=new float[6]{3,15,30,15,20,15};
             string json =JsonUtility.ToJson(level,true);

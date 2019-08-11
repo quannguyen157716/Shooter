@@ -7,6 +7,7 @@ public class PoweUp : MonoBehaviour {
 	void Start()
 	{
 		rb.velocity= -1*transform.up*1.5f;
+		Destroy(gameObject,10);
 	}
 	void OnTriggerEnter2D(Collider2D other)
 	{
