@@ -36,7 +36,10 @@ public class EnemyInfo
 	public int health;						//Enemy Ship Health
 	public int ScoreValue;					//How much the Enemy Ship give score after explosion
 	public float fireRate;			//Fire Rate between Shots
+
 }
+
+
 
 public static class JsonHelper
 {
