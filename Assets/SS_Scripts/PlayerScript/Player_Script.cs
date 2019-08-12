@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
 [System.Serializable]
@@ -39,7 +39,7 @@ public class Player_Script : MonoBehaviour
 	}
 	void FixedUpdate()
 	{	
-		MovingPC();
+		Move();
 	}
 
 	//Called when the Trigger entered 
@@ -65,9 +65,64 @@ public class Player_Script : MonoBehaviour
 			
 		}
 	}
+
 	//Moving touch pad only
+
+	Vector3 GetCameraPosition(Vector3 pos)
+	{
+		return mCamera.ScreenToWorldPoint(pos);
+	}
+
+    void Move()
+	{
+
+		
+			Debug.Log(EventSystem.current.IsPointerOverGameObject());
+		
+		#if UNITY_EDITOR
+		if (Input.GetMouseButton(0))
+		{
+			Debug.Log("PC");
+			Vector3 mousePosition = mCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
+            mousePosition.z = transform.position.z;
+			direction=mousePosition-transform.position;
+			rigidbody2.velocity=new Vector2(direction.x,direction.y+1) *speed;
+            //transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);	
+			if(Input.GetMouseButtonUp(0))
+			rigidbody2.velocity=Vector2.zero;
+		}
+		#endif
+
+		
+		#if UNITY_IOS || UNITY_ANDROID
+		if(Input.touchCount>0)
+		{
+			Touch touch=Input.GetTouch(0);
+			Debug.Log("Phone");
+			touchPosition=GetCameraPosition(touch.position);
+			touchPosition.z=0;
+
+			direction=touchPosition-transform.position;
+			rigidbody2.velocity=new Vector2(direction.x,direction.y+1) *speed;
+
+			if(touch.phase==TouchPhase.Ended)
+			{
+				rigidbody2.velocity=Vector2.zero;
+			}
+		}
+		#endif
+
+		rigidbody2.position = new Vector2 
+		(
+			Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
+			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
+		);
+	}
+	/* 
 	void Moving()
 	{
+		if(EventSystem.current.IsPointerOverGameObject())
+		return;
 		if(Input.touchCount>0)
 		{
 			Touch touch=Input.GetTouch(0);
@@ -97,13 +152,22 @@ public class Player_Script : MonoBehaviour
 	{
 
 		if (Input.GetMouseButton(0)) //if mouse button was pressed       
-            {
-				if(EventSystem.current.IsPointerOverGameObject())
-				return;
-                Vector3 mousePosition = mCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
-                mousePosition.z = transform.position.z;
-                transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
-            }
+        {
+			if(EventSystem.current.IsPointerOverGameObject())
+			return;
+            Vector3 mousePosition = mCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
+            mousePosition.z = transform.position.z;
+			direction=mousePosition-transform.position;
+			rigidbody2.velocity=new Vector2(direction.x,direction.y+1) *speed;
+            //transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
+
+			if(Input.GetMouseButtonUp(0))
+			{
+				rigidbody2.velocity=Vector2.zero;
+			}	
+
+        }
+			
 			
 		rigidbody2.position = new Vector2 
 		(
@@ -111,6 +175,7 @@ public class Player_Script : MonoBehaviour
 			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
 		);
 	}
+	*/
 	void TakeDamage(int damage)
 	{
 		Destruct();
