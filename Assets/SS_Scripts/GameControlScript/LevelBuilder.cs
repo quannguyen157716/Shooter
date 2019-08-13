@@ -10,8 +10,8 @@ public class Level
 	public float[] timeToStartEachEvent;
 }
 
-public class LevelBuilder : MonoBehaviour {
-
+public class LevelBuilder : MonoBehaviour 
+{
 	public static LevelBuilder LevelBuilderInstance;
 	[Tooltip ("List of level and their configuration")]
 	public List<Level> lv;
@@ -26,8 +26,7 @@ public class LevelBuilder : MonoBehaviour {
 		lv=new List<Level>();
 		numberOflevel=LevelName.Length;
 		loadLevel();
-		//StartCoroutine(RunLevel());
-		//Debug.Log("Run level");
+	
 	}
 	IEnumerator RunLevel()
 	{
@@ -61,9 +60,9 @@ public class LevelBuilder : MonoBehaviour {
 				}
 			}
 			//Debug.Log(i+" "+l.events[i-1].spawnEnd);
-//			Debug.Log(i+" "+l.events[5].spawnEnd);
+			//Debug.Log(i+" "+l.events[5].spawnEnd);
 			yield return new WaitUntil(()=>l.events[i-1].spawnEnd==true);//make sure levels do not mix
-//			Debug.Log(i+" "+l.events[5].spawnEnd);//more duration for final wave of level 4
+			//Debug.Log(i+" "+l.events[5].spawnEnd);//more duration for final wave of level 4
 			Debug.Log("End Level: "+l.name);
 			UICOntroller.UIControllerInstance.ListElements.WeaponPanel.SetActive(true);
 		}

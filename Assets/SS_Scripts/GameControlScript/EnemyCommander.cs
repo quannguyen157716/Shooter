@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class EnemyCommander : MonoBehaviour {
+public class EnemyCommander : MonoBehaviour 
+{
 	public static EnemyCommander EnemyCommanderInstance;
 	public string[] EnemyType;
+	//Info of Enemy and their upgrade
 	[HideInInspector]
-	public Dictionary<string, EnemyInfo> EDictionary;//Enemy upgrade goes here
+	public Dictionary<string, EnemyInfo> EDictionary;
 	void Awake()
-
 	{
 		EnemyCommanderInstance=this;
 		EDictionary=new Dictionary<string, EnemyInfo>();

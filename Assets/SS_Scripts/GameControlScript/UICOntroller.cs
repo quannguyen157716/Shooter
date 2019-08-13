@@ -14,11 +14,10 @@ public class UIElements
 	public GameObject InGamePanel;
 	public GameObject WeaponPanel;
 }
-public class UICOntroller : MonoBehaviour {
+public class UICOntroller : MonoBehaviour 
+{
 	public static UICOntroller UIControllerInstance;
 	public UIElements ListElements;
-	//public GameObject GameController;
-	//GameController_Script gameCScript;
 	
 	void Awake()
 	{

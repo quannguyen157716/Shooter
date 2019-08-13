@@ -15,16 +15,18 @@ public class Items
 public class SpawnInfo
 {
 	public string ID;
-	public string enemyTag; //tag of enemy to spawn
+	public string enemyTag; 
 	public string typeOfSpawn;
-	public int numberOfWave; //number of wave =0 it is individual spawn
-	public int numberOfObject; //number of object in one wave
-	//public float start_Wait; //Time to Start spawning
-	public float RandomSpawnWaitMin;  //Time to wait before a new spawn
+	public int numberOfWave; 
+	public int numberOfObject; 
+    //Time to wait before a new spawn
+	public float RandomSpawnWaitMin;  
 	public float RandomSpawnWaitMax;
-	public float wavewaitMin;  //Time to wait till a new wave
+    //Time to wait till a new wave
+	public float wavewaitMin;  
 	public float wavewaitMax;
-	public Vector2 position;  //position to spawn 
+    //position to spawn 
+	public Vector2 position;  
 	public bool spawnEnd=false;
     public float duration;
 }
@@ -32,15 +34,14 @@ public class SpawnInfo
 public class EnemyInfo
 {
     public string name;
-    public float speed;						//Enemy Ship Speed
-	public int health;						//Enemy Ship Health
-	public int ScoreValue;					//How much the Enemy Ship give score after explosion
-	public float fireRate;			//Fire Rate between Shots
-
+    public float speed;						
+	public int health;					
+	public int ScoreValue;					
+	public float fireRate;			
 }
 
 
-
+/* 
 public static class JsonHelper
 {
     public static T[] FromJson<T>(string json)
@@ -69,17 +70,17 @@ public static class JsonHelper
         public T[] Items;
     }
 }
-    
-public class GameDataInitializer : MonoBehaviour {
+*/ 
+public class GameDataInitializer : MonoBehaviour 
+{
     PlayerWeapon gun;
     SpawnInfo info;
 
     EnemyInfo enemyInfo;
-	void Awake () {
+	void Awake () 
+    {
         //Based value for object attributes
         Debug.Log(Application.persistentDataPath);
-        //Gun Type  
-        //Gun type and round type are different
         if(!File.Exists(Application.persistentDataPath+"/Items.json"))
         {
             Items i=new Items();
@@ -101,9 +102,9 @@ public class GameDataInitializer : MonoBehaviour {
         {
            enemyInfo=new EnemyInfo();
            enemyInfo.name="EnemyBlue";
-           enemyInfo.speed=2;						//Enemy Ship Speed
-	       enemyInfo.health=2;						//Enemy Ship Health
-           enemyInfo.ScoreValue=15;					//How much the Enemy Ship give score after explosion
+           enemyInfo.speed=2;						
+	       enemyInfo.health=2;						
+           enemyInfo.ScoreValue=15;					
 	       enemyInfo.fireRate = 4F;	
            string json=JsonUtility.ToJson(enemyInfo,true);        
            File.WriteAllText(Application.persistentDataPath+"/EnemyBlue.json",json);
@@ -113,9 +114,9 @@ public class GameDataInitializer : MonoBehaviour {
         {
            enemyInfo=new EnemyInfo();
            enemyInfo.name="EnemyGreen";
-           enemyInfo.speed=3;						//Enemy Ship Speed
-	       enemyInfo.health=4;						//Enemy Ship Health
-           enemyInfo.ScoreValue=25;					//How much the Enemy Ship give score after explosion
+           enemyInfo.speed=3;						
+	       enemyInfo.health=4;						
+           enemyInfo.ScoreValue=25;					
 	       enemyInfo.fireRate = 3F;	
            string json=JsonUtility.ToJson(enemyInfo,true);        
            File.WriteAllText(Application.persistentDataPath+"/EnemyGreen.json",json);
@@ -126,9 +127,9 @@ public class GameDataInitializer : MonoBehaviour {
         {
            enemyInfo=new EnemyInfo();
            enemyInfo.name="EnemyRed";
-           enemyInfo.speed=1.5f;						//Enemy Ship Speed
-	       enemyInfo.health=25;						//Enemy Ship Health
-           enemyInfo.ScoreValue=100;					//How much the Enemy Ship give score after explosion
+           enemyInfo.speed=1.5f;						
+	       enemyInfo.health=25;						
+           enemyInfo.ScoreValue=100;					
 	       enemyInfo.fireRate = 3F;	
            string json=JsonUtility.ToJson(enemyInfo,true);        
            File.WriteAllText(Application.persistentDataPath+"/EnemyRed.json",json);
@@ -139,9 +140,9 @@ public class GameDataInitializer : MonoBehaviour {
         {
            enemyInfo=new EnemyInfo();
            enemyInfo.name="Asteroid";
-           enemyInfo.speed=2f;						//Enemy Ship Speed
-	       enemyInfo.health=20;						//Enemy Ship Health
-           enemyInfo.ScoreValue=10;					//How much the Enemy Ship give score after explosion	
+           enemyInfo.speed=2f;						
+	       enemyInfo.health=20;						
+           enemyInfo.ScoreValue=10;						
            string json=JsonUtility.ToJson(enemyInfo,true);        
            File.WriteAllText(Application.persistentDataPath+"/Asteroid.json",json);
 
@@ -205,12 +206,12 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[0].enemyTag="EnemyBlue";
             level.events[0].typeOfSpawn="enemyRandomSpawn";
             level.events[0].numberOfWave=5;
-            level.events[0].numberOfObject=4; //number of object in one wave
-        	level.events[0].RandomSpawnWaitMin=6;  //Time to wait before a new spawn
+            level.events[0].numberOfObject=4; 
+        	level.events[0].RandomSpawnWaitMin=6;  
         	level.events[0].RandomSpawnWaitMax=6;
-        	level.events[0].wavewaitMin=6;  //Time to wait till a new wave
+        	level.events[0].wavewaitMin=6;  
         	level.events[0].wavewaitMax=8;
-        	level.events[0].position=new Vector2(3,6);  //position to spawn 
+        	level.events[0].position=new Vector2(3,6);   
             level.events[0].duration=85;
 
             level.events[1]=new SpawnInfo();
@@ -218,18 +219,16 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[1].enemyTag="EnemyStream1";
             level.events[1].typeOfSpawn="enemyRandomSpawn";
             level.events[1].numberOfWave=4;
-            level.events[1].numberOfObject=2; //number of object in one wave
-        	level.events[1].RandomSpawnWaitMin=12;  //Time to wait before a new spawn
+            level.events[1].numberOfObject=2; 
+        	level.events[1].RandomSpawnWaitMin=12;  
         	level.events[1].RandomSpawnWaitMax=12;
-        	level.events[1].wavewaitMin=6;  //Time to wait till a new wave
+        	level.events[1].wavewaitMin=6;  
         	level.events[1].wavewaitMax=6;
-        	level.events[1].position=new Vector2(3,6);  //position to spawn 
+        	level.events[1].position=new Vector2(3,6);   
             level.events[1].duration=80;
             level.timeToStartEachEvent=new float[2]{3,85};
 
             string json =JsonUtility.ToJson(level,true);
-       
-            //string json=JsonHelper.ToJson(level);
             File.WriteAllText(Application.persistentDataPath+"//Level_1.json",json);
         }
 
@@ -245,12 +244,12 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[0].enemyTag="EnemyStream1";
             level.events[0].typeOfSpawn="enemyRandomSpawn";
             level.events[0].numberOfWave=4;
-            level.events[0].numberOfObject=2; //number of object in one wave
-        	level.events[0].RandomSpawnWaitMin=12;  //Time to wait before a new spawn
+            level.events[0].numberOfObject=2; 
+        	level.events[0].RandomSpawnWaitMin=12;  
         	level.events[0].RandomSpawnWaitMax=12;
-        	level.events[0].wavewaitMin=6;  //Time to wait till a new wave
+        	level.events[0].wavewaitMin=6;  
         	level.events[0].wavewaitMax=6;
-        	level.events[0].position=new Vector2(3,6);  //position to spawn 
+        	level.events[0].position=new Vector2(3,6);   
             level.events[0].duration=20;
             level.timeToStartEachEvent=new float[2]{3,85};
             
@@ -260,12 +259,12 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[3].enemyTag="EnemyGreen";
             level.events[3].typeOfSpawn="enemyRandomSpawn";
             level.events[3].numberOfWave=8;
-            level.events[3].numberOfObject=4; //number of object in one wave
-        	level.events[3].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
+            level.events[3].numberOfObject=4; 
+        	level.events[3].RandomSpawnWaitMin=2;  
         	level.events[3].RandomSpawnWaitMax=5;
-        	level.events[3].wavewaitMin=4;  //Time to wait till a new wave
+        	level.events[3].wavewaitMin=4;  
         	level.events[3].wavewaitMax=6;
-        	level.events[3].position=new Vector2(3,6);  //position to spawn */
+        	level.events[3].position=new Vector2(3,6);  
             level.events[3].duration=80;
 
             level.events[1]=new SpawnInfo();
@@ -273,12 +272,12 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[1].enemyTag="EnemyStream2";
             level.events[1].typeOfSpawn="enemyHorizontalRandomSpawn";
             level.events[1].numberOfWave=5;
-            level.events[1].numberOfObject=2; //number of object in one wave
-        	level.events[1].RandomSpawnWaitMin=7;  //Time to wait before a new spawn
+            level.events[1].numberOfObject=2; 
+        	level.events[1].RandomSpawnWaitMin=7;  
         	level.events[1].RandomSpawnWaitMax=10;
-        	level.events[1].wavewaitMin=8;  //Time to wait till a new wave
+        	level.events[1].wavewaitMin=8;  
         	level.events[1].wavewaitMax=8;
-        	level.events[1].position=new Vector2(-5,4);  //position to spawn */
+        	level.events[1].position=new Vector2(-5,4);  
             level.events[1].duration=50;
 
             level.events[2]=new SpawnInfo();
@@ -286,18 +285,17 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[2].enemyTag="EnemyStream3";
             level.events[2].typeOfSpawn="enemyHorizontalRandomSpawn";
             level.events[2].numberOfWave=5;
-            level.events[2].numberOfObject=2; //number of object in one wave
-        	level.events[2].RandomSpawnWaitMin=7;  //Time to wait before a new spawn
+            level.events[2].numberOfObject=2; 
+        	level.events[2].RandomSpawnWaitMin=7;  
         	level.events[2].RandomSpawnWaitMax=10;
-        	level.events[2].wavewaitMin=8;  //Time to wait till a new wave
+        	level.events[2].wavewaitMin=8;  
         	level.events[2].wavewaitMax=8;
-        	level.events[2].position=new Vector2(5,4);  //position to spawn */
+        	level.events[2].position=new Vector2(5,4);  
             level.events[2].duration=50;
 
             level.timeToStartEachEvent=new float[4]{3,20,20,20};
+
             string json =JsonUtility.ToJson(level,true);
-           
-            //string json=JsonHelper.ToJson(level);
             File.WriteAllText(Application.persistentDataPath+"//Level_2.json",json);
         }
 
@@ -314,31 +312,31 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[0].enemyTag="Asteroid";
             level.events[0].typeOfSpawn="enemyRandomSpawn";
             level.events[0].numberOfWave=10;
-            level.events[0].numberOfObject=6; //number of object in one wave
-        	level.events[0].RandomSpawnWaitMin=2;  //Time to wait before a new spawn//
+            level.events[0].numberOfObject=6; 
+        	level.events[0].RandomSpawnWaitMin=2;  
         	level.events[0].RandomSpawnWaitMax=6;
-        	level.events[0].wavewaitMin=3;  //Time to wait till a new wave
+        	level.events[0].wavewaitMin=3;  
         	level.events[0].wavewaitMax=8;
-        	level.events[0].position=new Vector2(3,6);  //position to spawn 
+        	level.events[0].position=new Vector2(3,6);  
             level.events[0].duration=45;
 
             level.events[1]=new SpawnInfo();
             level.events[1].ID="LV3_Event01";
             level.events[1].enemyTag="EnemyRed";
             level.events[1].typeOfSpawn="singleSpawn";
-        	level.events[1].position=new Vector2(3,6);  //position to spawn 
+        	level.events[1].position=new Vector2(3,6);   
 
             level.events[2]=new SpawnInfo();
             level.events[2].ID="LV3_Event02";
             level.events[2].enemyTag="EnemyRed";
             level.events[2].typeOfSpawn="enemyRandomSpawn";
             level.events[2].numberOfWave=1;
-            level.events[2].numberOfObject=2; //number of object in one wave
-        	level.events[2].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
+            level.events[2].numberOfObject=2; 
+        	level.events[2].RandomSpawnWaitMin=2;  
         	level.events[2].RandomSpawnWaitMax=5;
-        	level.events[2].wavewaitMin=5;  //Time to wait till a new wave
+        	level.events[2].wavewaitMin=5;  
         	level.events[2].wavewaitMax=8;
-        	level.events[2].position=new Vector2(3,6);  //position to spawn 
+        	level.events[2].position=new Vector2(3,6);   
             level.events[2].duration=60;
 
             level.events[3]=new SpawnInfo();
@@ -346,12 +344,12 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[3].enemyTag="EnemyStream2";
             level.events[3].typeOfSpawn="enemyHorizontalRandomSpawn";
             level.events[3].numberOfWave=3;
-            level.events[3].numberOfObject=2; //number of object in one wave
-        	level.events[3].RandomSpawnWaitMin=7;  //Time to wait before a new spawn
+            level.events[3].numberOfObject=2; 
+        	level.events[3].RandomSpawnWaitMin=7;  
         	level.events[3].RandomSpawnWaitMax=10;
-        	level.events[3].wavewaitMin=8;  //Time to wait till a new wave
+        	level.events[3].wavewaitMin=8;  
         	level.events[3].wavewaitMax=8;
-        	level.events[3].position=new Vector2(-5,4);  //position to spawn */
+        	level.events[3].position=new Vector2(-5,4);  
             level.events[3].duration=20;
 
             level.events[4]=new SpawnInfo();
@@ -359,12 +357,12 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[4].enemyTag="EnemyGreen";
             level.events[4].typeOfSpawn="enemyRandomSpawn";
             level.events[4].numberOfWave=8;
-            level.events[4].numberOfObject=4; //number of object in one wave
-        	level.events[4].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
+            level.events[4].numberOfObject=4; 
+        	level.events[4].RandomSpawnWaitMin=2;  
         	level.events[4].RandomSpawnWaitMax=5;
-        	level.events[4].wavewaitMin=4;  //Time to wait till a new wave
+        	level.events[4].wavewaitMin=4;  
         	level.events[4].wavewaitMax=6;
-        	level.events[4].position=new Vector2(3,6);  //position to spawn */
+        	level.events[4].position=new Vector2(3,6);  
             level.events[4].duration=80;
 
             level.events[5]=new SpawnInfo();
@@ -372,12 +370,12 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[5].enemyTag="EnemyStream3";
             level.events[5].typeOfSpawn="enemyHorizontalRandomSpawn";
             level.events[5].numberOfWave=3;
-            level.events[5].numberOfObject=2; //number of object in one wave
-        	level.events[5].RandomSpawnWaitMin=7;  //Time to wait before a new spawn
+            level.events[5].numberOfObject=2; 
+        	level.events[5].RandomSpawnWaitMin=7;  
         	level.events[5].RandomSpawnWaitMax=10;
-        	level.events[5].wavewaitMin=8;  //Time to wait till a new wave
+        	level.events[5].wavewaitMin=8;  
         	level.events[5].wavewaitMax=8;
-        	level.events[5].position=new Vector2(5,4);  //position to spawn */
+        	level.events[5].position=new Vector2(5,4);  
             level.events[5].duration=20;
 
             level.events[6]=new SpawnInfo();
@@ -385,12 +383,12 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[6].enemyTag="EnemyStream4";
             level.events[6].typeOfSpawn="enemyHorizontalRandomSpawn";
             level.events[6].numberOfWave=3;
-            level.events[6].numberOfObject=2; //number of object in one wave
-        	level.events[6].RandomSpawnWaitMin=7;  //Time to wait before a new spawn
+            level.events[6].numberOfObject=2; 
+        	level.events[6].RandomSpawnWaitMin=7;  
         	level.events[6].RandomSpawnWaitMax=10;
-        	level.events[6].wavewaitMin=8;  //Time to wait till a new wave
+        	level.events[6].wavewaitMin=8;  
         	level.events[6].wavewaitMax=8;
-        	level.events[6].position=new Vector2(-5,4);  //position to spawn */
+        	level.events[6].position=new Vector2(-5,4);  
             level.events[6].duration=20;
 
             level.events[7]=new SpawnInfo();
@@ -398,18 +396,17 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[7].enemyTag="EnemyStream5";
             level.events[7].typeOfSpawn="enemyHorizontalRandomSpawn";
             level.events[7].numberOfWave=3;
-            level.events[7].numberOfObject=2; //number of object in one wave
-        	level.events[7].RandomSpawnWaitMin=7;  //Time to wait before a new spawn
+            level.events[7].numberOfObject=2; 
+        	level.events[7].RandomSpawnWaitMin=7;  
         	level.events[7].RandomSpawnWaitMax=10;
-        	level.events[7].wavewaitMin=8;  //Time to wait till a new wave
+        	level.events[7].wavewaitMin=8;  
         	level.events[7].wavewaitMax=8;
-        	level.events[7].position=new Vector2(5,4);  //position to spawn */
+        	level.events[7].position=new Vector2(5,4);  
             level.events[7].duration=20;
 
             level.timeToStartEachEvent=new float[8]{3,45,45,60,10,30,20,15};
+
             string json =JsonUtility.ToJson(level,true);
-            Debug.Log(json.Length);
-            //string json=JsonHelper.ToJson(level);
             File.WriteAllText(Application.persistentDataPath+"//Level_3.json",json);
         }
 
@@ -425,31 +422,31 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[0].enemyTag="Asteroid";
             level.events[0].typeOfSpawn="enemyRandomSpawn";
             level.events[0].numberOfWave=10;
-            level.events[0].numberOfObject=6; //number of object in one wave
-        	level.events[0].RandomSpawnWaitMin=2;  //Time to wait before a new spawn//
+            level.events[0].numberOfObject=6; 
+        	level.events[0].RandomSpawnWaitMin=2;  
         	level.events[0].RandomSpawnWaitMax=3;
-        	level.events[0].wavewaitMin=5;  //Time to wait till a new wave
+        	level.events[0].wavewaitMin=5;  
         	level.events[0].wavewaitMax=8;
-        	level.events[0].position=new Vector2(3,6);  //position to spawn 
+        	level.events[0].position=new Vector2(3,6);  
             level.events[0].duration=60;
 
             level.events[1]=new SpawnInfo();
             level.events[1].ID="LV4_Event01";
             level.events[1].enemyTag="EnemyRed";
             level.events[1].typeOfSpawn="singleSpawn";
-        	level.events[1].position=new Vector2(3,6);  //position to spawn 
+        	level.events[1].position=new Vector2(3,6);   
 
             level.events[2]=new SpawnInfo();
             level.events[2].ID="LV4_Event02";
             level.events[2].enemyTag="EnemyStream1";
             level.events[2].typeOfSpawn="enemyRandomSpawn";
             level.events[2].numberOfWave=5;
-            level.events[2].numberOfObject=2; //number of object in one wave
-        	level.events[2].RandomSpawnWaitMin=12;  //Time to wait before a new spawn
+            level.events[2].numberOfObject=2; 
+        	level.events[2].RandomSpawnWaitMin=12;  
         	level.events[2].RandomSpawnWaitMax=12;
-        	level.events[2].wavewaitMin=6;  //Time to wait till a new wave
+        	level.events[2].wavewaitMin=6;  
         	level.events[2].wavewaitMax=6;
-        	level.events[2].position=new Vector2(3,6);  //position to spawn 
+        	level.events[2].position=new Vector2(3,6);   
             level.events[2].duration=60;
 
             level.events[3]=new SpawnInfo();
@@ -457,12 +454,12 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[3].enemyTag="EnemyGreen";
             level.events[3].typeOfSpawn="enemyRandomSpawn";
             level.events[3].numberOfWave=8;
-            level.events[3].numberOfObject=4; //number of object in one wave
-        	level.events[3].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
+            level.events[3].numberOfObject=4; 
+        	level.events[3].RandomSpawnWaitMin=2;  
         	level.events[3].RandomSpawnWaitMax=5;
-        	level.events[3].wavewaitMin=4;  //Time to wait till a new wave
+        	level.events[3].wavewaitMin=4;  
         	level.events[3].wavewaitMax=6;
-        	level.events[3].position=new Vector2(3,6);  //position to spawn */
+        	level.events[3].position=new Vector2(3,6);  
             level.events[3].duration=80;
 
             level.events[4]=new SpawnInfo();
@@ -470,12 +467,12 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[4].enemyTag="EnemyStream4";
             level.events[4].typeOfSpawn="enemyHorizontalRandomSpawn";
             level.events[4].numberOfWave=6;
-            level.events[4].numberOfObject=2; //number of object in one wave
-        	level.events[4].RandomSpawnWaitMin=7;  //Time to wait before a new spawn
+            level.events[4].numberOfObject=2; 
+        	level.events[4].RandomSpawnWaitMin=7;  
         	level.events[4].RandomSpawnWaitMax=10;
-        	level.events[4].wavewaitMin=8;  //Time to wait till a new wave
+        	level.events[4].wavewaitMin=8;  
         	level.events[4].wavewaitMax=8;
-        	level.events[4].position=new Vector2(-5,4);  //position to spawn */
+        	level.events[4].position=new Vector2(-5,4);  
             level.events[4].duration=80;
 
             level.events[5]=new SpawnInfo();
@@ -483,18 +480,17 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[5].enemyTag="EnemyRed";
             level.events[5].typeOfSpawn="enemyRandomSpawn";
             level.events[5].numberOfWave=2;
-            level.events[5].numberOfObject=2; //number of object in one wave
-        	level.events[5].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
+            level.events[5].numberOfObject=2; 
+        	level.events[5].RandomSpawnWaitMin=2;  
         	level.events[5].RandomSpawnWaitMax=5;
-        	level.events[5].wavewaitMin=50;  //Time to wait till a new wave
+        	level.events[5].wavewaitMin=50;  
         	level.events[5].wavewaitMax=50;
-        	level.events[5].position=new Vector2(3,6);  //position to spawn 
+        	level.events[5].position=new Vector2(3,6);   
             level.events[5].duration=140;
 
             level.timeToStartEachEvent=new float[6]{3,15,30,15,20,15};
+
             string json =JsonUtility.ToJson(level,true);
-       
-            //string json=JsonHelper.ToJson(level);
             File.WriteAllText(Application.persistentDataPath+"//Level_4.json",json);
         }
 
@@ -510,12 +506,12 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[0].enemyTag="EnemyGreen";
             level.events[0].typeOfSpawn="enemyRandomSpawn";
             level.events[0].numberOfWave=10;
-            level.events[0].numberOfObject=5; //number of object in one wave
-        	level.events[0].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
+            level.events[0].numberOfObject=5; 
+        	level.events[0].RandomSpawnWaitMin=2;  
         	level.events[0].RandomSpawnWaitMax=5;
-        	level.events[0].wavewaitMin=4;  //Time to wait till a new wave
+        	level.events[0].wavewaitMin=4;  
         	level.events[0].wavewaitMax=6;
-        	level.events[0].position=new Vector2(3,6);  //position to spawn */
+        	level.events[0].position=new Vector2(3,6);  
             level.events[0].duration=80;
 
             level.events[1]=new SpawnInfo();
@@ -523,29 +519,19 @@ public class GameDataInitializer : MonoBehaviour {
             level.events[1].enemyTag="EnemyRed";
             level.events[1].typeOfSpawn="enemyRandomSpawn";
             level.events[1].numberOfWave=3;
-            level.events[1].numberOfObject=2; //number of object in one wave
-        	level.events[1].RandomSpawnWaitMin=2;  //Time to wait before a new spawn
+            level.events[1].numberOfObject=2; 
+        	level.events[1].RandomSpawnWaitMin=2;  
         	level.events[1].RandomSpawnWaitMax=5;
-        	level.events[1].wavewaitMin=50;  //Time to wait till a new wave
+        	level.events[1].wavewaitMin=50;  
         	level.events[1].wavewaitMax=50;
-        	level.events[1].position=new Vector2(3,6);  //position to spawn 
+        	level.events[1].position=new Vector2(3,6);   
             level.events[1].duration=160;
 
             level.timeToStartEachEvent=new float[2]{3,15};
 
             string json =JsonUtility.ToJson(level,true);
-       
-            //string json=JsonHelper.ToJson(level);
             File.WriteAllText(Application.persistentDataPath+"//Level_5.json",json);
         }
-/* 		string json=JsonUtility.ToJson(Obja,true);
-		Debug.Log(json);//
-		Debug.Log(Application.persistentDataPath);
-		File.WriteAllText(Application.persistentDataPath+"/F.json",json);
-		json=File.ReadAllText(Application.persistentDataPath+"/F.json");
-		TestingS myOb=JsonUtility.FromJson<TestingS>(json);
-		Debug.Log(myOb.position);
-		Debug.Log(myOb.health); */ //
     }
 	
 }

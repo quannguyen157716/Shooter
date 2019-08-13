@@ -35,35 +35,19 @@ public class Hazard
 
 public class GameController_Script : MonoBehaviour 
 {	
-	//public Asteroid asteroid;			//make an Object from Class asteroid
-	//public EnemyBlue enemyBlue;			//make an Object from Class enemyBlue
-	//public EnemyGreen enemyGreen;		//make an Object from Class enemyGreen
-	//public EnemyRed enemyRed;			//make an Object from Class enemyRed
 	public GameObject PowerUp;
 	public static GameController_Script GameControllerInstance;
-	//public Hazard asteroid;
-	//public Hazard enemyBlue;
-	//public Hazard enemyGreen;
-	//public Hazard enemyRed;
-	//public Vector2 spawnValues;			//Store spawning (x,y) values
 	public GameObject Player;
-	//public GameObject UI_controller;
-	//UICOntroller UIControllerS;
-//	SpawnInfo s;
 	public AudioSource audios;
 	// Use this for initialization
 	void Start ()
 	{
-		//AudioListener.volume=0;
 		GameControllerInstance=this;
 		UICOntroller.UIControllerInstance.ListElements.ReplayButton.gameObject.SetActive(false);
 		UICOntroller.UIControllerInstance.ListElements.ReplayButton.gameObject.SetActive(false);
 		UICOntroller.UIControllerInstance.ListElements.ReplayButton.onClick.AddListener(Replay);
 		UICOntroller.UIControllerInstance.ListElements.StartButton.onClick.AddListener(StartGame);
 		UICOntroller.UIControllerInstance.ListElements.InGamePanel.gameObject.SetActive(false);
-		//audios.Play();
-		//UICOntroller.UIControllerInstance.ListElements.WeaponPanel.SetActive(false);
-		//Debug.Log("GameController");
 	}
 
 	// Update is called once per frame
@@ -79,18 +63,10 @@ public class GameController_Script : MonoBehaviour
 	public void Replay()
 	{
 		SceneManager.LoadScene("Scene_01");
-		//StartGame(); 
 	}
-
+	//Start the Game
 	public void StartGame()
 	{
-		//StartCoroutine (asteroidSpawnWaves());  	//Start IEnumerator function
-		//StartCoroutine (enemyBlueSpawnWaves());		//Start IEnumerator function
-		//StartCoroutine (StreamOfEnemy(3,new Vector2(0,5), enemyBlue.hazard));
-		//StartCoroutine (enemyGreenSpawnWaves());	//Start IEnumerator function
-		//StartCoroutine (enemyRedSpawnWaves());		//Start IEnumerator function 
-		//StartCoroutine(enemyRandomSpawn(s));
-
 		UICOntroller.UIControllerInstance.ListElements.MainMenuPanel.gameObject.SetActive(false);
 		UICOntroller.UIControllerInstance.ListElements.InGamePanel.gameObject.SetActive(true);
 		Player.gameObject.SetActive(true);
@@ -118,12 +94,6 @@ public class GameController_Script : MonoBehaviour
 			yield return new WaitForSeconds (enemyBlue.WaveWait);														//wait for seconds before the next wave
 		}
 	}*/
-
-	//Spawn enemy as stream
-	//public IEnumerator streamOfEnemySpawn(int numberOfWave,Vector2 SpawnPos, GameObject gObj)
-	//{
-
-	//}
 
 	//Random spawn from range of position
 	public IEnumerator enemyRandomSpawn(SpawnInfo ifo)
@@ -169,12 +139,13 @@ public class GameController_Script : MonoBehaviour
 		
 	}	
 
+	//Spawm PowerUp
 	public void SpawnPowerUp()
 	{
 		Vector3 spawnPosition=new Vector3(Random.Range(-3,3),6);
 		Instantiate(PowerUp,spawnPosition,Quaternion.identity);
 	}
-
+	//Spawn enemy horizontally
 	public IEnumerator enemyHorizontalRandomSpawn(SpawnInfo ifo)
 	{
 		float startTime=Time.time;
@@ -200,7 +171,7 @@ public class GameController_Script : MonoBehaviour
 			duration+=(Time.time-startTime);
 			startTime=Time.time;
 			//Debug.Log("EndTime: " +Time.time);
-//			Debug.Log("CurrentDuration "+duration );
+			//Debug.Log("CurrentDuration "+duration );
 			if(duration>ifo.duration)
 			{
 				ifo.spawnEnd=true;
@@ -218,7 +189,7 @@ public class GameController_Script : MonoBehaviour
 	//wait to spawn an object at specific location after specific time
 	public void singleSpawn(SpawnInfo ifo)
 	{
-		Debug.Log("ss");
+		//Debug.Log("ss");
 		//yield return new WaitForSeconds (ifo.start_Wait);					
 		ObjectPooler.ObjectPoolerInstance.GetPooledObject(ifo.enemyTag, ifo.position,true);	
 		ifo.spawnEnd=true;										

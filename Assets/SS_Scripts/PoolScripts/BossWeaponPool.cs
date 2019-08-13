@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossWeaponPool : MonoBehaviour {
-
+public class BossWeaponPool : MonoBehaviour 
+{
 	public List<Pool> pools;
 	public Dictionary<string, Queue<GameObject>> poolDictionary;
 	public static BossWeaponPool BossWeaponPoolInstance;

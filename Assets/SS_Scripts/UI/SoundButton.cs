@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundButton : MonoBehaviour {
+public class SoundButton : MonoBehaviour 
+{
 	public Sprite on;
 	public Sprite off;
 	public Button button;
 
-	// Update is called once per frame
 	public void SoundButtonClick()
 	{
 		if(AudioListener.volume==0)

@@ -16,7 +16,8 @@ public class Pool
 	public GameObject objectToPool;
 	public int amountToPool;
 }
-public class ObjectPooler : MonoBehaviour {
+public class ObjectPooler : MonoBehaviour 
+{
 	public List<Pool> pools;
 	public Dictionary<string, Queue<GameObject>> poolDictionary;
 	public static ObjectPooler ObjectPoolerInstance;

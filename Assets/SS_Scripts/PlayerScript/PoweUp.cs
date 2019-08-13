@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoweUp : MonoBehaviour {
+public class PoweUp : MonoBehaviour 
+{
 	public Rigidbody2D rb;
 	void Start()
 	{

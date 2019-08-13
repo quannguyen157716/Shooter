@@ -5,16 +5,19 @@ using UnityEngine.EventSystems;
 [System.Serializable]
 public class Boundary 
 {
-	public float xMin, xMax, yMin, yMax; //Screen Boundary dimentions
+	//Screen Boundary 
+	public float xMin, xMax, yMin, yMax; 
 }
 
 public class Player_Script : MonoBehaviour 
 {
 	public static Player_Script PlayerInstance;
 	//Public Var
-	public float speed; 			//Player Ship Speed
-	public Boundary boundary; 		//make an Object from Class Boundary
-	public GameObject Explosion;	//Explosion Prefab
+	public float speed; 	
+	//make an Object from Class Boundary		
+	public Boundary boundary; 		
+	//Explosion Prefab
+	public GameObject Explosion;	
 	Vector3 direction;
 	Vector3 touchPosition;
 	Vector3 lastTouchPosition;
@@ -22,7 +25,6 @@ public class Player_Script : MonoBehaviour
 	public Transform position;
 	[HideInInspector]
 	public bool isDead=false;
-	float x,y;//calculate touch points
 	Camera mCamera;
 	//AudioSource audio2;
 	// Update is called once per frame
@@ -35,14 +37,12 @@ public class Player_Script : MonoBehaviour
 		mCamera=Camera.main;
 		PlayerInstance=this;
 		rigidbody2=GetComponent<Rigidbody2D>();
-		//audio2=GetComponent<AudioSource>();
 	}
-	void FixedUpdate()
+	void Update()
 	{	
 		Move();
 	}
 
-	//Called when the Trigger entered 
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		//Excute if the object tag was equal to one of these
@@ -50,10 +50,10 @@ public class Player_Script : MonoBehaviour
 		{
 			Debug.Log(other.tag);
 			Debug.Log(PlayerGun.PlayerGunInstance.shotDealDamage);
-			Instantiate (Explosion, transform.position , transform.rotation); 				//Instantiate Explosion
+			//Instantiate Explosion
+			Instantiate (Explosion, transform.position , transform.rotation); 			
 			SharedValues_Script.gameover = true;
 			TakeDamage(1); 											
-			//gameObject.SetActive(false); 															//Destroy Player Ship Object
 		}
 		if(other.tag=="PowerUp")
 		{
@@ -65,8 +65,6 @@ public class Player_Script : MonoBehaviour
 			
 		}
 	}
-
-	//Moving touch pad only
 
 	Vector3 GetCameraPosition(Vector3 pos)
 	{
@@ -84,7 +82,8 @@ public class Player_Script : MonoBehaviour
 		#if UNITY_EDITOR
 		if (Input.GetMouseButton(0))
 		{
-			Vector3 mousePosition = mCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
+			//calculating mouse position in the worldspace
+			Vector3 mousePosition = mCamera.ScreenToWorldPoint(Input.mousePosition); 
             mousePosition.z = transform.position.z;
 			direction=mousePosition-transform.position;
 			rigidbody2.velocity=new Vector2(direction.x,direction.y+1) *speed;
@@ -185,7 +184,7 @@ public class Player_Script : MonoBehaviour
 	{
 		isDead=true;
 		//Destroy(gameObject);
-		SharedValues_Script.gameover = true;   //Trigger That its a GameOver
+		SharedValues_Script.gameover = true;  
 		gameObject.SetActive(false);
 	}
 }

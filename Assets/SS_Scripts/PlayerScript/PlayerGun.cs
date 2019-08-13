@@ -5,15 +5,17 @@ using System.IO;
 [System.Serializable]
 public class PlayerWeapon
 {
-	public string shotType;//for prefab
-	public float nextFire;	//First fire & Next fire Time
-	public float fireRate;	//Fire Rate between Shots
+	public string shotType;
+	public float nextFire;	
+	//Time between Shots
+	public float fireRate;	
 	public int shotDamage;
 	public float shotSpeed;
 
 	public int level;
 }
-public class PlayerGun : MonoBehaviour {
+public class PlayerGun : MonoBehaviour 
+{
 	public static PlayerGun PlayerGunInstance;
 	public GameObject shotSpawn;
 	public GameObject LshotSpawn;
@@ -22,15 +24,17 @@ public class PlayerGun : MonoBehaviour {
 	[HideInInspector]
 
 	public string shotType="PlayerRegularShot";
+	//name that enemy will dectect to get hit
 	[HideInInspector]
-	public string shotDealDamage;//name that enemy will dectect to get hit
-	float nextFire=0f;	//First fire & Next fire Time
-	float fireRate=1f;	//Fire Rate between Shots
+	public string shotDealDamage;
+	float nextFire=0f;	
+	float fireRate=1f;	
 	public int shotDamage;
 	//Gun level up? increase rate of fire lv1(starting point) lv2 increase rate fire, level 3:firing extra rounds(no time to do this) 
 	public int level=1;
 	public string[] Gun;
-	Dictionary<string, PlayerWeapon> gunDictionary;//current player's arsenal save all upgrade here
+	//current player's weapon inventory save all upgrade here
+	Dictionary<string, PlayerWeapon> gunDictionary;
 	AudioSource audio2;
 	void Awake()
 	{
@@ -47,30 +51,12 @@ public class PlayerGun : MonoBehaviour {
 		else
 		Fire2();
 	}
-	/* 
-	void Fire()
-	{
-		if(Time.time >nextFire)
-		{
-			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame 
-			shot = BulletPooler.SharedBulletPool.GetPooledObject(shotType); 
-  			if (shot != null) 
-			{
-   			shot.transform.position = shotSpawn.transform.position;
-    		shot.transform.rotation = shotSpawn.transform.rotation;
-    		shot.SetActive(true);
-			audio2.Play();
-			}
-			else
-			return;
-		}
-	}*/
 
 	void Fire1()
 	{
 		if(Time.time >nextFire)
 		{
-			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
+			nextFire = Time.time + fireRate;
 			shot = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shotType, shotSpawn.transform.position,true); 
   			if (shot != null) 
 			{
@@ -85,7 +71,7 @@ public class PlayerGun : MonoBehaviour {
 	{
 		if(Time.time >nextFire)
 		{
-			nextFire = Time.time + fireRate;//fire after ''firerate'' time from the time of last frame
+			nextFire = Time.time + fireRate;
 			GameObject shot1 = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shotType, LshotSpawn.transform.position,true); 
 			GameObject shot2 = ObjectPooler.ObjectPoolerInstance.GetPooledObject(shotType, RshotSpawn.transform.position,true); 
   			if (shot1 == null ||shot2==null)  
@@ -134,5 +120,4 @@ public class PlayerGun : MonoBehaviour {
 		Debug.Log(shotType);
 		gunDictionary[shotType].level=level;
 	}
-
 }
