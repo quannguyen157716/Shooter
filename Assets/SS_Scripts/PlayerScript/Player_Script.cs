@@ -75,14 +75,15 @@ public class Player_Script : MonoBehaviour
 
     void Move()
 	{
+	
+		//Debug.Log(EventSystem.current.IsPointerOverGameObject());
+		//if click over UI Then block -->Doesnt really work well with touch
+		if(EventSystem.current.IsPointerOverGameObject())
+		return;
 
-		
-			Debug.Log(EventSystem.current.IsPointerOverGameObject());
-		
 		#if UNITY_EDITOR
 		if (Input.GetMouseButton(0))
 		{
-			Debug.Log("PC");
 			Vector3 mousePosition = mCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
             mousePosition.z = transform.position.z;
 			direction=mousePosition-transform.position;
@@ -98,7 +99,6 @@ public class Player_Script : MonoBehaviour
 		if(Input.touchCount>0)
 		{
 			Touch touch=Input.GetTouch(0);
-			Debug.Log("Phone");
 			touchPosition=GetCameraPosition(touch.position);
 			touchPosition.z=0;
 

@@ -14,28 +14,88 @@ public class BossWeapon
 public class Boss_1_Script : MonoBehaviour {
 	public GameObject RightMachineGun;
 	public GameObject LeftMachineGun;
-	public GameObject RightCentralMachineGun;
-	public GameObject LeftCentralMachineGun;
+	public GameObject RightCentralGun;
+	public GameObject LeftCentralGun;
 	public GameObject MachineGunRound;
 	public GameObject NormalRound;
 	public GameObject LaserBeam;
 
-	public BossWeapon weapon;
+	BossWeapon weapon;
+	
 
 	public SubBehavior behavior;
+	float CentralGunNextFire;
+	float MachineGunNextFire;
+	Vector3 euler;
+	public float MachineGunFireRate;
+	public float CentralGunFireRate;
+	public int health;
+	public float speed;
+	bool switchGun=true;
 	void OnEnable () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		FireMaChineGun(true, true);
+		FireCentralGun();
 	}
 
-
-
-	void FireMaChineGun()
+	void FireCentralGun()
 	{
+		if(Time.time>CentralGunNextFire)
+		{
+			CentralGunNextFire=Time.time+CentralGunFireRate;
 
+			if(switchGun)
+			{
+				NormalRound=BossWeaponPool.BossWeaponPoolInstance.GetPooledObject("EnemyShot", RightCentralGun.transform.position, true);
+				switchGun=false;
+			}
+			else
+			{
+				NormalRound=BossWeaponPool.BossWeaponPoolInstance.GetPooledObject("EnemyShot", LeftCentralGun.transform.position, true);
+				switchGun=true;
+			}
+			
+		}
+	}
+	void FireMaChineGun(bool LeftGun, bool RightGun)
+	{
+		if(Time.time > MachineGunNextFire)
+		{
+			MachineGunNextFire=Time.time+MachineGunFireRate;
+
+			MachineGunRound=BossWeaponPool.BossWeaponPoolInstance.GetPooledObject("MachineGunRound", RightMachineGun.transform.position, false);
+			if(MachineGunRound!=null && RightGun)
+			{
+				MachineGunRound.transform.eulerAngles=RandomRotation(MachineGunRound);
+				MachineGunRound.SetActive(true);
+			}
+			else
+			{
+				Debug.Log("out of bullet");
+			}
+			
+
+			MachineGunRound=BossWeaponPool.BossWeaponPoolInstance.GetPooledObject("MachineGunRound", LeftMachineGun.transform.position, false);
+			if(MachineGunRound!=null && LeftGun)
+			{
+				MachineGunRound.transform.eulerAngles=RandomRotation(MachineGunRound);
+				MachineGunRound.SetActive(true);
+			}
+			else
+			{
+				Debug.Log("out of bullet");
+			}
+		}
+	}
+	//pass in machinegunRound
+	Vector3 RandomRotation(GameObject obj)
+	{
+		euler=obj.transform.eulerAngles;
+		euler.z=Random.Range(-20f,20f);
+		return euler;
 	}
 }

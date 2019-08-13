@@ -63,5 +63,4 @@ public class ObjectPooler : MonoBehaviour {
 			return null;
 		}
 	}
-
 }
