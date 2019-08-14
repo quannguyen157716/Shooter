@@ -61,8 +61,8 @@ public class Player_Script : MonoBehaviour
 			{
 				PlayerGun.PlayerGunInstance.level++;
 				PlayerGun.PlayerGunInstance.UpgradeGun();
+				Destroy(other.gameObject);
 			}
-			
 		}
 	}
 

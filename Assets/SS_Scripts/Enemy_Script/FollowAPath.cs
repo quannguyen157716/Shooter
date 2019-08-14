@@ -66,7 +66,7 @@ public class FollowAPath : MonoBehaviour {
 			3*Mathf.Pow(1-inPath.tParam,2)*inPath.tParam*p1+
 			3*(1-inPath.tParam)*Mathf.Pow(inPath.tParam,2)*p2+
 			Mathf.Pow(inPath.tParam,3)*p3;
-			
+			Debug.Log(inPath.objPostion);
 			transform.position= inPath.objPostion;
 			yield return new WaitForEndOfFrame();
 			}

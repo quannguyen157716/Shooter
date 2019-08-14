@@ -46,17 +46,17 @@ public class LevelBuilder : MonoBehaviour
 			{
 				yield return new WaitForSeconds (l.timeToStartEachEvent[i]);
 				Debug.Log("Event "+l.events[i].ID );
-				if(l.events[i].typeOfSpawn=="enemyRandomSpawn")
+				if(l.events[i].typeOfSpawn=="EnemyRandomSpawn")
 				{
-					StartCoroutine(GameController_Script.GameControllerInstance.enemyRandomSpawn(l.events[i]));
+					StartCoroutine(GameController_Script.GameControllerInstance.EnemyRandomSpawn(l.events[i]));
 				}	
-				else if(l.events[i].typeOfSpawn=="singleSpawn")
+				else if(l.events[i].typeOfSpawn=="SingleSpawn")
 				{
-					GameController_Script.GameControllerInstance.singleSpawn(l.events[i]);
+					GameController_Script.GameControllerInstance.SingleSpawn(l.events[i]);
 				}
-				else if(l.events[i].typeOfSpawn=="enemyHorizontalRandomSpawn")
+				else if(l.events[i].typeOfSpawn=="EnemyHorizontalRandomSpawn")
 				{
-					StartCoroutine(GameController_Script.GameControllerInstance.enemyHorizontalRandomSpawn(l.events[i]));
+					StartCoroutine(GameController_Script.GameControllerInstance.EnemyHorizontalRandomSpawn(l.events[i]));
 				}
 			}
 			//Debug.Log(i+" "+l.events[i-1].spawnEnd);

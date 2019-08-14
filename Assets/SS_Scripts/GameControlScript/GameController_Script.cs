@@ -26,7 +26,7 @@ public class Hazard
 	public float RandomMin, RandomMax;
 	public float SpawnWait;					//Time to wait before a new spawn
 	public float StartWait;					
-	public float WaveWait;					//Time to wait till a new wave
+	public float WaveWait;					//Time to wait till a new wave f
 	public float x_pos, y_pos; //position to spawn 
 }
 */
@@ -39,7 +39,7 @@ public class GameController_Script : MonoBehaviour
 	public static GameController_Script GameControllerInstance;
 	public GameObject Player;
 	public AudioSource audios;
-	// Use this for initialization
+	// Use this for initialization 
 	void Start ()
 	{
 		GameControllerInstance=this;
@@ -96,7 +96,7 @@ public class GameController_Script : MonoBehaviour
 	}*/
 
 	//Random spawn from range of position
-	public IEnumerator enemyRandomSpawn(SpawnInfo ifo)
+	public IEnumerator EnemyRandomSpawn(SpawnInfo ifo)
 	{
 		//Debug.Log("New cor");
 		float startTime=Time.time;
@@ -146,7 +146,7 @@ public class GameController_Script : MonoBehaviour
 		Instantiate(PowerUp,spawnPosition,Quaternion.identity);
 	}
 	//Spawn enemy horizontally
-	public IEnumerator enemyHorizontalRandomSpawn(SpawnInfo ifo)
+	public IEnumerator EnemyHorizontalRandomSpawn(SpawnInfo ifo)
 	{
 		float startTime=Time.time;
 		float duration=0;
@@ -187,7 +187,7 @@ public class GameController_Script : MonoBehaviour
 	}	
 
 	//wait to spawn an object at specific location after specific time
-	public void singleSpawn(SpawnInfo ifo)
+	public void SingleSpawn(SpawnInfo ifo)
 	{
 		//Debug.Log("ss");
 		//yield return new WaitForSeconds (ifo.start_Wait);					

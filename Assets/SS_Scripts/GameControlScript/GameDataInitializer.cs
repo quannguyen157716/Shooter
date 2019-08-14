@@ -204,7 +204,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[0]=new SpawnInfo();
             level.events[0].ID="LV1_Event00";
             level.events[0].enemyTag="EnemyBlue";
-            level.events[0].typeOfSpawn="enemyRandomSpawn";
+            level.events[0].typeOfSpawn="EnemyRandomSpawn";
             level.events[0].numberOfWave=5;
             level.events[0].numberOfObject=4; 
         	level.events[0].RandomSpawnWaitMin=6;  
@@ -217,7 +217,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[1]=new SpawnInfo();
             level.events[1].ID="LV1_Event01";
             level.events[1].enemyTag="EnemyStream1";
-            level.events[1].typeOfSpawn="enemyRandomSpawn";
+            level.events[1].typeOfSpawn="EnemyRandomSpawn";
             level.events[1].numberOfWave=4;
             level.events[1].numberOfObject=2; 
         	level.events[1].RandomSpawnWaitMin=12;  
@@ -242,7 +242,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[0]=new SpawnInfo();
             level.events[0].ID="LV2_Event00";
             level.events[0].enemyTag="EnemyStream1";
-            level.events[0].typeOfSpawn="enemyRandomSpawn";
+            level.events[0].typeOfSpawn="EnemyRandomSpawn";
             level.events[0].numberOfWave=4;
             level.events[0].numberOfObject=2; 
         	level.events[0].RandomSpawnWaitMin=12;  
@@ -257,7 +257,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[3]=new SpawnInfo();
             level.events[3].ID="LV2_Event04";
             level.events[3].enemyTag="EnemyGreen";
-            level.events[3].typeOfSpawn="enemyRandomSpawn";
+            level.events[3].typeOfSpawn="EnemyRandomSpawn";
             level.events[3].numberOfWave=8;
             level.events[3].numberOfObject=4; 
         	level.events[3].RandomSpawnWaitMin=2;  
@@ -270,7 +270,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[1]=new SpawnInfo();
             level.events[1].ID="LV2_Event01";
             level.events[1].enemyTag="EnemyStream2";
-            level.events[1].typeOfSpawn="enemyHorizontalRandomSpawn";
+            level.events[1].typeOfSpawn="EnemyHorizontalRandomSpawn";
             level.events[1].numberOfWave=5;
             level.events[1].numberOfObject=2; 
         	level.events[1].RandomSpawnWaitMin=7;  
@@ -283,7 +283,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[2]=new SpawnInfo();
             level.events[2].ID="LV2_Event03";
             level.events[2].enemyTag="EnemyStream3";
-            level.events[2].typeOfSpawn="enemyHorizontalRandomSpawn";
+            level.events[2].typeOfSpawn="EnemyHorizontalRandomSpawn";
             level.events[2].numberOfWave=5;
             level.events[2].numberOfObject=2; 
         	level.events[2].RandomSpawnWaitMin=7;  
@@ -310,7 +310,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[0]=new SpawnInfo();
             level.events[0].ID="LV3_Event00";
             level.events[0].enemyTag="Asteroid";
-            level.events[0].typeOfSpawn="enemyRandomSpawn";
+            level.events[0].typeOfSpawn="EnemyRandomSpawn";
             level.events[0].numberOfWave=10;
             level.events[0].numberOfObject=6; 
         	level.events[0].RandomSpawnWaitMin=2;  
@@ -323,13 +323,13 @@ public class GameDataInitializer : MonoBehaviour
             level.events[1]=new SpawnInfo();
             level.events[1].ID="LV3_Event01";
             level.events[1].enemyTag="EnemyRed";
-            level.events[1].typeOfSpawn="singleSpawn";
+            level.events[1].typeOfSpawn="SingleSpawn";
         	level.events[1].position=new Vector2(3,6);   
 
             level.events[2]=new SpawnInfo();
             level.events[2].ID="LV3_Event02";
             level.events[2].enemyTag="EnemyRed";
-            level.events[2].typeOfSpawn="enemyRandomSpawn";
+            level.events[2].typeOfSpawn="EnemyRandomSpawn";
             level.events[2].numberOfWave=1;
             level.events[2].numberOfObject=2; 
         	level.events[2].RandomSpawnWaitMin=2;  
@@ -342,7 +342,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[3]=new SpawnInfo();
             level.events[3].ID="LV3_Event03";
             level.events[3].enemyTag="EnemyStream2";
-            level.events[3].typeOfSpawn="enemyHorizontalRandomSpawn";
+            level.events[3].typeOfSpawn="EnemyHorizontalRandomSpawn";
             level.events[3].numberOfWave=3;
             level.events[3].numberOfObject=2; 
         	level.events[3].RandomSpawnWaitMin=7;  
@@ -355,7 +355,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[4]=new SpawnInfo();
             level.events[4].ID="LV3_Event04";
             level.events[4].enemyTag="EnemyGreen";
-            level.events[4].typeOfSpawn="enemyRandomSpawn";
+            level.events[4].typeOfSpawn="EnemyRandomSpawn";
             level.events[4].numberOfWave=8;
             level.events[4].numberOfObject=4; 
         	level.events[4].RandomSpawnWaitMin=2;  
@@ -368,7 +368,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[5]=new SpawnInfo();
             level.events[5].ID="LV3_Event04";
             level.events[5].enemyTag="EnemyStream3";
-            level.events[5].typeOfSpawn="enemyHorizontalRandomSpawn";
+            level.events[5].typeOfSpawn="EnemyHorizontalRandomSpawn";
             level.events[5].numberOfWave=3;
             level.events[5].numberOfObject=2; 
         	level.events[5].RandomSpawnWaitMin=7;  
@@ -381,7 +381,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[6]=new SpawnInfo();
             level.events[6].ID="LV3_Event05";
             level.events[6].enemyTag="EnemyStream4";
-            level.events[6].typeOfSpawn="enemyHorizontalRandomSpawn";
+            level.events[6].typeOfSpawn="EnemyHorizontalRandomSpawn";
             level.events[6].numberOfWave=3;
             level.events[6].numberOfObject=2; 
         	level.events[6].RandomSpawnWaitMin=7;  
@@ -394,7 +394,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[7]=new SpawnInfo();
             level.events[7].ID="LV3_Event06";
             level.events[7].enemyTag="EnemyStream5";
-            level.events[7].typeOfSpawn="enemyHorizontalRandomSpawn";
+            level.events[7].typeOfSpawn="EnemyHorizontalRandomSpawn";
             level.events[7].numberOfWave=3;
             level.events[7].numberOfObject=2; 
         	level.events[7].RandomSpawnWaitMin=7;  
@@ -420,7 +420,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[0]=new SpawnInfo();
             level.events[0].ID="LV4_Event00";
             level.events[0].enemyTag="Asteroid";
-            level.events[0].typeOfSpawn="enemyRandomSpawn";
+            level.events[0].typeOfSpawn="EnemyRandomSpawn";
             level.events[0].numberOfWave=10;
             level.events[0].numberOfObject=6; 
         	level.events[0].RandomSpawnWaitMin=2;  
@@ -433,13 +433,13 @@ public class GameDataInitializer : MonoBehaviour
             level.events[1]=new SpawnInfo();
             level.events[1].ID="LV4_Event01";
             level.events[1].enemyTag="EnemyRed";
-            level.events[1].typeOfSpawn="singleSpawn";
+            level.events[1].typeOfSpawn="SingleSpawn";
         	level.events[1].position=new Vector2(3,6);   
 
             level.events[2]=new SpawnInfo();
             level.events[2].ID="LV4_Event02";
             level.events[2].enemyTag="EnemyStream1";
-            level.events[2].typeOfSpawn="enemyRandomSpawn";
+            level.events[2].typeOfSpawn="EnemyRandomSpawn";
             level.events[2].numberOfWave=5;
             level.events[2].numberOfObject=2; 
         	level.events[2].RandomSpawnWaitMin=12;  
@@ -452,7 +452,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[3]=new SpawnInfo();
             level.events[3].ID="LV4_Event03";
             level.events[3].enemyTag="EnemyGreen";
-            level.events[3].typeOfSpawn="enemyRandomSpawn";
+            level.events[3].typeOfSpawn="EnemyRandomSpawn";
             level.events[3].numberOfWave=8;
             level.events[3].numberOfObject=4; 
         	level.events[3].RandomSpawnWaitMin=2;  
@@ -465,7 +465,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[4]=new SpawnInfo();
             level.events[4].ID="LV4_Event04";
             level.events[4].enemyTag="EnemyStream4";
-            level.events[4].typeOfSpawn="enemyHorizontalRandomSpawn";
+            level.events[4].typeOfSpawn="EnemyHorizontalRandomSpawn";
             level.events[4].numberOfWave=6;
             level.events[4].numberOfObject=2; 
         	level.events[4].RandomSpawnWaitMin=7;  
@@ -478,7 +478,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[5]=new SpawnInfo();
             level.events[5].ID="LV4_Event05";
             level.events[5].enemyTag="EnemyRed";
-            level.events[5].typeOfSpawn="enemyRandomSpawn";
+            level.events[5].typeOfSpawn="EnemyRandomSpawn";
             level.events[5].numberOfWave=2;
             level.events[5].numberOfObject=2; 
         	level.events[5].RandomSpawnWaitMin=2;  
@@ -504,7 +504,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[0]=new SpawnInfo();
             level.events[0].ID="LV5_Event00";
             level.events[0].enemyTag="EnemyGreen";
-            level.events[0].typeOfSpawn="enemyRandomSpawn";
+            level.events[0].typeOfSpawn="EnemyRandomSpawn";
             level.events[0].numberOfWave=10;
             level.events[0].numberOfObject=5; 
         	level.events[0].RandomSpawnWaitMin=2;  
@@ -517,7 +517,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[1]=new SpawnInfo();
             level.events[1].ID="LV5_Event01";
             level.events[1].enemyTag="EnemyRed";
-            level.events[1].typeOfSpawn="enemyRandomSpawn";
+            level.events[1].typeOfSpawn="EnemyRandomSpawn";
             level.events[1].numberOfWave=3;
             level.events[1].numberOfObject=2; 
         	level.events[1].RandomSpawnWaitMin=2;  
