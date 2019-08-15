@@ -48,8 +48,8 @@ public class Player_Script : MonoBehaviour
 		//Excute if the object tag was equal to one of these
 		if(other.tag!=PlayerGun.PlayerGunInstance.shotDealDamage && other.tag!="Boundary"&&other.tag!="PowerUp"&&other.tag!="PlayerTracingShot") 
 		{
-			Debug.Log(other.tag);
-			Debug.Log(PlayerGun.PlayerGunInstance.shotDealDamage);
+			//Debug.Log(other.tag);
+			//Debug.Log(PlayerGun.PlayerGunInstance.shotDealDamage);
 			//Instantiate Explosion
 			Instantiate (Explosion, transform.position , transform.rotation); 			
 			SharedValues_Script.gameover = true;

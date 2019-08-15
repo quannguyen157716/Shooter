@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAimShot : MonoBehaviour {
-
-	//making more shot shot data and enemy data, behaviors and behaviors data
-	//Public Var
-	public float speed; //EnemyRed Shot Speed
+public class EnemyAimShot : MonoBehaviour 
+{
+	public float speed; 
 	public Rigidbody2D rigidbody2;
 	Vector2 target;
 

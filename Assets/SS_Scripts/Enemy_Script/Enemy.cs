@@ -14,17 +14,17 @@ public class Enemy: MonoBehaviour{
 	public FollowAPath path;
 	public SubBehavior behavior;
 
-
+	//detect player shot when get hit
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.tag == PlayerGun.PlayerGunInstance.shotDealDamage)
 		{
 			//get shot from pool to fire                                                                                       
 			ObjectPooler.ObjectPoolerInstance.GetPooledObject(LaserHit.tag, transform.position,true);
-			//Destroy the Other (PlayerLaser)
+			//Destroy the Other (PlayerShot)
 			other.gameObject.SetActive(false);
-			//Check the Health if greater than 
-
+			
+			//Check the Health 
 			if(currentHealth > 0)
 			TakeDamage(PlayerGun.PlayerGunInstance.shotDamage);													
 			

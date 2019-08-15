@@ -40,7 +40,7 @@ public class EnemyBlue_Script : Enemy
 	//Load initial attribute
 	void Load()
 	{
-		//Debug.Log(EnemyCommander.EnemyCommanderInstance.EDictionary[gameObject.tag]);
+		//Debug.Log(EnemyCommander.EnemyCommanderInstance.EDictionary[gameObject.tag]); 
 		EnemyInfo info=EnemyCommander.EnemyCommanderInstance.EDictionary[gameObject.tag];
 		speed=info.speed;
 		health=info.health;

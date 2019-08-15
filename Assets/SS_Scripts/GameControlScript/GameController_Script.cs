@@ -35,6 +35,7 @@ public class Hazard
 
 public class GameController_Script : MonoBehaviour 
 {	
+	public GameObject Boss;
 	public GameObject PowerUp;
 	public static GameController_Script GameControllerInstance;
 	public GameObject Player;
@@ -73,7 +74,6 @@ public class GameController_Script : MonoBehaviour
 		LevelBuilder.LevelBuilderInstance.StartLevel();
 	}
 	
-	//EnemyBlue IEnumerator Coroutine
 	/* IEnumerator enemyBlueSpawnWaves()
 	{
 		yield return new WaitForSeconds (enemyBlue.StartWait);															//Wait for Seconds before start the wave
@@ -189,9 +189,13 @@ public class GameController_Script : MonoBehaviour
 	//wait to spawn an object at specific location after specific time
 	public void SingleSpawn(SpawnInfo ifo)
 	{
-		//Debug.Log("ss");
-		//yield return new WaitForSeconds (ifo.start_Wait);					
+		//Debug.Log("ss"); 
 		ObjectPooler.ObjectPoolerInstance.GetPooledObject(ifo.enemyTag, ifo.position,true);	
 		ifo.spawnEnd=true;										
+	}
+	//Spawn boss
+	public void BossSpawn()
+	{
+
 	}
 }
