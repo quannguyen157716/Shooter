@@ -42,7 +42,7 @@ public class SubBehavior:MonoBehaviour{
 			}
 			yield return new WaitForEndOfFrame();
 			duration+=(Time.time-startTime);
-			//Debug.Log(duration);
+			//Debug.Log(duration);      
 		}
 		rb.velocity = -1 * transform.up * speed;
 	}
