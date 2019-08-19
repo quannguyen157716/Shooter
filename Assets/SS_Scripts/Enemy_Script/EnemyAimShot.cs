@@ -11,8 +11,6 @@ public class EnemyAimShot : MonoBehaviour
 	// Use this for initialization
 	void OnEnable ()
 	{
-		//rigidbody2=GetComponent<Rigidbody2D>();
-		//rigidbody2.velocity = -1 * transform.up * speed; //Give Velocity to the Enemy ship shot
 		try
 		{
 			target=(Player_Script.PlayerInstance.transform.position-transform.position);

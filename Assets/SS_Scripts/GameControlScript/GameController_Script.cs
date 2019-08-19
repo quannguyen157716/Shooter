@@ -11,7 +11,7 @@ using System.IO;
 public class EnemyRed 
 {
 	public GameObject enemyRedObj;		//Object Prefab
-	public int Count;					//Number of the object in 1 wave
+	public int Count;					//Number of the object in 1 wave 
 	public float SpawnWait;				//Time to wait before a new spawn
 	public float StartWait;				//Time to Start spawning
 	public float WaveWait;				//Time to wait till a new wave
@@ -37,6 +37,7 @@ public class GameController_Script : MonoBehaviour
 {	
 	public GameObject Boss;
 	public GameObject PowerUp;
+	//static instance for easy access
 	public static GameController_Script GameControllerInstance;
 	public GameObject Player;
 	public AudioSource audios;
@@ -139,7 +140,7 @@ public class GameController_Script : MonoBehaviour
 		
 	}	
 
-	//Spawm PowerUp
+	//Spawm PowerUp 
 	public void SpawnPowerUp()
 	{
 		Vector3 spawnPosition=new Vector3(Random.Range(-3,3),6);

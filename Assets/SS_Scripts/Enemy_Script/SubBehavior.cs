@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubBehavior:MonoBehaviour{
+public class SubBehavior:MonoBehaviour
+{
 
 	public void MoveInScene(float speed, Vector3 position)
 	{
@@ -19,7 +20,7 @@ public class SubBehavior:MonoBehaviour{
 	{
 		StartCoroutine(patrol(rb ,height,speed, time));
 	}
-	//Move around specific path
+	//Move around specific path     
 	IEnumerator patrol(Rigidbody2D rb,float height, float speed,float time)
 	{
 		float duration=0;

@@ -27,7 +27,8 @@ public class StreamPara
 	
 }
 
-public class FollowAPath : MonoBehaviour {
+public class FollowAPath : MonoBehaviour 
+{
 	public StreamPara inPath; 
 	Vector2 p,p1,p2,p3;
 	void OnEnable()
@@ -54,7 +55,7 @@ public class FollowAPath : MonoBehaviour {
 		p1=inPath.path[1].position;
 		p2=inPath.path[2].position;
 		p3=inPath.path[3].position;
-//		Debug.Log(inPath.loop);
+		//Debug.Log(inPath.loop);
 		//Debug.Log(NumberOfWave);
 		//Debug.Log("Moving");
 		while(repeat)

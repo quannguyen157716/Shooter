@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStream : MonoBehaviour {
+public class EnemyStream : MonoBehaviour 
+{
 	public GameObject enemy;
 	public Transform[] points;
 	Vector2 GizmoPosition;
@@ -36,7 +37,7 @@ public class EnemyStream : MonoBehaviour {
 		Gizmos.DrawLine(p,p1);
 		Gizmos.DrawLine(p2,p3);
 	}
-	//still write code the same way
+	//
 	IEnumerator CreateStream()
 	{
 		//Debug.Log("Stream"); 
@@ -45,7 +46,7 @@ public class EnemyStream : MonoBehaviour {
 			enemy=ObjectPooler.ObjectPoolerInstance.GetPooledObject(enemy.tag, p,false);
 			if(enemy!=null)
 			{
-				
+				//follow path 
 				FollowAPath TestC=enemy.GetComponent<FollowAPath>();
 				TestC.inPath.path=points;
 				TestC.inPath.InStream=InStream;

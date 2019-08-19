@@ -26,7 +26,7 @@ public class Player_Script : MonoBehaviour
 	[HideInInspector]
 	public bool isDead=false;
 	Camera mCamera;
-	//AudioSource audio2;
+	//AudioSource audio2; 
 	// Update is called once per frame
 	void OnEnable()
 	{
