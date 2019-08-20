@@ -25,7 +25,7 @@ public class SpawnInfo
     //Time to wait till a new wave
 	public float wavewaitMin;  
 	public float wavewaitMax;
-    //position to spawn 
+    //position to spawn
 	public Vector2 position;  
 	public bool spawnEnd=false;
     public float duration;
@@ -146,6 +146,19 @@ public class GameDataInitializer : MonoBehaviour
            string json=JsonUtility.ToJson(enemyInfo,true);        
            File.WriteAllText(Application.persistentDataPath+"/Asteroid.json",json);
 
+        }
+
+        if(!File.Exists(Application.persistentDataPath+"/Boss1.json"))
+        {
+            BossInfo bossInfo=new BossInfo();
+            bossInfo.MachineGunFireRate=0.3f;
+            bossInfo.CentralGunFireRate=0.4f;
+            bossInfo.health=150;
+            bossInfo.speed=1.5f;
+            bossInfo.ScoreValue=1000;
+
+            string json=JsonUtility.ToJson(bossInfo,true);        
+            File.WriteAllText(Application.persistentDataPath+"/Boss1.json",json);
         }
 
         if(!File.Exists(Application.persistentDataPath+"/PlayerRegularGun.json"))
@@ -532,6 +545,23 @@ public class GameDataInitializer : MonoBehaviour
             string json =JsonUtility.ToJson(level,true);
             File.WriteAllText(Application.persistentDataPath+"//Level_5.json",json);
         }
+
+        if(!File.Exists(Application.persistentDataPath+"/Level_6.json"))
+        {
+            Level level=new Level();
+            level.name="Level_6";
+        
+            level.events=new SpawnInfo[1];
+            level.events[0]=new SpawnInfo();
+            level.events[0].ID="LV6_Event00";
+            level.events[0].enemyTag="Boss1";
+            level.events[0].typeOfSpawn="BossSpawn";
+
+            level.timeToStartEachEvent=new float[1]{6};
+            string json =JsonUtility.ToJson(level,true);
+            File.WriteAllText(Application.persistentDataPath+"//Level_6.json",json);
+        }
+
     }
 	
 }

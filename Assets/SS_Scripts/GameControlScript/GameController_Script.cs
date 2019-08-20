@@ -197,6 +197,6 @@ public class GameController_Script : MonoBehaviour
 	//Spawn boss
 	public void BossSpawn()
 	{
-
+		Instantiate(Boss, new Vector3(0,7.5f,0), Quaternion.identity);
 	}
 }

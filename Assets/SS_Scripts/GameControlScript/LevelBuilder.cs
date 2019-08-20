@@ -58,6 +58,10 @@ public class LevelBuilder : MonoBehaviour
 				{
 					StartCoroutine(GameController_Script.GameControllerInstance.EnemyHorizontalRandomSpawn(l.events[i]));
 				}
+				else if(l.events[i].typeOfSpawn=="BossSpawn")
+				{
+					GameController_Script.GameControllerInstance.BossSpawn();
+				}
 			}
 			//Debug.Log(i+" "+l.events[i-1].spawnEnd);
 			//Debug.Log(i+" "+l.events[5].spawnEnd); 

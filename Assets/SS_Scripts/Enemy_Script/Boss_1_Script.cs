@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class BossWeapon
+public class BossInfo
 {
 	public float MachineGunFireRate;
 	public float CentralGunFireRate;
 	public int health;
 	public float speed;
+	public int ScoreValue;
 }
 
 public class Boss_1_Script : MonoBehaviour 
@@ -20,29 +21,35 @@ public class Boss_1_Script : MonoBehaviour
 	public GameObject MachineGunRound;
 	public GameObject NormalRound;
 	public GameObject LaserBeam;
+	public GameObject Explosion;
 
-	BossWeapon weapon;
+	//BossInfo bossIfo;
 
 	public SubBehavior behavior;
 	float CentralGunNextFire;
 	float MachineGunNextFire;
+	float SpreadingGunNextFire;
 	Vector3 euler;
 	public float MachineGunFireRate;
 	public float CentralGunFireRate;
+	public float SpreadingGunFireRate;
 	public int health;
 	public float speed;
+	public int ScoreValue;
 	bool switchGun=true;
 	public Rigidbody2D rigidbody2;
 	void Start()
 	{
-		behavior.Patrol(rigidbody2,3.4f,speed, 150);
+		Load();
+		behavior.Patrol(rigidbody2,3.8f,speed, 180);
 	}
 	//Update is called once per frame  
 	void Update () 
 	{
 		//transform.position = Vector3.MoveTowards(transform.position, new Vector2(0,-7f), 1.5f * Time.deltaTime);  
-		FireMaChineGun(true, true);
-		FireCentralGun();
+		//FireMaChineGun(true, true);
+		//FireCentralGun(); 
+		FireSpreadingGun();
 	}
 
 	void FireCentralGun()
@@ -64,6 +71,21 @@ public class Boss_1_Script : MonoBehaviour
 		}
 	}
 
+	void FireSpreadingGun()
+	{
+		if(Time.time> SpreadingGunNextFire)
+		{
+			SpreadingGunNextFire=Time.time+SpreadingGunFireRate;
+			for(int i=1; i<6; i++)
+			{
+				MachineGunRound=BossWeaponPool.BossWeaponPoolInstance.GetPooledObject("MachineGunRound", transform.position, false);
+				Vector3 e=MachineGunRound.transform.eulerAngles;
+				e.z=-90+(i*30);
+				MachineGunRound.transform.eulerAngles=e;
+				MachineGunRound.SetActive(true);
+			}
+		}
+	}
 	void FireMaChineGun(bool LeftGun, bool RightGun)
 	{
 		if(Time.time > MachineGunNextFire)
@@ -97,10 +119,51 @@ public class Boss_1_Script : MonoBehaviour
 	}
 
 	//pass in machinegunRound   
+	void Load()
+	{
+		BossInfo bossIfo=EnemyCommander.EnemyCommanderInstance.bossInfo;
+		MachineGunFireRate=bossIfo.MachineGunFireRate;
+		CentralGunFireRate=bossIfo.CentralGunFireRate;
+		health=bossIfo.health;
+		speed=bossIfo.speed;
+	}
 	Vector3 RandomRotation(GameObject obj)
 	{
 		euler=obj.transform.eulerAngles;
 		euler.z=Random.Range(-20f,20f);
 		return euler;
+	}
+
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if(other.tag == PlayerGun.PlayerGunInstance.shotDealDamage)
+		{
+			//get shot from pool to fire                                                                                       
+			ObjectPooler.ObjectPoolerInstance.GetPooledObject("HitEffect", transform.position,true);
+			//Destroy the Other (PlayerShot)
+			other.gameObject.SetActive(false);
+			
+			//Check the Health 
+			if(health > 0)
+			TakeDamage(PlayerGun.PlayerGunInstance.shotDamage);													
+			
+			//Check the Health if less or equal 0
+			if(health<= 0)
+			{
+				//Instantiate explosion
+				Instantiate (Explosion, transform.position , transform.rotation); 							
+				Destruct();												
+			}
+		}
+	}
+
+	public void TakeDamage(int damage)
+	{
+		health-=damage;
+	}
+	public void Destruct()
+	{
+		SharedValues_Script.score +=ScoreValue; 
+		gameObject.SetActive(false);
 	}
 }
