@@ -60,7 +60,8 @@ public class LevelBuilder : MonoBehaviour
 				}
 				else if(l.events[i].typeOfSpawn=="BossSpawn")
 				{
-					GameController_Script.GameControllerInstance.BossSpawn();
+					//GameController_Script.GameControllerInstance.BossSpawn();
+					StartCoroutine(GameController_Script.GameControllerInstance.BossSpawn(l.events[i]));
 				}
 			}
 			//Debug.Log(i+" "+l.events[i-1].spawnEnd);

@@ -124,7 +124,7 @@ public class GameController_Script : MonoBehaviour
 			duration+=(Time.time-startTime);
 			startTime=Time.time;
 			//Debug.Log("EndTime: " +Time.time);
-			Debug.Log("CurrentDuration "+duration );
+			//Debug.Log("CurrentDuration "+duration );
 			if(duration>ifo.duration)
 			{
 				ifo.spawnEnd=true;// not run out of wave
@@ -195,8 +195,23 @@ public class GameController_Script : MonoBehaviour
 		ifo.spawnEnd=true;										
 	}
 	//Spawn boss
+	/* 
 	public void BossSpawn()
 	{
+		Instantiate(Boss, new Vector3(0,7.5f,0), Quaternion.identity); 
+	}*/
+
+	public IEnumerator BossSpawn(SpawnInfo ifo)
+	{
 		Instantiate(Boss, new Vector3(0,7.5f,0), Quaternion.identity);
+		float startTime=Time.time;
+		float duration=0;
+		while(duration<ifo.duration)
+		{
+			yield return new WaitForEndOfFrame();
+			duration+=(Time.time-startTime);
+			startTime=Time.time;
+		}
+		ifo.spawnEnd=true;
 	}
 }

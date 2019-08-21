@@ -98,7 +98,7 @@ public class PlayerGun : MonoBehaviour
 		shotDamage=ob.shotDamage;
 		shotDealDamage=shotType;
 		level=ob.level;
-		Debug.Log("ok");
+		Debug.Log("Load Gun");
 	}
 
 	public void ChangeShotType(string ShotName)

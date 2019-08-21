@@ -337,7 +337,8 @@ public class GameDataInitializer : MonoBehaviour
             level.events[1].ID="LV3_Event01";
             level.events[1].enemyTag="EnemyRed";
             level.events[1].typeOfSpawn="SingleSpawn";
-        	level.events[1].position=new Vector2(3,6);   
+        	level.events[1].position=new Vector2(3,6); 
+            level.events[1].duration=60;  
 
             level.events[2]=new SpawnInfo();
             level.events[2].ID="LV3_Event02";
@@ -556,6 +557,7 @@ public class GameDataInitializer : MonoBehaviour
             level.events[0].ID="LV6_Event00";
             level.events[0].enemyTag="Boss1";
             level.events[0].typeOfSpawn="BossSpawn";
+            level.events[0].duration=180;
 
             level.timeToStartEachEvent=new float[1]{6};
             string json =JsonUtility.ToJson(level,true);

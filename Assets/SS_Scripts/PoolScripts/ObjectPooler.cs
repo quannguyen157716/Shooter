@@ -41,7 +41,7 @@ public class ObjectPooler : MonoBehaviour
 	
 	public GameObject GetPooledObject(string tag, Vector2 position, bool Enable)
 	{
-		//Debug.Log(tag+": " +poolDictionary[tag].Count);
+		//Debug.Log(tag+": " +poolDictionary[tag].Count); expand?    
 		if(!poolDictionary.ContainsKey(tag) || poolDictionary[tag].Count==0)
 		{
 			Debug.Log("Out of obj");

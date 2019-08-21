@@ -21,7 +21,7 @@ public class EnemyCommander : MonoBehaviour
 	//Get Based enemy info
 	void GetEnemyInfo()
 	{
-		Debug.Log("Enemy info loading");
+		//Debug.Log("Enemy info loading");
 		string json;
 		EnemyInfo ob;
 		foreach(string f in EnemyType)
@@ -33,6 +33,6 @@ public class EnemyCommander : MonoBehaviour
 
 		json=File.ReadAllText(Application.persistentDataPath+"/Boss1.json");
 		bossInfo=JsonUtility.FromJson<BossInfo>(json);
-		Debug.Log(json);
+		//Debug.Log(json);
 	}
 }
