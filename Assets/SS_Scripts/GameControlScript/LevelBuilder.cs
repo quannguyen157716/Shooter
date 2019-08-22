@@ -60,13 +60,13 @@ public class LevelBuilder : MonoBehaviour
 				}
 				else if(l.events[i].typeOfSpawn=="BossSpawn")
 				{
-					//GameController_Script.GameControllerInstance.BossSpawn();
 					StartCoroutine(GameController_Script.GameControllerInstance.BossSpawn(l.events[i]));
 				}
 			}
 			//Debug.Log(i+" "+l.events[i-1].spawnEnd);
-			//Debug.Log(i+" "+l.events[5].spawnEnd); 
-			yield return new WaitUntil(()=>l.events[i-1].spawnEnd==true);//make sure levels do not mix
+			//Debug.Log(i+" "+l.events[5].spawnEnd);     
+			//make sure levels do not mix  
+			yield return new WaitUntil(()=>l.events[i-1].spawnEnd==true);
 			//Debug.Log(i+" "+l.events[5].spawnEnd);//more duration for final wave of level 4 
 			Debug.Log("End Level: "+l.name);
 			UICOntroller.UIControllerInstance.ListElements.WeaponPanel.SetActive(true);
@@ -75,7 +75,7 @@ public class LevelBuilder : MonoBehaviour
 		StartLevel();
 	}
 
-	public void StartLevel()
+	public void StartLevel() 
 	{
 		StartCoroutine(RunLevel());
 	}

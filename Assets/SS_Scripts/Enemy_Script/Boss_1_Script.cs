@@ -47,9 +47,9 @@ public class Boss_1_Script : MonoBehaviour
 	void Update () 
 	{
 		//transform.position = Vector3.MoveTowards(transform.position, new Vector2(0,-7f), 1.5f * Time.deltaTime);  
-		//FireMaChineGun(true, true);
+		//FireMaChineGun(true, true); 
 		//FireCentralGun(); 
-		FireSpreadingGun();
+		FireSpreadingGun(); 
 	}
 
 	void FireCentralGun()
@@ -79,6 +79,11 @@ public class Boss_1_Script : MonoBehaviour
 			for(int i=1; i<6; i++)
 			{
 				MachineGunRound=BossWeaponPool.BossWeaponPoolInstance.GetPooledObject("MachineGunRound", transform.position, false);
+				if(MachineGunRound==null)
+				{
+					Debug.Log("Out of bullet"); 
+					return;
+				}
 				Vector3 e=MachineGunRound.transform.eulerAngles;
 				e.z=-90+(i*30);
 				MachineGunRound.transform.eulerAngles=e;

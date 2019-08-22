@@ -4,19 +4,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
 
-
-/* [System.Serializable]
-//EnemyRed Properties
-[System.Serializable]
-public class EnemyRed 
-{
-	public GameObject enemyRedObj;		//Object Prefab
-	public int Count;					//Number of the object in 1 wave 
-	public float SpawnWait;				//Time to wait before a new spawn
-	public float StartWait;				//Time to Start spawning
-	public float WaveWait;				//Time to wait till a new wave
-}
-*/
 /* 
 [System.Serializable]
 public class Hazard
@@ -57,7 +44,6 @@ public class GameController_Script : MonoBehaviour
 	{
 		if(SharedValues_Script.gameover)
 		{
-			//ListButton.ReplayButton.gameObject.SetActive(true);
 			UICOntroller.UIControllerInstance.ListElements.ReplayButton.gameObject.SetActive(true);
 		}
 	}
@@ -99,13 +85,12 @@ public class GameController_Script : MonoBehaviour
 	//Random spawn from range of position
 	public IEnumerator EnemyRandomSpawn(SpawnInfo ifo)
 	{
-		//Debug.Log("New cor");
 		float startTime=Time.time;
 		float duration=0;
 		//Debug.Log("StarTime: " +startTime);
 		float numberofWave=0;
-		//yield return new WaitForSeconds (ifo.start_Wait);		//Wait for Seconds before start the wave
-		//Infinite Loop 
+
+		//Wave spawn Loop 
 		while (numberofWave <ifo.numberOfWave)
 		{
 			//Spawn Specific number of Objects in 1 wave
@@ -120,14 +105,16 @@ public class GameController_Script : MonoBehaviour
 			numberofWave++;
 			Debug.Log("Wave "+numberofWave);
 			float waveWait=Random.Range(ifo.wavewaitMin, ifo.RandomSpawnWaitMax);
-			yield return new WaitForSeconds (waveWait);		//wait for seconds before the next wave
+			//wait for seconds before the next wave
+			yield return new WaitForSeconds (waveWait);		
 			duration+=(Time.time-startTime);
 			startTime=Time.time;
 			//Debug.Log("EndTime: " +Time.time);
 			//Debug.Log("CurrentDuration "+duration );
 			if(duration>ifo.duration)
 			{
-				ifo.spawnEnd=true;// not run out of wave
+				// not run out of wave
+				ifo.spawnEnd=true;
 				yield break;
 			}
 		}
@@ -135,7 +122,8 @@ public class GameController_Script : MonoBehaviour
 		if(duration<ifo.duration)
 		{
 			yield return new WaitForSeconds(ifo.duration-duration);
-			ifo.spawnEnd=true;//run out of wave
+			//run out of wave
+			ifo.spawnEnd=true;
 		}
 		
 	}	
@@ -146,7 +134,7 @@ public class GameController_Script : MonoBehaviour
 		Vector3 spawnPosition=new Vector3(Random.Range(-3,3),6);
 		Instantiate(PowerUp,spawnPosition,Quaternion.identity);
 	}
-	//Spawn enemy horizontally
+	//Spawn enemy horizontally   
 	public IEnumerator EnemyHorizontalRandomSpawn(SpawnInfo ifo)
 	{
 		float startTime=Time.time;
@@ -190,16 +178,9 @@ public class GameController_Script : MonoBehaviour
 	//wait to spawn an object at specific location after specific time
 	public void SingleSpawn(SpawnInfo ifo)
 	{
-		//Debug.Log("ss"); 
 		ObjectPooler.ObjectPoolerInstance.GetPooledObject(ifo.enemyTag, ifo.position,true);	
 		ifo.spawnEnd=true;										
 	}
-	//Spawn boss
-	/* 
-	public void BossSpawn()
-	{
-		Instantiate(Boss, new Vector3(0,7.5f,0), Quaternion.identity); 
-	}*/
 
 	public IEnumerator BossSpawn(SpawnInfo ifo)
 	{
