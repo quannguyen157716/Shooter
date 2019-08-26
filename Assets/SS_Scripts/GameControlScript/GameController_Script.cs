@@ -28,7 +28,7 @@ public class GameController_Script : MonoBehaviour
 	public static GameController_Script GameControllerInstance;
 	public GameObject Player;
 	public AudioSource audios;
-	// Use this for initialization 
+
 	void Start ()
 	{
 		GameControllerInstance=this;
@@ -39,7 +39,7 @@ public class GameController_Script : MonoBehaviour
 		UICOntroller.UIControllerInstance.ListElements.InGamePanel.gameObject.SetActive(false);
 	}
 
-	// Update is called once per frame
+	// Update is called once per frame 
 	void Update () 
 	{
 		if(SharedValues_Script.gameover)
@@ -52,7 +52,7 @@ public class GameController_Script : MonoBehaviour
 	{
 		SceneManager.LoadScene("Scene_01");
 	}
-	//Start the Game
+	//Start the Game  
 	public void StartGame()
 	{
 		UICOntroller.UIControllerInstance.ListElements.MainMenuPanel.gameObject.SetActive(false);
@@ -109,7 +109,7 @@ public class GameController_Script : MonoBehaviour
 			yield return new WaitForSeconds (waveWait);		
 			duration+=(Time.time-startTime);
 			startTime=Time.time;
-			//Debug.Log("EndTime: " +Time.time);
+			//Debug.Log("EndTime: " +Time.time); 
 			//Debug.Log("CurrentDuration "+duration );
 			if(duration>ifo.duration)
 			{
@@ -140,11 +140,10 @@ public class GameController_Script : MonoBehaviour
 		float startTime=Time.time;
 		float duration=0;
 		float numberofWave=0;
-		//yield return new WaitForSeconds (ifo.start_Wait);		//Wait for Seconds before start the wave
-		//Infinite Loop 
+		
 		while (numberofWave <ifo.numberOfWave)
 		{
-			//Spawn Specific number of Objects in 1 wave
+			//Spawn Specific number of Objects in 1 wave          
 			for (int i = 0; i < ifo.numberOfObject; i++)
 			{
 				Vector2 spawnPosition = new Vector2 (ifo.position.x, Random.Range(2,ifo.position.y));		
@@ -156,11 +155,12 @@ public class GameController_Script : MonoBehaviour
 			numberofWave++;
 			Debug.Log("Wave: "+numberofWave);
 			float waveWait=Random.Range(ifo.wavewaitMin, ifo.RandomSpawnWaitMax);
-			yield return new WaitForSeconds (waveWait);		//wait for seconds before the next wave
+			//wait for seconds before the next wave 
+			yield return new WaitForSeconds (waveWait);		
 			duration+=(Time.time-startTime);
 			startTime=Time.time;
-			//Debug.Log("EndTime: " +Time.time);
-			//Debug.Log("CurrentDuration "+duration );
+			//Debug.Log("EndTime: " +Time.time);     
+			//Debug.Log("CurrentDuration "+duration );  
 			if(duration>ifo.duration)
 			{
 				ifo.spawnEnd=true;
@@ -171,11 +171,12 @@ public class GameController_Script : MonoBehaviour
 		if(duration<ifo.duration)
 		{
 			yield return new WaitForSeconds(ifo.duration-duration);
-			ifo.spawnEnd=true;//run out of wave
+			//run out of wave
+			ifo.spawnEnd=true;
 		}
 	}	
 
-	//wait to spawn an object at specific location after specific time
+	
 	public void SingleSpawn(SpawnInfo ifo)
 	{
 		ObjectPooler.ObjectPoolerInstance.GetPooledObject(ifo.enemyTag, ifo.position,true);	
