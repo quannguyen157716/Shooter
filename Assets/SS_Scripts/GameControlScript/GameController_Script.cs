@@ -10,7 +10,7 @@ public class Hazard
 {
 	public GameObject hazard;		//Object Prefab
 	public int Count;						//Number of the object in 1 wave
-	public float RandomMin, RandomMax;
+	public float RandomMin, RandomMax; 
 	public float SpawnWait;					//Time to wait before a new spawn
 	public float StartWait;					
 	public float WaveWait;					//Time to wait till a new wave f
@@ -82,7 +82,7 @@ public class GameController_Script : MonoBehaviour
 		}
 	}*/
 
-	//Random spawn from range of position
+	//Random spawn from range of position 
 	public IEnumerator EnemyRandomSpawn(SpawnInfo ifo)
 	{
 		float startTime=Time.time;
