@@ -1,24 +1,24 @@
 ﻿using UnityEngine;
 
-public class Asteroid_Script : MonoBehaviour 
+public class Asteroid_Script : Enemy
 {
 	//Maximum Speed of the angular velocity
 	public float maxTumble; 			
 	//Minimum Speed of the angular velocity
 	public float minTumble; 	
 	//Asteroid Speed		
-	public float speed; 	
+	//public float speed; 	
 	//Asteroid Health 		
-	public int health; 				
+	//public int health; 				
 	//LaserGreenHit Prefab	
-	public GameObject LaserHit; 	
+	//public GameObject LaserHit; 	
 	//Explosion Prefab
-	public GameObject Explosion; 		
+	//public GameObject Explosion; 		
 	//How much the Asteroid give score after explosion 
-	public int ScoreValue; 				
-	public Rigidbody2D rigidbody2;
+	//public int ScoreValue; 				
+	//public Rigidbody2D rigidbody2;
 
-	int currentHealth;
+	//int currentHealth;
 	
 	void Awake()
 	{
@@ -42,37 +42,4 @@ public class Asteroid_Script : MonoBehaviour
 		ScoreValue=info.ScoreValue;
 	}
 
-	//Called when the Trigger entered
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		//Excute if the object tag was equal to one of these
-		if(other.tag == PlayerGun.PlayerGunInstance.shotDealDamage)
-		{
-			ObjectPooler.ObjectPoolerInstance.GetPooledObject(LaserHit.tag, transform.position,true);
-		
-			other.gameObject.SetActive(false);
-	
-			if(currentHealth > 0)
-			TakeDamage(PlayerGun.PlayerGunInstance.shotDamage);	
-			
-	
-			if(currentHealth <= 0)
-			{
-				Instantiate (Explosion, transform.position , transform.rotation); 							
-				Destruct();												
-			}
-		}
-	}
-
-	void TakeDamage(int damage)
-	{
-		currentHealth-=damage;
-		//Debug.Log(currentHealth);
-	}
-
-	void Destruct()
-	{
-		SharedValues_Script.score +=ScoreValue; 
-		gameObject.SetActive(false);
-	}
 }

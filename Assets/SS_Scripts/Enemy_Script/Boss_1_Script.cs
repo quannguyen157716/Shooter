@@ -7,6 +7,7 @@ public class BossInfo
 {
 	public float MachineGunFireRate;
 	public float CentralGunFireRate;
+	public float SpreadingGunFireRate;
 	public int health;
 	public float speed;
 	public int ScoreValue;
@@ -23,6 +24,7 @@ public class Boss_1_Script : MonoBehaviour
 	public GameObject LaserBeam;
 	public GameObject Explosion;
 
+	
 	//BossInfo bossIfo;
 
 	public SubBehavior behavior;
@@ -38,6 +40,7 @@ public class Boss_1_Script : MonoBehaviour
 	public int ScoreValue;
 	bool switchGun=true;
 	public Rigidbody2D rigidbody2;
+
 	void Start()
 	{
 		Load();
@@ -123,12 +126,13 @@ public class Boss_1_Script : MonoBehaviour
 		}
 	}
 
-	//pass in machinegunRound   
+	//Load info
 	void Load()
 	{
 		BossInfo bossIfo=EnemyCommander.EnemyCommanderInstance.bossInfo;
 		MachineGunFireRate=bossIfo.MachineGunFireRate;
 		CentralGunFireRate=bossIfo.CentralGunFireRate;
+		SpreadingGunFireRate=bossIfo.SpreadingGunFireRate;
 		health=bossIfo.health;
 		speed=bossIfo.speed;
 	}

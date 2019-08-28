@@ -67,40 +67,4 @@ public class EnemyGreen_Script : Enemy
 			return;
 		}
 	}
-	/* 
-	//Called when the Trigger entered
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		//Excute if the object tag was equal to one of these
-		if(other.tag == PlayerGun.PlayerGunInstance.shotDealDamage)
-		{
-			ObjectPooler.ObjectPoolerInstance.GetPooledObject(LaserHit.tag, transform.position,true);
-		
-			other.gameObject.SetActive(false);
-			//Check the Health if greater than 0
-			if(currentHealth > 0)
-			TakeDamage(PlayerGun.PlayerGunInstance.shotDamage);													
-			
-			//Check the Health if less or equal 0
-			if(currentHealth <= 0)
-			{
-				Instantiate (Explosion, transform.position , transform.rotation); 			//Instantiate Explosion							
-				Destruct();												
-			}
-		}
-	}
-
-	
-	
-	void TakeDamage(int damage)
-	{
-		currentHealth-=damage;
-	}
-
-	void Destruct()
-	{
-		SharedValues_Script.score +=ScoreValue; //Increment score by ScoreValue 
-		gameObject.SetActive(false);//return to pool
-	}
-	*/
 }

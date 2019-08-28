@@ -153,7 +153,8 @@ public class GameDataInitializer : MonoBehaviour
             BossInfo bossInfo=new BossInfo();
             bossInfo.MachineGunFireRate=0.3f;
             bossInfo.CentralGunFireRate=0.4f;
-            bossInfo.health=150;
+            bossInfo.SpreadingGunFireRate=0.6f;
+            bossInfo.health=300;
             bossInfo.speed=1.5f;
             bossInfo.ScoreValue=1000;
 

@@ -72,44 +72,4 @@ public class EnemyRed_Script : Enemy
 			return;
 		}
 	}
-	/* 
-	//Called when the Trigger entered
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		if(other.tag == PlayerGun.PlayerGunInstance.shotDealDamage)
-		{
-			//get shot from pool to fire
-			ObjectPooler.ObjectPoolerInstance.GetPooledObject(LaserHit.tag, transform.position,true);
-			//Destroy the Other (PlayerLaser)
-			other.gameObject.SetActive(false);
-			//Check the Health if greater than 0
-
-			if(currentHealth > 0)
-			TakeDamage(PlayerGun.PlayerGunInstance.shotDamage);													
-			
-			//Check the Health if less or equal 0
-			if(currentHealth <= 0)
-			{
-				//Instantiate explosion
-				Instantiate (Explosion, transform.position , transform.rotation); 							
-				Destruct();												
-			}
-		}
-	}
-
-	
-	
-	void TakeDamage(int damage)
-	{
-		currentHealth-=damage;
-	}
-
-	void Destruct()
-	{
-		//Increment score by ScoreValue 
-		SharedValues_Script.score +=ScoreValue; 
-		//return to pool
-		gameObject.SetActive(false);
-	}
-	*/
 }
