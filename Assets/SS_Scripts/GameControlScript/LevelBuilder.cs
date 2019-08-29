@@ -62,7 +62,7 @@ public class LevelBuilder : MonoBehaviour
 				{
 					StartCoroutine(GameController_Script.GameControllerInstance.BossSpawn(l.events[i]));
 				}
-			}
+			}                 
 			//Debug.Log(i+" "+l.events[i-1].spawnEnd);
 			//Debug.Log(i+" "+l.events[5].spawnEnd);     
 			//make sure levels do not mix  

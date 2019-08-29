@@ -44,7 +44,7 @@ public class Boss_1_Script : MonoBehaviour
 	void Start()
 	{
 		Load();
-		behavior.Patrol(rigidbody2,3.8f,speed, 180);
+		//behavior.Patrol(rigidbody2,3.8f,speed, 180);
 	}
 	//Update is called once per frame 
 	void Update () 
@@ -126,7 +126,7 @@ public class Boss_1_Script : MonoBehaviour
 		}
 	}
 
-	//Load info
+	//Load boss info
 	void Load()
 	{
 		BossInfo bossIfo=EnemyCommander.EnemyCommanderInstance.bossInfo;
