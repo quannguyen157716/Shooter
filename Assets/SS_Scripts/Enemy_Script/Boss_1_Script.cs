@@ -24,7 +24,7 @@ public class Boss_1_Script : MonoBehaviour
 	public GameObject LaserBeam;
 	public GameObject Explosion;
 
-	
+	public GameObject WeaponPool;
 	//BossInfo bossIfo;
 
 	public SubBehavior behavior;
@@ -41,10 +41,11 @@ public class Boss_1_Script : MonoBehaviour
 	bool switchGun=true;
 	public Rigidbody2D rigidbody2;
 
-	void Start()
+	void OnEnable()
 	{
+		Instantiate(WeaponPool,transform.position,Quaternion.identity);
 		Load();
-		//behavior.Patrol(rigidbody2,3.8f,speed, 180);
+		behavior.Patrol(rigidbody2,3.8f,speed, 180);
 	}
 	//Update is called once per frame 
 	void Update () 
@@ -59,7 +60,7 @@ public class Boss_1_Script : MonoBehaviour
 	{
 		if(Time.time>CentralGunNextFire)
 		{
-			CentralGunNextFire=Time.time+CentralGunFireRate;
+			CentralGunNextFire=Time.time+0.5f;
 
 			if(switchGun)
 			{
@@ -173,6 +174,7 @@ public class Boss_1_Script : MonoBehaviour
 	public void Destruct()
 	{
 		SharedValues_Script.score +=ScoreValue; 
-		gameObject.SetActive(false);
+		Destroy(gameObject);
+		BossWeaponPool.BossWeaponPoolInstance.Destroy();
 	}
 }

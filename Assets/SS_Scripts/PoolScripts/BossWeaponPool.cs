@@ -50,4 +50,9 @@ public class BossWeaponPool : MonoBehaviour
 			return null;
 		}
 	}
+
+	public void Destroy()
+	{
+		Destroy(gameObject,10);
+	}
 }
