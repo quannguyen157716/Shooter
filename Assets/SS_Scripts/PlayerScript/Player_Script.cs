@@ -117,64 +117,7 @@ public class Player_Script : MonoBehaviour
 			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
 		);
 	}
-	/* 
-	void Moving()
-	{
-		if(EventSystem.current.IsPointerOverGameObject())
-		return;
-		if(Input.touchCount>0)
-		{
-			Touch touch=Input.GetTouch(0);
 	
-			touchPosition=mCamera.ScreenToWorldPoint(touch.position);
-			touchPosition.z=0;
-		
-		
-			direction=touchPosition-transform.position;
-			rigidbody2.velocity=new Vector2(direction.x,direction.y+1) *speed;
-			
-		
-			if(touch.phase==TouchPhase.Ended)
-			{
-				rigidbody2.velocity=Vector2.zero;
-			}
-		}
-
-		rigidbody2.position = new Vector2 
-		(
-			Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
-			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
-		);
-	}
-
-	void MovingPC()
-	{
-
-		if (Input.GetMouseButton(0)) //if mouse button was pressed       
-        {
-			if(EventSystem.current.IsPointerOverGameObject())
-			return;
-            Vector3 mousePosition = mCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
-            mousePosition.z = transform.position.z;
-			direction=mousePosition-transform.position;
-			rigidbody2.velocity=new Vector2(direction.x,direction.y+1) *speed;
-            //transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
-
-			if(Input.GetMouseButtonUp(0))
-			{
-				rigidbody2.velocity=Vector2.zero;
-			}	
-
-        }
-			
-			
-		rigidbody2.position = new Vector2 
-		(
-			Mathf.Clamp (rigidbody2.position.x, boundary.xMin, boundary.xMax),  //X
-			Mathf.Clamp (rigidbody2.position.y, boundary.yMin, boundary.yMax)	 //Y
-		);
-	}
-	*/
 	void TakeDamage(int damage)
 	{
 		Destruct();
