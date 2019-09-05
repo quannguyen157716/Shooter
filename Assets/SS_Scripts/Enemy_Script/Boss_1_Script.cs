@@ -50,7 +50,6 @@ public class Boss_1_Script : MonoBehaviour
 	//Update is called once per frame 
 	void Update () 
 	{
-		//transform.position = Vector3.MoveTowards(transform.position, new Vector2(0,-7f), 1.5f * Time.deltaTime);  
 		//FireMaChineGun(true, true); 
 		//FireCentralGun(); 
 		FireSpreadingGun(); 
